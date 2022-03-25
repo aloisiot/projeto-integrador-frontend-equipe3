@@ -1,0 +1,53 @@
+.component-product-card{
+    height: 260px;
+    background-color: white;
+
+    .img-container {
+        overflow: hidden;
+        min-width: 240px;
+        max-width: 240px;
+        height: 100%;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .product-description {
+        .description {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .locale svg {
+            height: 18px;
+        }
+    }
+
+    .score {
+        .num {
+            font-size: 1.2rem;
+            color: white;
+            background-color: var(--secondary-deep-blue);
+        }
+        
+        .text {
+            font-size: .7rem;
+            text-align: right;
+        }
+
+    }
+
+    @media (max-width: 512px) {
+        flex-direction: column;
+        height: auto;
+
+        .img-container {
+            max-width: 100%;
+        }
+    }
+}

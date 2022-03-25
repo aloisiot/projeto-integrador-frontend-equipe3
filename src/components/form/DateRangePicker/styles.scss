@@ -1,0 +1,23 @@
+.constainer-date-range-picker {
+    position: relative;
+
+    .date-range-picker {
+        position: absolute;
+        top : 48px;
+        background-color: white;
+
+        .rdrDayToday .rdrDayNumber span:after{
+            background: var(--primary-orange) !important
+        }
+    }
+
+    .date-view {
+        height: 100%;
+        cursor: pointer;
+        background-color: white;
+
+        .icon svg :is(path, rect) {
+            fill: var(--terciary-dark-gray);
+        }
+    }
+}

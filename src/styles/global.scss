@@ -1,0 +1,21 @@
+input {
+    outline: none;
+    border: unset;
+}
+
+.escondido{
+    visibility: hidden;
+}
+
+.semDisplay{
+    display: none;
+}
+
+.input-negativo{
+    background-color: #FFE1E1;
+    border-color: var(--primary-orange);
+
+    &:focus {
+        background-color: #FFE1E1;
+    } 
+}

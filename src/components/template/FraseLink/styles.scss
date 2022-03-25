@@ -1,0 +1,20 @@
+.link-login-holder{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        margin-top: revert;
+    }
+    button{
+        border: none;
+        background-color: unset;
+        color:#F0572D;
+
+        &:hover{
+            text-decoration: underline solid #F0572D 2px;
+        }
+    }
+
+}

@@ -1,0 +1,13 @@
+.search-bar {
+    background-color: var(--terciary-dark-gray);
+    
+    .title {
+        color: white;
+    }
+    .search-bar-content{
+        @media (max-width: 490px) {
+            flex-direction: column;
+        }
+    }
+
+}

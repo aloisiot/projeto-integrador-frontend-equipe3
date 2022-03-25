@@ -1,0 +1,63 @@
+
+
+.calendarioCampo{
+
+
+    .dateRange-holder{
+        width: fit-content;
+
+        @media (max-width: 992px){
+            width: 100%;
+        }
+    }
+
+    .texto-calendario-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p{
+            font-weight: 500;
+            margin-bottom: 0.55rem;
+
+        }
+    }
+
+    .data-campo-holder{
+        margin-top: 1rem;
+
+        
+
+       .rdrCalendarWrapper{
+
+        @media (max-width: 992px){
+            width: 100%;
+        }
+
+        .rdrDayToday .rdrDayNumber span:after{
+            background: var(--primary-orange) !important
+        }
+
+        .rdrMonths{
+
+            @media (max-width: 992px){
+                display: unset;
+
+            }
+            .rdrMonth{
+                @media (max-width: 992px){
+                    width: 100%;
+                }
+            }
+        }
+
+        .rdrDateDisplay{
+            color: var(--primary-orange) !important
+        }
+           .rdrWeekDay{
+               margin-right: 0.3rem;
+           }
+       }
+    }
+}

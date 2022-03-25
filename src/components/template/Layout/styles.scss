@@ -1,0 +1,21 @@
+.default-template {
+    min-height: 100vh;
+
+    &.default-bg-white{
+        background-color: white;
+    }
+    &.default-bg-gray{
+        background-color: var(--quaternary-light-gray);
+    }
+
+    & .main-content {
+        margin-top: 68px;
+    }
+       
+    .default-header {
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        width: 100%;
+    }
+}

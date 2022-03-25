@@ -1,0 +1,79 @@
+.login-page-content {
+    background-color: var(--light-gray);
+    min-height: calc(100vh - 140px);
+    display: flex;
+
+    .form-container{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+
+        .login-box{
+            width: 32rem;
+            display: flex;
+            flex-direction: column;
+
+            .component-title{
+                text-align: center;
+                font-size: 2.3rem;
+            }
+
+            .form-box form{
+                gap: 1.5rem;
+                
+                div input{
+                    box-shadow:  1px 1px 4px #0000004f;
+                    height: 3rem;
+
+                    &:hover{
+                        border-color: var(--primary-orange);
+                    } 
+                    &:focus {
+                        border-color: var(--primary-orange);
+                    } 
+                }
+                
+                .warn{
+                    margin: unset;
+                    color:var(--primary-orange);
+                    padding-top: 0.25rem;
+                }
+
+                .btn.btn-outline-primary {
+                    transform: scale(.8);
+                    position: relative;
+                    box-shadow: none !important;
+                    border: 3px solid var(--primary-orange);
+
+                    svg {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-9px, -9px);
+                        width: 18px;
+                        height: 18px;
+                        opacity: 0;
+                    }
+                }
+                .btn-check:checked+.btn-outline-primary,
+                .btn-check:hover+.btn-outline-primary  {
+                    background-color: var(--primary-orange);
+                
+                    svg{
+                        opacity: 1;
+                    }
+                }
+
+                .btn-check:hover+.btn-outline-primary  {
+                    background-color: var(--primary-orange)
+                }
+                
+                label{
+                    font-weight: 600;
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+}

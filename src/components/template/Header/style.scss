@@ -1,0 +1,213 @@
+.default-header{
+    height: 68px;
+    background-color: white;
+
+
+
+    .sidebar-bkg{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-color: #00000054;
+        visibility: hidden;
+        transition: all ease 1s;
+
+
+        &.sidebar-bkg-visible{
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .headerItem{
+        @media (max-width: 821px){
+            display: none !important;
+        }
+    }
+    
+    .menu-header{
+        display: none;
+        
+        button{
+            border: unset;
+            background-color: unset;
+        }
+
+        @media(max-width:821px){
+            display: block;
+        }
+    }
+
+
+    .logo-slogan {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.75rem;
+
+        svg{
+            cursor: pointer;
+        }
+        .slogan{
+            font-size: 1.25rem;
+            font-style: italic;
+            font-weight: lighter;
+            margin: unset;
+            padding-bottom: 0.25rem;
+            
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+    }
+
+    .sidebar-holder{
+        position: fixed;
+        height: 100%;
+        width: 0%;
+        right: 0px;
+        background-color: var(--primary-white);
+        visibility: hidden;
+        transition: all ease 1s;
+
+        &.sidebar-visible{
+            width: 42%;
+            visibility: visible;
+
+            @media (max-width: 768px){
+                width: 45%;
+            }
+
+            @media (max-width: 580px){
+                width: 50%;
+            }
+
+            @media (max-width: 520px){
+                width: 58%;
+            }
+
+            @media (max-width: 420px){
+                width: 65%;
+            }
+
+            
+            @media (max-width: 358px){
+                width: 75%;
+            }
+        }
+
+    
+        .orange-box{
+            height: 27%;
+            background-color: var(--primary-orange);
+
+
+            & > div{
+                width: 100%;
+                height: 50%;
+                display: flex;
+                padding: 1rem;
+
+                & > button{
+                    border-style: unset;
+                    padding: unset;
+                    width: fit-content;
+                    height: fit-content;
+                    background-color: unset;
+                }
+            }
+
+            div:nth-child(2){
+                flex-direction: column-reverse;
+                padding-bottom: unset;
+
+               
+                .sidebar-span-holder{
+                    display: flex;
+                    justify-content: flex-end;
+                    div{
+                        width: 50%;
+                    }
+                    span{
+                        color: white;
+                        font-size: 1.5rem;
+                        opacity: 0;
+                        font-weight: 500;
+                        margin-bottom: 8px;
+                        
+                        &.open-animation{
+                            animation-delay: 1s !important;
+                            animation-fill-mode: forwards !important;
+                            animation: open-animation 1s;
+                        }
+                        
+                        &.close-animation{
+                            animation: close-animation 250ms;
+                        }
+                            
+                    }    
+                }
+                
+            }
+
+            &.become-visible{
+                opacity: 1;
+            }
+        }
+        
+        .header-second-section{
+            padding: 1rem;
+            display: flex;
+
+            & > div{
+                display: flex;
+                flex-direction: column;
+                place-items: flex-end;
+                width: 100%;
+                gap: 0.5rem;
+                margin-top: 1.5rem;
+                opacity: 0;
+                transition: all ease-in-out 3s;
+     
+                
+
+                & > a{
+                    color: black;
+                    font-weight: 500;
+                }
+
+                .sidebar-section-separator{
+                    padding: 1px;
+                    width: 100%;
+                    background-color: black;
+    
+                }
+
+                 
+                &.open-animation{
+                    animation-delay: 1s !important;
+                    animation-fill-mode: forwards !important;
+                    animation: open-animation 0.5s;
+                }
+
+                &.close-animation{
+                    animation: close-animation 250ms;
+                }
+            }
+        }
+    
+    }
+
+
+    @keyframes open-animation {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+
+    @keyframes close-animation{
+        from {opacity: 1}
+        to {opacity: 0;}
+    }
+}
+
+

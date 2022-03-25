@@ -1,0 +1,13 @@
+.component-link {
+    color: var(--primary-orange);
+    cursor: pointer;
+    text-decoration: none;
+    
+    &:hover, &:visited {
+        color: var(--primary-dark-orange);
+    }
+    
+    &.underline {
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,173 @@
+.component-paginaDetalhes{
+
+    div{
+
+        div{
+            button{
+                background-color: transparent;
+                border: unset;
+            }
+        }
+    }
+
+    .detalhesCabecalho{
+        background-color: var(--terciary-dark-gray);
+        padding: 0.6rem;
+    }
+
+    .detalhesSegundoCabecalho{
+        background-color: var(--secondary-grey);
+        padding: 0.6rem;
+        height: 80px;
+        display: flex;
+        
+        p{
+            margin: unset;
+        }
+
+        .local-infobox{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            div{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.2rem;
+
+                p{
+                    color: var(--secondary-deep-blue);
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .avaliacoes-infobox{
+            p{
+                font-weight: 500;
+            }
+
+            .div-estrelas{
+                margin-top: -0.55rem;
+            }
+
+           .avalicaoes-info{
+               display: flex;
+               gap: 0.5rem;
+           }
+            .num-avaliacao{
+                color: white;
+                background-color: var(--secondary-deep-blue);
+                font-weight: 500;
+                font-size: 1.45rem;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-left: 12px;
+                padding-right: 12px;
+                border-radius: 11px;
+            }
+        }
+    }
+
+    .cabecalhoTexto{
+        color: var(--primary-white);
+        p{
+            margin: unset;
+            font-weight: 500;
+
+        }
+
+        
+        h4{
+            font-size: 1.4rem;
+        }
+    }
+
+    .iconesContainer{
+
+        margin-top: 3rem;
+        svg{
+            size: 10rem;
+        }
+        
+        button{
+            margin: unset;
+        }
+    }
+
+    .detalhesUltimoContainer{
+        h3{
+            padding: 1rem;
+            color: var(--secondary-deep-blue);
+        }
+
+        .separador-box{
+            padding-left: 1rem;
+            padding-right: 1rem;
+            .separador{
+                padding: 0.1rem;
+                background-color: var(--primary-orange);
+            }
+        }
+
+        .descricaoCampo{
+            margin-top: 1rem;
+            p{
+                padding: 1rem;
+            }
+        }
+
+        .tituloSecundario{
+            padding-bottom: 0.5rem;               
+            margin-bottom: unset;
+            
+        }
+
+        .mapaCampo{
+            .localizao-texto{
+                padding: 1rem;
+
+                p{
+                    margin: unset;
+                    font-weight: 500;
+                }
+
+                p:nth-child(2){
+                    margin-top: 1rem;
+                }
+            }
+        }
+
+        .detalhes-main-holder{
+            padding: 1rem;
+            margin-top: 1rem;
+
+            .opcao-div{
+                align-items: center;
+                padding-top: 1rem;
+                p{
+                    margin: unset;
+                    font-weight: 500;
+                }
+
+            
+            }
+
+            .info-div{
+               p{
+                margin-top: 0;
+                margin-bottom: 1rem;
+               }
+            }
+
+        }
+
+    }
+
+    
+    
+}
+
+
+
+

@@ -1,0 +1,31 @@
+.galeriaImagens{
+    margin-top: 1rem;
+    
+.imagensSecondarias{
+    position: relative;
+    .grid-img-secondarias{
+        height: 100%;
+        div{
+            height: 50%;
+        }
+        img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .ultimaImagem{
+            position: relative;
+        }
+    }
+
+}
+
+.imagemPrimaria{
+        img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
