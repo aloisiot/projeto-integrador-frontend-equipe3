@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../../pages/Home';
 import Login from '../../pages/Login';
 import Cadastro from '../../pages/Cadastro';
+import ConfirmacaoReserva from '../../pages/ConfirmacaoReserva'
 import DetalhesReserva from '../../pages/DetalhesReserva';
 import { Provider } from 'react-redux';
 import { AuthProvider } from '../auth/AuthContext';
@@ -18,6 +19,7 @@ export default function RouterList(){
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/cadastro" element={<Cadastro/>}/>
                         <Route path="/reserva/:idReserva" element={<DetalhesReserva/>} />
+                        <Route path="/confirmacao-reserva/:idReserva" element={<ConfirmacaoReserva/>} />
                     </Routes>
                 </AuthProvider>
             </Provider>

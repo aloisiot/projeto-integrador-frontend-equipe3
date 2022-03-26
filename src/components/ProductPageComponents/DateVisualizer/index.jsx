@@ -27,12 +27,12 @@ export default function DateVisualizer(props) {
 
     return (
         <div className="container calendarioCampo">
-            <h3 className="tituloSecundario">Datas disponíveis</h3>
+            <h3 className=" py-3 tituloSecundario">Datas disponíveis</h3>
             <div className="separador-box">
                 <div className="separador"></div>
             </div>
 
-            <div className="row g-0 data-campo-holder p-3">
+            <div className="row g-0 data-campo-holder py-3">
                     <div className=" dateRange-holder col col-12 col-lg-6 shadow rounded-1">
                         <DateRange
                             editableDateInputs={true}

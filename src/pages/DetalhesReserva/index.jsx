@@ -3,18 +3,18 @@ import DesktopGallery from "../../components/ProductPageComponents/Gallery/Deskt
 import MobileGallery from "../../components/ProductPageComponents/Gallery/MobileGallery";
 import ModalGallery from "../../components/ProductPageComponents/ModalGallery";
 import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer";
+import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
 import { useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/currentProductSlice'
 import {
-    goBackArrow, Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
+     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
     kitchenIcon, noSmoke, noParty, shareIconMobile, heartIconMobile, acIcon, petsIcon, creditCard
 } from "../../components/icons";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Link from "../../components/tipografy/Link";
-
 
 
 const iconCaracteristicas = {
@@ -53,18 +53,8 @@ export default function DetalhesReserva() {
         <Template>
             <div className="component-paginaDetalhes">
                 <ModalGallery modalStatus={modalAtivo} modalFunction={() => { setModalAtivo(false) }} />
-                <div className="container-fluid detalhesCabecalho">
-                    <div className="container d-flex justify-content-between">
-                        <div className="cabecalhoTexto">
-                            <p>{product?.category?.qualification}</p>
-                            <h4>{product?.name}</h4>
-                        </div>
-                        <Link to="/" className="d-flex align-items-center">
-                            {goBackArrow}
-                        </Link>
-                    </div>
-                </div>
-                <div className="container-fluid detalhesSegundoCabecalho">
+                <DetalhesCabecalho/>
+                <div className="detalhesSegundoCabecalho">
                     <div className="container d-flex justify-content-between align-items-center">
                         <div className="local-infobox">
                             {Locale}
@@ -90,27 +80,27 @@ export default function DetalhesReserva() {
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid">
+                <div>
                     <div className="container iconesContainer">
                         <button>{window.innerWidth < 520 ? shareIconMobile : shareIcon}</button>
                         <button>{window.innerWidth < 520 ? heartIconMobile : heartIcon}</button>
                     </div>
                 </div>
                 {galeriaAtual === "desktop" ? <DesktopGallery modalFunction={() => { setModalAtivo(true) }} /> : <MobileGallery />}
-                <div className="container-fluid detalhesUltimoContainer">
+                <div className="detalhesUltimoContainer">
                     <div className="container descricaoCampo">
                         <div>
-                            <h3>Hospede-se em {product?.name}</h3>
+                            <h3 className="py-3">Hospede-se em {product?.name}</h3>
                         </div>
                         <div>
-                            <p>
+                            <p className="py-3">
                                 {product?.description}
                             </p>
                         </div>
                     </div>
                     <div className="container opcoesCampo">
                         <div>
-                            <h3 className="tituloSecundario">Características da reserva</h3>
+                            <h3 className="py-3 tituloSecundario">Características da reserva</h3>
                         </div>
                         <div className="separador-box">
                             <div className="separador"></div>
@@ -139,7 +129,7 @@ export default function DetalhesReserva() {
                         <div>
 
                         </div>
-                        <div className="localizao-texto">
+                        <div className="localizao-texto py-3">
                             <p>{product?.city?.name}, {product?.city?.country}</p>
                             <p>Bairro lagoa azul, Rua Tabajara</p>
                         </div>
@@ -154,7 +144,7 @@ export default function DetalhesReserva() {
                         <div className="separador-box">
                             <div className="separador"></div>
                         </div>
-                        <div className="detalhes-main-holder">
+                        <div className="detalhes-main-holder py-3">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                                 <div className="col info-div">
                                     <h5>Normas da reserva</h5>

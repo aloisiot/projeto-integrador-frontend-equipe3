@@ -1,0 +1,27 @@
+.confirmacao-main-holder{
+    background-color: var(--light-gray);
+
+
+    & > .container{
+        padding-top: 2rem;
+        
+        h4{
+            color: var(--secondary-deep-blue);
+            font-weight: bold;
+        }
+    }
+
+    .confirmacao-conteudo{
+        display: flex;
+        gap: 1rem;
+        margin-top: 12px;
+        div:nth-child(1){
+            width: 60%;
+        }
+
+        div:nth-child(2){
+            width: 40%;
+        }
+    }
+
+}

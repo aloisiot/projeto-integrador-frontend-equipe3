@@ -10,14 +10,10 @@
         }
     }
 
-    .detalhesCabecalho{
-        background-color: var(--terciary-dark-gray);
-        padding: 0.6rem;
-    }
-
     .detalhesSegundoCabecalho{
         background-color: var(--secondary-grey);
-        padding: 0.6rem;
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
         height: 80px;
         display: flex;
         
@@ -69,41 +65,26 @@
         }
     }
 
-    .cabecalhoTexto{
-        color: var(--primary-white);
-        p{
-            margin: unset;
-            font-weight: 500;
-
-        }
-
-        
-        h4{
-            font-size: 1.4rem;
-        }
-    }
-
     .iconesContainer{
 
-        margin-top: 3rem;
+        margin-top: 2rem;
         svg{
             size: 10rem;
         }
         
         button{
             margin: unset;
+            padding: 0;
         }
     }
 
     .detalhesUltimoContainer{
         h3{
-            padding: 1rem;
             color: var(--secondary-deep-blue);
         }
 
         .separador-box{
-            padding-left: 1rem;
-            padding-right: 1rem;
+
             .separador{
                 padding: 0.1rem;
                 background-color: var(--primary-orange);
@@ -112,9 +93,6 @@
 
         .descricaoCampo{
             margin-top: 1rem;
-            p{
-                padding: 1rem;
-            }
         }
 
         .tituloSecundario{
@@ -125,8 +103,6 @@
 
         .mapaCampo{
             .localizao-texto{
-                padding: 1rem;
-
                 p{
                     margin: unset;
                     font-weight: 500;
@@ -139,7 +115,6 @@
         }
 
         .detalhes-main-holder{
-            padding: 1rem;
             margin-top: 1rem;
 
             .opcao-div{
