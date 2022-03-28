@@ -6,7 +6,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { selectCurrentProduct } from '../../../../app/store/currentProductSlice';
 import { useSelector } from 'react-redux';
-import { produto } from "../../../../mocks/produtoMock"
 
 
 export default function MobileGallery(){
@@ -21,7 +20,7 @@ export default function MobileGallery(){
                 modules={[Pagination]}
                 pagination={{type: 'fraction'}}
                 >
-                    {produto?.images?.map?.((img)=>{
+                    {product?.images?.map?.((img)=>{
                         return(
                         <SwiperSlide key ={`slide-${img.id}`} >
                             <img className="mobile-swipe-img" src={img.url} alt={img.title}></img>
