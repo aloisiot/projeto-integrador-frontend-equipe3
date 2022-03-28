@@ -4,6 +4,7 @@ import MobileGallery from "../../components/ProductPageComponents/Gallery/Mobile
 import ModalGallery from "../../components/ProductPageComponents/ModalGallery";
 import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer";
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
+import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
 import { useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/currentProductSlice'
@@ -53,7 +54,7 @@ export default function DetalhesReserva() {
         <Template>
             <div className="component-paginaDetalhes">
                 <ModalGallery modalStatus={modalAtivo} modalFunction={() => { setModalAtivo(false) }} />
-                <DetalhesCabecalho/>
+                <DetalhesCabecalho product={product}/>
                 <div className="detalhesSegundoCabecalho">
                     <div className="container d-flex justify-content-between align-items-center">
                         <div className="local-infobox">
@@ -137,32 +138,7 @@ export default function DetalhesReserva() {
                             <MapVisualizer latitude={product?.latitude} longitude={product?.longitude} />
                         }
                     </div>
-                    <div className="container infoCampo">
-                        <div>
-                            <h3 className="tituloSecundario">Informações adicionais</h3>
-                        </div>
-                        <div className="separador-box">
-                            <div className="separador"></div>
-                        </div>
-                        <div className="detalhes-main-holder py-3">
-                            <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
-                                <div className="col info-div">
-                                    <h5>Normas da reserva</h5>
-                                    <p>lorem lorem</p>
-                                    <p>lorem lorem</p>
-                                    <p>lorem lorem</p>
-                                </div>
-                                <div className="col info-div">
-                                    <h5>Saúde e segurança</h5>
-                                    <p>lorem lorem</p>
-                                </div>
-                                <div className="col info-div">
-                                    <h5>Cancelamento</h5>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aliquam aspernatur vel commodi placeat consectetur ducimus laborum, nemo eos reiciendis eaque odit voluptates dicta modi eligendi illo, nesciunt, laudantium provident?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <InformacoesCampo></InformacoesCampo>
                 </div>
             </div>
         </Template>
