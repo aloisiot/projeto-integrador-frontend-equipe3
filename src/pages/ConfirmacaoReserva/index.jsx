@@ -37,7 +37,7 @@ export default function ConfirmacaoReserva() {
                             <h4 className="p-3">Detalhe da reserva</h4>
                             <div className="detalhes-confirmacao-box">
                                 <div>
-                                    <img src={product?.images?.[0].url}></img>
+                                    <img src={product?.images?.[0].url} alt={product?.images?.title}></img>
                                 </div>
                                 <div className="confirmacao-info">
                                     <p>{product?.category?.qualification}</p>
