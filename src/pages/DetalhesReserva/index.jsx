@@ -93,7 +93,7 @@ export default function DetalhesReserva() {
                             <h3 className="py-3">Hospede-se em {product?.name}</h3>
                         </div>
                         <div>
-                            <p className="py-3">
+                            <p>
                                 {product?.description}
                             </p>
                         </div>

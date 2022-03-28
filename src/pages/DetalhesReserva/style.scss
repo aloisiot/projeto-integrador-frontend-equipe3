@@ -83,6 +83,11 @@
             color: var(--secondary-deep-blue);
         }
 
+
+        & > div{
+            margin-bottom: 1.5rem;
+        }
+
         .separador-box{
 
             .separador{
@@ -93,6 +98,9 @@
 
         .descricaoCampo{
             margin-top: 1rem;
+            p{
+                margin: unset;
+            }
         }
 
         .tituloSecundario{
@@ -102,7 +110,6 @@
         }
 
         .mapaCampo{
-            margin-bottom: 1rem;
             .localizao-texto{
                 p{
                     margin: unset;
