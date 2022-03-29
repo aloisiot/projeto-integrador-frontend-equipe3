@@ -106,7 +106,7 @@ export default function DetalhesReserva() {
                         <div className="separador-box">
                             <div className="separador"></div>
                         </div>
-                        <div className="detalhes-main-holder">
+                        <div className="detalhes-main-holder mt-3">
                             <div className="row row-cols-2 row-cols-lg-4 opcoesBox">
                                 {product?.characteristics?.map((cat,index,arr) => {
                                     return(
@@ -119,7 +119,7 @@ export default function DetalhesReserva() {
                             </div>
                         </div>
                     </div>
-                    <DateVisualizer />
+                    <DateVisualizer calendarioTitle={"Datas disponíveis"} temSeparador={true} />
                     <div className="container mapaCampo">
                         <div>
                             <h3 className="tituloSecundario">Localização</h3>

@@ -1,28 +1,71 @@
 .confirmacao-main-holder{
     background-color: var(--light-gray);
 
+
+    .redondo{
+        border-radius: 0.5rem;
+    }
+
     & > .container{
         padding-top: 2rem;
         
         h4{
             color: var(--secondary-deep-blue);
-            font-weight: bold;
         }
     }
 
     .confirmacao-conteudo{
         display: flex;
-        gap: 1rem;
+        gap: 2.5rem;
         margin-top: 12px;
         padding-bottom: 3rem;
         & > div:nth-child(1){
             width: 65%;
+
+            @media (max-width: 1024px){
+                width: 60%;
+            }
+
+            .confirmacao-calendario{
+                .calendarioCampo{
+                    background-color: var(--primary-white);
+
+                    .rdrCalendarWrapper{
+                        width: 100%;
+
+                        .rdrDayToday{
+                            .rdrDayNumber{
+                                span:after{
+                                    background-color: var(--primary-orange);
+                                }
+                            }
+                        }  
+
+                        .rdrDateDisplayWrapper{
+                            background-color: var(--secondary-deep-blue);
+
+                            .rdrDateInput{
+                                input{
+                                    color: var(--primary-orange);
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                        .rdrMonth{
+                            width: 50%;
+                        }
+                    }
+                }
+            }
         }
 
         & > div:nth-child(2){
             width: 35%;
             background-color: var(--primary-white);
-            border-radius: 0.5rem;
+
+            @media (max-width: 1024px){
+                width: 40%;
+            }
             
             .detalhes-confirmacao-box{
                 display: flex;
@@ -77,6 +120,9 @@
                 }
             }
         }
+
+
+
     }
 
 }
