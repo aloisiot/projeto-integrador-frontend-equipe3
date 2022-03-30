@@ -15,5 +15,6 @@ phases:
       commands:
         - rm -rf node_modules/
 artifacts:
+  base-directory: dist  
   files:
-    - 'dist/index.html'
+    - '**/*'
