@@ -18,6 +18,6 @@ phases:
       - echo Removing unnecessary files...
       - rm -rf node_modules/
 artifacts:
-  base-directory: '.'
+  base-directory: './dist'
   files:
     - '**/*'
