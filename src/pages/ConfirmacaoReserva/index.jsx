@@ -9,7 +9,7 @@ import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import DateVisualizerPure from "../../components/template/DateVisualizerPure";
 import { StarIcon, LocaleSmall } from "../../components/icons";
-import formatarData from "../../utilitarios/formatarData";
+import { dateFormatPtBt } from "../../utilitarios/dateFormat";
 import './style.scss'
 
 
@@ -61,10 +61,10 @@ export default function ConfirmacaoReserva() {
 
                                     </div>
                                     <div className="check-date mt-3 py-1">
-                                        <p>Check in</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].startDate) : "Escolha uma data" }</p>
+                                        <p>Check in</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].startDate) : "Escolha uma data" }</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
-                                        <p>Check out</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].endDate) : "Escolha uma data" }</p>
+                                        <p>Check out</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].endDate) : "Escolha uma data" }</p>
                                     </div>
                                     <div className="mt-5 mb-2">
                                         <Button className="btn-confirmacao">Confirmar reserva</Button>
