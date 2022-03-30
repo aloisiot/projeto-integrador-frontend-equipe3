@@ -4,14 +4,20 @@ phases:
   install:
     runtime-versions:
       nodejs: 12
-   
+    
+    pre_build:  
+      commands:
+        - echo install packages...      
+        - npm install
+    build:
+      commands:
+        - echo Create build...     
+        - npm run build
+    post_build:
     commands:
-      - npm install
-       
-  build:
-    commands:
-      - npm run build
-     
+      - echo Removing unnecessary files...
+      - rm -rf node_modules/
 artifacts:
+  base-directory: '.'
   files:
-    - build/**/*
+    - '**/*'
