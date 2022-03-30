@@ -5,9 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
-
-const stylesHandler = MiniCssExtractPlugin.loader;
+const isProduction = process.env.NODE_ENV === "production";
 
 const config = {
   entry: "./src/index.js",
@@ -31,20 +29,38 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
-        loader: 'resolve-url-loader',
-        options: {
-          removeCR: true
-        },
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.css$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader"],
-        loader: 'resolve-url-loader',
-        options: {
-          removeCR: true
-        },
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              sourceMap: true
+            }
+          },
+          { loader: "resolve-url-loader", options: { sourceMap: true } },
+          { loader: "adjust-sourcemap-loader", options: { debug: true } },
+          { loader: "sass-loader", options: { sourceMap: true } }
+        ]
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: { loader: "file-loader" }
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
