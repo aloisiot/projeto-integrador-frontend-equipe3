@@ -1,0 +1,37 @@
+.select-input {
+  position: relative;
+  background-color: white;
+}
+
+.select-input .icon svg path {
+  fill: var(--terciary-dark-gray);
+}
+
+.select-input .imput-options {
+  height: 100%;
+  min-height: 38px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.select-input ul.options {
+  width: calc(100% - 1rem);
+  background-color: white;
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+}
+
+.select-input ul.options li {
+  border-bottom: 1px solid var(--light-gray);
+  cursor: pointer;
+}
+
+.select-input ul.options li:last-child {
+  border-bottom: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,54 @@
+.component-product-card {
+  height: 260px;
+  background-color: white;
+}
+
+.component-product-card .img-container {
+  overflow: hidden;
+  min-width: 240px;
+  max-width: 240px;
+  height: 100%;
+}
+
+.component-product-card .img-container img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.component-product-card .product-description .description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.component-product-card .product-description .locale svg {
+  height: 18px;
+}
+
+.component-product-card .score .num {
+  font-size: 1.2rem;
+  color: white;
+  background-color: var(--secondary-deep-blue);
+}
+
+.component-product-card .score .text {
+  font-size: .7rem;
+  text-align: right;
+}
+
+@media (max-width: 512px) {
+  .component-product-card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: auto;
+  }
+  .component-product-card .img-container {
+    max-width: 100%;
+  }
+}
+/*# sourceMappingURL=styles.css.map */

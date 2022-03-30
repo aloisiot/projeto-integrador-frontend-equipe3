@@ -2,7 +2,7 @@
     background-color: var(--light-gray);
 
 
-    .redondo{
+    .redondo, .form-dados{
         border-radius: 0.5rem;
     }
 
@@ -18,13 +18,34 @@
         display: flex;
         gap: 2.5rem;
         margin-top: 12px;
-        padding-bottom: 3rem;
+        padding-bottom: 3rem;  
         & > div:nth-child(1){
-            width: 65%;
 
             @media (max-width: 1024px){
-                width: 60%;
+                width: 70%;
             }
+            
+            .form-dados{
+                background: var(--primary-white);
+                width: 100%;
+                flex-direction: column;
+                flex-wrap: wrap;
+
+                .col-1, .col-2{
+                    width: 100%;
+                    label{
+                        margin: 10px;
+                    }
+
+                    input{
+                        background-color: var(--secondary-grey);
+                        width: 260px;
+                        height: 40px;
+                        border-radius: 6%;
+                    }
+                }
+            }
+
 
             .confirmacao-calendario{
                 .calendarioCampo{

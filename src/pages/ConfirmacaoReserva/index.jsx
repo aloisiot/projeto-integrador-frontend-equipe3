@@ -31,14 +31,29 @@ export default function ConfirmacaoReserva() {
             <DetalhesCabecalho product={product} />
             <div className="confirmacao-main-holder">
                 <Container>
-                    <h4>Complete seus dados</h4>
+                        <h4>Complete seus dados</h4>      
                     <div className="confirmacao-conteudo">
+
+                        <div className="left">
+                        <div className="form-dados p-1">
+                            <div className="col-1">
+                                <label>Nome <br></br><input type="text" name="name" /></label>
+                                <label>Sobrenome <br></br><input type="text" name="lastName" /></label>
+                            </div>
+                            <div className="col-2">
+                                <label>Email <br></br><input type="email" name="email" /></label>
+                                <label>Cidade <br></br><input type="text" name="city" /></label>
+                            </div>
+                        </div>
+
                         <div>
-                            <div className="confirmacao-calendario mt-2">
+                            <div className="confirmacao-calendario mt-5">
                                 <h4>Selecione sua data de reserva</h4>
                                 <DateVisualizerPure onchange={item => setCurrentDateRange([item.selection])} range={currentDateRange}/>
                             </div>
                         </div>
+                        </div>
+
                         <div className="redondo">
                             <h4 className="p-3">Detalhe da reserva</h4>
                             <div className="detalhes-confirmacao-box">

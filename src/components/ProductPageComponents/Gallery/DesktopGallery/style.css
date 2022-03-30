@@ -1,0 +1,34 @@
+.galeriaImagens {
+  margin-top: 1rem;
+}
+
+.galeriaImagens .imagensSecondarias {
+  position: relative;
+}
+
+.galeriaImagens .imagensSecondarias .grid-img-secondarias {
+  height: 100%;
+}
+
+.galeriaImagens .imagensSecondarias .grid-img-secondarias div {
+  height: 50%;
+}
+
+.galeriaImagens .imagensSecondarias .grid-img-secondarias img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.galeriaImagens .imagensSecondarias .grid-img-secondarias .ultimaImagem {
+  position: relative;
+}
+
+.galeriaImagens .imagemPrimaria img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+/*# sourceMappingURL=style.css.map */

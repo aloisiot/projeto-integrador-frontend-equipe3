@@ -1,0 +1,28 @@
+.link-login-holder {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.link-login-holder p {
+  margin-top: revert;
+}
+
+.link-login-holder button {
+  border: none;
+  background-color: unset;
+  color: #F0572D;
+}
+
+.link-login-holder button:hover {
+  -webkit-text-decoration: underline solid #F0572D 2px;
+          text-decoration: underline solid #F0572D 2px;
+}
+/*# sourceMappingURL=styles.css.map */

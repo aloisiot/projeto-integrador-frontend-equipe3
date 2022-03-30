@@ -1,0 +1,25 @@
+.mobile-swiper-container {
+  margin-top: 1rem;
+}
+
+.mobile-swiper-container .mobile-swipe-img {
+  width: 100%;
+  height: 25rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.mobile-swiper-container .swiper-pagination {
+  bottom: 10px;
+  color: var(--primary-orange);
+  font-weight: bolder;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 37px;
+  font-size: 1.20rem;
+}
+/*# sourceMappingURL=style.css.map */
