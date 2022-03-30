@@ -15,7 +15,8 @@ phases:
     commands:
       - rm -rf node_modules/
 artifacts:
-  files:
+  base-directory: build
+    files:
     - public/**/*
     - src/**/*
     - package.json
