@@ -44,7 +44,7 @@ export default function Home(){
                 <Container className="py-4">
                     <Title variant="h2">Buscar por categoria</Title>
                     <section className="categories-container list-unstyled gap-4">
-                        {categories?.map(category => {
+                        {categories?.map?.(category => {
                             return (
                                 <div key={category.id}>
                                     <CategoryCard style={{width: "100%"}} category={category}/>
