@@ -33,10 +33,18 @@ const config = {
       {
         test: /\.s[ac]ss$/i,
         use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
+        loader: 'resolve-url-loader',
+        options: {
+          removeCR: true
+        },
       },
       {
         test: /\.css$/i,
         use: [stylesHandler, "css-loader", "postcss-loader"],
+        loader: 'resolve-url-loader',
+        options: {
+          removeCR: true
+        },
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
