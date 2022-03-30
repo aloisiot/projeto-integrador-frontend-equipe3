@@ -12,8 +12,8 @@ phases:
       commands:
         - npm run build
     post_build:
-    commands:
-      - rm -rf node_modules/
+      commands:
+        - rm -rf node_modules/
 artifacts:
   base-directory: build
   files:
