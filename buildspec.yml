@@ -15,6 +15,9 @@ phases:
       commands:
         - rm -rf node_modules/
 artifacts:
-  base-directory: dist  
   files:
-    - '**/*'
+    - public/**/*
+    - src/**/*
+    - package.json
+    - appspec.yml
+    - scripts/**/*
