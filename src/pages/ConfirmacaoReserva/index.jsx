@@ -36,11 +36,11 @@ export default function ConfirmacaoReserva() {
 
                         <div className="left">
                         <div className="form-dados p-1">
-                            <div className="col-1">
+                            <div className="column-1">
                                 <label>Nome <br></br><input type="text" name="name" /></label>
                                 <label>Sobrenome <br></br><input type="text" name="lastName" /></label>
                             </div>
-                            <div className="col-2">
+                            <div className="column-2">
                                 <label>Email <br></br><input type="email" name="email" /></label>
                                 <label>Cidade <br></br><input type="text" name="city" /></label>
                             </div>

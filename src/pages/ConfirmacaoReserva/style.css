@@ -40,15 +40,15 @@
       flex-wrap: wrap;
 }
 
-.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-1, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-2 {
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 {
   width: 100%;
 }
 
-.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-1 label, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-2 label {
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1 label, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 label {
   margin: 10px;
 }
 
-.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-1 input, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .col-2 input {
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1 input, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 input {
   background-color: var(--secondary-grey);
   width: 260px;
   height: 40px;
