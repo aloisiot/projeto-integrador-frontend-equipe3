@@ -119,7 +119,7 @@ export default function DetalhesReserva() {
                             </div>
                         </div>
                     </div>
-                    <DateVisualizer calendarioTitle={"Datas disponíveis"} temSeparador={true} />
+                    <DateVisualizer reservaIndex={product.id} calendarioTitle={"Datas disponíveis"} temSeparador={true} />
                     <div className="container mapaCampo">
                         <div>
                             <h3 className="tituloSecundario">Localização</h3>

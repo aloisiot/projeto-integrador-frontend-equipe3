@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import Button from "../../template/Button";
+import { useNavigate } from 'react-router-dom';
+
 
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
 
@@ -12,14 +14,19 @@ function getMonthQTD() {
 
 export default function DateVisualizer(props) {
     const [monthQTD, setMonthQTD] = useState(getMonthQTD())
-    const [currentRange, setCurrentRange] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection'
-        }
-    ]);
+    const [currentRange, setCurrentRange] = useState(null)
 
+    const initialState = [
+        {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: 'selection'
+        }
+    ] 
+
+    const navigate = useNavigate();
+
+        
 
     window.addEventListener("resize", () => {
         setMonthQTD(getMonthQTD())
@@ -45,14 +52,14 @@ export default function DateVisualizer(props) {
                         direction="horizontal"
                         onChange={item => setCurrentRange([item.selection])}
                         moveRangeOnFirstSelection={false}
-                        ranges={currentRange}
+                        ranges={currentRange !== null ? currentRange : initialState}
                         weekdayDisplayFormat="EEEEEE"
                     />
                 </div>
                 <div className="col  texto-calendario-box p-3">
                     <div>
                         <p>Selecione a data de início e término no calendário</p>
-                        <Button className="detalhes-btn">Fazer reserva</Button>
+                        <Button className="detalhes-btn" onClick={()=>{navigate(`/confirmacao-reserva/${props.reservaIndex}`);window.scrollTo(0, 0)}}>Fazer reserva</Button>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
 
 function getMonthQTD() {
-    return window.innerWidth >= 993 ? 2 : 1
+    return window.innerWidth >= 992 ? 2 : 1
 }
 
 export default function DateVisualizerPure({onchange,range}) {
@@ -25,17 +25,18 @@ export default function DateVisualizerPure({onchange,range}) {
 
 
     return (
-        <div className="calendarioCampo redondo p-3">
+        <div className="calendarioCampo redondo p-3 margin-top-padrao">
             <DateRange
                 editableDateInputs={true}
                 rangeColors={["#F0572D"]}
+                showDateDisplay={getMonthQTD() === 2 ? true : false}
                 color='#F0572D'
                 minDate={new Date()}
                 locale={ptBR}
                 months={monthQTD}
                 direction="horizontal"
                 onChange={onchange}
-                moveRangeOnFirstSelection={false}
+                moveRangeOnFirstSelection={true}
                 ranges={range !== null ? range : initialState}
                 weekdayDisplayFormat="EEEEEE"
             />
