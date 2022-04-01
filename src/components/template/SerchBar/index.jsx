@@ -8,12 +8,19 @@ import Title from "../../tipografy/Title"
 import Button from "../Button"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchCities, selectAllCities } from "../../../app/store/citiesSlice"
-import { fetchProductsByCity } from "../../../app/store/productsSlice"
+import { formatDateForTransfer } from "../../../utilitarios/dateFormat";
+import {
+    fetchProductsByCity,
+    fetchProductsByCityAndDateRange,
+    fetchProductsByDateRange
+} from "../../../app/store/productsSlice"
+import Swal from "sweetalert2"
 
 export default function SearchBar() {
     const dispatch = useDispatch()
     const [selectedCityName, setSelectedCityName] = useState("");
     const [ selectedCityId, setSelectedCityId] = useState(0);
+    const [dateRange, setDateRange] = useState(null)
     const cities = useSelector(selectAllCities);
 
     useEffect(() => {
@@ -23,8 +30,24 @@ export default function SearchBar() {
     }, [dispatch, cities])
 
     function onSubmit(event){
-        if(selectedCityId !== 0) {
+        const startDate = dateRange?.[0]?.startDate
+        const endDate = dateRange?.[0]?.endDate
+
+        if(selectedCityId && startDate && endDate) {
+            dispatch(fetchProductsByCityAndDateRange({
+                cityId: selectedCityId,
+                startDate: formatDateForTransfer(startDate),
+                endDate: formatDateForTransfer(endDate)
+            }))
+        } else if(selectedCityId){
             dispatch(fetchProductsByCity(selectedCityId))
+        } else if(startDate && endDate) {
+            dispatch(fetchProductsByDateRange({
+                startDate: formatDateForTransfer(startDate),
+                endDate: formatDateForTransfer(endDate)
+            }))
+        } else {
+            Swal.fire("Opss!", "Voce deve indicar uma cidade ou intervalo de datas para a pesquisa!")
         }
     }
 
@@ -45,7 +68,11 @@ export default function SearchBar() {
                         options={cities}
                         onSelectedOption={setSelectedCityId}
                     />
-                    <DateRangePicker className="flex-grow-1"/>
+                    <DateRangePicker
+                        className="flex-grow-1"
+                        dateRange={dateRange}
+                        setDateRange={setDateRange}
+                    />
                     <Button
                         onClick={onSubmit}
                         className="flex-grow-1"

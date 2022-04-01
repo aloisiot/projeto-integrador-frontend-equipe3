@@ -1,14 +1,13 @@
 import './styles.scss'
 import { useEffect, useState } from "react";
 import { DateRange } from 'react-date-range';
-import formatarData from "../../../utilitarios/formatarData";
+import { dateFormatPtBt } from "../../../utilitarios/dateFormat";
 import { CalendarioIcon } from '../../icons';
 import Button from '../../template/Button';
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
 
-export default function DateRangePicker(props) {
+export default function DateRangePicker({className, dateRange, setDateRange}) {
     const [visible, setVisible ]= useState(false) 
-    const [dateRange, setDateRange] = useState(null)
 
     const initialState = [
         {
@@ -18,7 +17,7 @@ export default function DateRangePicker(props) {
         }
     ]
 
-    function handlerChange(newDateRange) {
+    function handlerDateRangeChange(newDateRange) {
         const newState = {
             ...dateRange,
             ...newDateRange
@@ -28,9 +27,9 @@ export default function DateRangePicker(props) {
 
     function renderDates() {
         return (
-            formatarData(dateRange[0]?.startDate)
+            dateFormatPtBt(dateRange[0]?.startDate)
             + " - " +
-            formatarData(dateRange[0]?.endDate)
+            dateFormatPtBt(dateRange[0]?.endDate)
         )
     }
 
@@ -42,7 +41,7 @@ export default function DateRangePicker(props) {
 
     return (
         <div
-            className={`constainer-date-range-picker ${props.className}`}
+            className={`constainer-date-range-picker ${className}`}
             onClick={event => event.stopPropagation()}
         >
             <div
@@ -66,11 +65,11 @@ export default function DateRangePicker(props) {
                     overflow-hidden
                 `}>
                     <DateRange
-                        rangeColors='#F0572D'
+                        rangeColors={['#F0572D']}
                         color='#F0572D'
                         minDate={new Date()}
                         editableDateInputs={true}
-                        onChange={item => handlerChange(item.selection)}
+                        onChange={item => handlerDateRangeChange(item.selection)}
                         moveRangeOnFirstSelection={false}
                         ranges={dateRange !== null ? dateRange : initialState}
                         showDateDisplay={false}
