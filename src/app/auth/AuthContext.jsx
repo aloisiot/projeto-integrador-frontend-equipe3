@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AppContext = createContext();
-
 export function AuthProvider(props) {
-    const cookieName = "c7d5e61a-e190-43b0-b422-b56571c0005d"
+    const userCookieName = "c7d5e61a-e190-43b0-b422-b56571c0005d"
     const navigate = useNavigate()
     const [ authenticated, setAuthenticated ] = useState()
 
@@ -20,7 +19,7 @@ export function AuthProvider(props) {
     }, [authenticated, checkIsAuthenticated])
 
     async function signIn(email, password, keepConnected, onRejected) {
-        jsCookie.remove(cookieName)
+        jsCookie.remove(userCookieName)
         const resp = await axios.post(
             `${process.env.REACT_APP_LINK_API}/auth/sign-in`,
             {email, password}
@@ -28,7 +27,7 @@ export function AuthProvider(props) {
         
         if(resp.status === 200) {
             const options = keepConnected ? { expires: 30 } : undefined
-            jsCookie.set(cookieName, JSON.stringify(resp.data), options)
+            jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
             setAuthenticated(true)
         } else {
             onRejected()
@@ -50,12 +49,12 @@ export function AuthProvider(props) {
     } 
 
     function signOut() {
-        jsCookie.remove(cookieName)
+        jsCookie.remove(userCookieName)
         setAuthenticated(false)
     }
 
     function getUserDetails() {
-        const cookie = jsCookie.get(cookieName)
+        const cookie = jsCookie.get(userCookieName)
         if(cookie) {
             const cookieContent = JSON.parse(cookie)
             return cookieContent.userDetails
@@ -63,7 +62,7 @@ export function AuthProvider(props) {
     }
 
     function getTocken() {
-        const cookie = JSON.parse(jsCookie.get(cookieName))
+        const cookie = JSON.parse(jsCookie.get(userCookieName))
         const tocken =  `${cookie.type} ${cookie.token}`
         return tocken
     }
