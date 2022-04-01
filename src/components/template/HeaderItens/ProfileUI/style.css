@@ -1,0 +1,23 @@
+.component-user-header p {
+  margin: unset;
+}
+
+.component-user-header p.texto-inferior {
+  color: var(--primary-orange);
+}
+
+.component-user-header .x-icon {
+  cursor: pointer;
+}
+
+.component-user-header .first-char {
+  height: 48px;
+  width: 48px;
+  background-color: var(--primary-orange);
+  border-radius: 25px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  opacity: .8;
+}
+/*# sourceMappingURL=style.css.map */

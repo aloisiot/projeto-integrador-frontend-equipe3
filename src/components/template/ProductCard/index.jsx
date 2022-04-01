@@ -38,7 +38,7 @@ export default function ProductCard ({product, className}) {
                 </div>
                 <div>
                     <p className='description'>{product?.description}</p>
-                    <Button full onClick={() => {navigate(`/reserva/${product.id}`)}}>Veja mais</Button>
+                    <Button full onClick={() => {navigate(`/reserva/${product.id}`);window.scrollTo(0, 0)}}>Veja mais</Button>
                 </div>
             </div>    
         </div>

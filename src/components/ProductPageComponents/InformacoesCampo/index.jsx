@@ -15,17 +15,19 @@ export default function InformacoesCampo(props) {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                     <div className="col info-div">
                         <h5>Normas da reserva</h5>
-                        <p>lorem lorem</p>
-                        <p>lorem lorem</p>
-                        <p>lorem lorem</p>
+                        <p>Check out as 10:00</p>
+                        <p>Sem festas</p>
+                        <p>Proibido fumar</p>
                     </div>
                     <div className="col info-div">
                         <h5>Saúde e segurança</h5>
-                        <p>lorem lorem</p>
+                        <p>Detector de fumaça</p>
+                        <p>Alarme e camêras de segurança</p>
+
                     </div>
                     <div className="col info-div">
                         <h5>Cancelamento</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aliquam aspernatur vel commodi placeat consectetur ducimus laborum, nemo eos reiciendis eaque odit voluptates dicta modi eligendi illo, nesciunt, laudantium provident?</p>
+                        <p>Adicione as datas da viagem para obter detalhes de cancelamento para a estadia</p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,63 @@
+#root .btn {
+  font-weight: 700;
+}
+
+#root .btn:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#root .btn.full {
+  width: 100%;
+}
+
+#root .btn.large {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  font-size: 1.2rem;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+#root .btn.large:hover {
+  -webkit-transform: scale(1.025);
+          transform: scale(1.025);
+}
+
+#root .btn.primary {
+  background-color: var(--primary-orange);
+  color: white;
+}
+
+#root .btn.primary.detalhes-btn {
+  width: -webkit-fill-available;
+  font-size: 1.15rem;
+}
+
+#root .btn.primary:disabled {
+  border: 1px solid transparent;
+  background-color: #444;
+}
+
+#root .btn.primary:hover {
+  opacity: .9;
+}
+
+#root .btn.bordered {
+  background: none;
+  color: var(--primary-orange);
+  border: 2px solid var(--primary-orange);
+}
+
+#root .btn.bordered:hover {
+  background-color: var(--primary-orange);
+  color: white;
+}
+
+#root .btn.bordered:disabled {
+  border: 2px solid #444;
+  color: #444;
+}
+/*# sourceMappingURL=style.css.map */

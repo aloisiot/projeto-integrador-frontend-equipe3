@@ -1,0 +1,162 @@
+.confirmacao-main-holder {
+  background-color: var(--light-gray);
+}
+
+.confirmacao-main-holder .redondo, .confirmacao-main-holder .form-dados {
+  border-radius: 0.5rem;
+}
+
+.confirmacao-main-holder > .container {
+  padding-top: 2rem;
+}
+
+.confirmacao-main-holder > .container h4 {
+  color: var(--secondary-deep-blue);
+}
+
+.confirmacao-main-holder .confirmacao-conteudo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 12px;
+  padding-bottom: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) {
+    width: 70%;
+  }
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados {
+  background: var(--primary-white);
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 {
+  width: 100%;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1 label, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 label {
+  margin: 10px;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-1 input, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .form-dados .column-2 input {
+  background-color: var(--secondary-grey);
+  width: 260px;
+  height: 40px;
+  border-radius: 6%;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo {
+  background-color: var(--primary-white);
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo .rdrCalendarWrapper {
+  width: 100%;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo .rdrCalendarWrapper .rdrDayToday .rdrDayNumber span:after {
+  background-color: var(--primary-orange);
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo .rdrCalendarWrapper .rdrDateDisplayWrapper {
+  background-color: var(--secondary-deep-blue);
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo .rdrCalendarWrapper .rdrDateDisplayWrapper .rdrDateInput input {
+  color: var(--primary-orange);
+  font-weight: bold;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(1) .confirmacao-calendario .calendarioCampo .rdrCalendarWrapper .rdrMonth {
+  width: 50%;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) {
+  width: 35%;
+  background-color: var(--primary-white);
+}
+
+@media (max-width: 1024px) {
+  .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) {
+    width: 40%;
+  }
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info {
+  padding: 1rem;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info p, .confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info h4 {
+  margin: unset;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info p {
+  font-weight: 500;
+  color: var(--secondary-deep-blue);
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info h4 {
+  margin-bottom: -3px;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info .confirmacao-localizacao {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info .confirmacao-box-separator {
+  background-color: var(--primary-orange);
+  height: 2px;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info .check-date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info .check-date p {
+  font-size: 20px;
+}
+
+.confirmacao-main-holder .confirmacao-conteudo > div:nth-child(2) .detalhes-confirmacao-box .confirmacao-info .btn-confirmacao {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.separador {
+  padding: 0.1rem;
+  background-color: var(--primary-orange);
+}
+/*# sourceMappingURL=style.css.map */

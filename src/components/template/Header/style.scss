@@ -139,7 +139,7 @@
                         &.open-animation{
                             animation-delay: 1s !important;
                             animation-fill-mode: forwards !important;
-                            animation: open-animation 1s;
+                            animation: open-animation 0.5s;
                         }
                         
                         &.close-animation{
