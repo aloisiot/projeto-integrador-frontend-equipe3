@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AppContext = createContext();
+export const userCookieName = "c7d5e61a-e190-43b0-b422-b56571c0005d"
+
 export function AuthProvider(props) {
-    const userCookieName = "c7d5e61a-e190-43b0-b422-b56571c0005d"
     const navigate = useNavigate()
     const [ authenticated, setAuthenticated ] = useState()
 

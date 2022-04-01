@@ -13,6 +13,10 @@ import formatarData, { formatDateForTransfer } from "../../utilitarios/formatarD
 import './style.scss'
 import useAuth from "../../app/auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import jsCookie from "js-cookie";
+import { userCookieName } from "../../app/auth/AuthContext";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 function hourPush(){
     let array = []
@@ -31,7 +35,7 @@ export default function ConfirmacaoReserva() {
     const [dropdownToggle, setDropdownToggle] = useState(false);
     const [horarioSelecionado, setHorarioSelecionado] = useState(null)
     const hourArray = hourPush();
-    const {getUserDetails,authenticated} = useAuth()
+    const {getUserDetails,authenticated, getTocken} = useAuth()
     const userDetails = getUserDetails();
     const navigate = useNavigate();
     const initialReserva = {
@@ -53,25 +57,32 @@ export default function ConfirmacaoReserva() {
         setHorarioSelecionado(horaChegada)
         setReserva({
             ...reserva,
-            startTime : {
-                hour: +horaChegada.split(":")[0],
-                minute: +horaChegada.split(":")[1],
-                second : 0,
-                nano : 0
-            }
+            startTime : horaChegada.split(":")[0].length < 2 ? "0"+horaChegada+":00" : horaChegada+":00"
         })
         setDropdownToggle(!dropdownToggle)
     }
 
     useEffect(()=>{
-        if(!authenticated){
-            navigate('/login')
-        }
-    },[authenticated,navigate])
+      const cookie = jsCookie.get(userCookieName)
+      if(!cookie){
+        Swal.fire('Faça login para continuar')
+            .then(()=> navigate('/login'))
+      }
+    },[navigate,authenticated])
     
-    function reservaHandler(){
-   
-        console.log(reserva)
+    async function reservaHandler(){
+        const config = {
+            headers: {
+                Authorization: getTocken()
+            }
+        }
+        const resposta = await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        .catch(({response})=> {
+            if(response.status === 422){
+                Swal.fire(response.data.error)
+            }
+        })
+        
     }
 
     function telefoneHandler(telefone){
@@ -110,10 +121,10 @@ export default function ConfirmacaoReserva() {
                             <div className="form-dados p-1">
                                 <div className="column-1 d-flex">
                                     <label>Nome<br></br><input type="text" name="name" defaultValue={authenticated ? userDetails.name  : ""}/></label>
-                                    <label>Sobrenome <br></br><input type="text" name="lastName" defaultValue={authenticated && userDetails.lastname} /></label>
+                                    <label>Sobrenome <br></br><input type="text" name="lastName" defaultValue={authenticated ? userDetails.lastname  : ""} /></label>
                                 </div>
                                 <div className="column-2 d-flex">
-                                    <label>Email<br></br><input type="email" name="email" defaultValue={authenticated && userDetails.email}/></label>
+                                    <label>Email<br></br><input type="email" name="email" defaultValue={authenticated ? userDetails.email  : ""}/></label>
                                     <label>Telefone<br></br><input type="text" name="telefone" onChange={(e)=>{telefoneHandler(e.target.value)}} /></label>
                                 </div>
                             </div>
