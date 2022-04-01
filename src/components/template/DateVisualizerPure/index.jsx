@@ -15,7 +15,7 @@ export default function DateVisualizerPure({onchange,range}) {
         {
           startDate: new Date(),
           endDate: new Date(),
-          key: 'selection'
+          key: 'datasSelecao'
         }
     ] 
 

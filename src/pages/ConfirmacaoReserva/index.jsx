@@ -9,9 +9,14 @@ import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import DateVisualizerPure from "../../components/template/DateVisualizerPure";
 import { StarIcon, LocaleSmall, clockIcon, downArrow } from "../../components/icons";
-import formatarData from "../../utilitarios/formatarData";
+import formatarData, { formatDateForTransfer } from "../../utilitarios/formatarData";
 import './style.scss'
-
+import useAuth from "../../app/auth/useAuth";
+import { useNavigate } from "react-router-dom";
+import jsCookie from "js-cookie";
+import { userCookieName } from "../../app/auth/AuthContext";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 function hourPush(){
     let array = []
@@ -28,19 +33,75 @@ export default function ConfirmacaoReserva() {
     const { idReserva } = useParams();
     const [currentDateRange, setCurrentDateRange] = useState(null);
     const [dropdownToggle, setDropdownToggle] = useState(false);
-    const [horarioSelecionado, setHorarioSelecionado] = useState(null);
+    const [horarioSelecionado, setHorarioSelecionado] = useState(null)
     const hourArray = hourPush();
-   
+    const {getUserDetails,authenticated, getTocken} = useAuth()
+    const userDetails = getUserDetails();
+    const navigate = useNavigate();
+    const initialReserva = {
+        product:{
+            id: +idReserva
+        },
+        client:{
+            id : userDetails?.id
+        }
+    }
+    const [reserva, setReserva] = useState(initialReserva)
 
 
     useEffect(() => {
         dispatch(findCurrentProduct(idReserva))
     }, [dispatch, idReserva])
 
-    function horarioHandler(horarioValue){
-        setHorarioSelecionado(horarioValue)
+    function horarioHandler(horaChegada){
+        setHorarioSelecionado(horaChegada)
+        setReserva({
+            ...reserva,
+            startTime : horaChegada.split(":")[0].length < 2 ? "0"+horaChegada+":00" : horaChegada+":00"
+        })
         setDropdownToggle(!dropdownToggle)
     }
+
+    useEffect(()=>{
+      const cookie = jsCookie.get(userCookieName)
+      if(!cookie){
+        Swal.fire('Faça login para continuar')
+            .then(()=> navigate('/login'))
+      }
+    },[navigate,authenticated])
+    
+    async function reservaHandler(){
+        const config = {
+            headers: {
+                Authorization: getTocken()
+            }
+        }
+        const resposta = await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        .catch(({response})=> {
+            if(response.status === 422){
+                Swal.fire(response.data.error)
+            }
+        })
+        
+    }
+
+    function telefoneHandler(telefone){
+        setReserva({
+            ...reserva,
+            telefone
+        })
+    }
+
+    function calendarioHandler(datas){
+        setCurrentDateRange(datas)
+        setReserva({
+            ...reserva,
+            startDate : formatDateForTransfer(datas[0].startDate),
+            endDate : formatDateForTransfer(datas[0].endDate)
+        })
+    }
+    
+
 
     const hourLi = hourArray.map((horario,index)=>{
         return (
@@ -59,18 +120,18 @@ export default function ConfirmacaoReserva() {
                         <div className="left">
                             <div className="form-dados p-1">
                                 <div className="column-1 d-flex">
-                                    <label>Nome <br></br><input type="text" name="name" /></label>
-                                    <label>Sobrenome <br></br><input type="text" name="lastName" /></label>
+                                    <label>Nome<br></br><input type="text" name="name" defaultValue={authenticated ? userDetails.name  : ""}/></label>
+                                    <label>Sobrenome <br></br><input type="text" name="lastName" defaultValue={authenticated ? userDetails.lastname  : ""} /></label>
                                 </div>
                                 <div className="column-2 d-flex">
-                                    <label>Email <br></br><input type="email" name="email" /></label>
-                                    <label>Cidade <br></br><input type="text" name="city" /></label>
+                                    <label>Email<br></br><input type="email" name="email" defaultValue={authenticated ? userDetails.email  : ""}/></label>
+                                    <label>Telefone<br></br><input type="text" name="telefone" onChange={(e)=>{telefoneHandler(e.target.value)}} /></label>
                                 </div>
                             </div>
                             <div>
                                 <div className="confirmacao-calendario mt-4">
                                     <h4>Selecione sua data de reserva</h4>
-                                    <DateVisualizerPure onchange={item => setCurrentDateRange([item.selection])} range={currentDateRange} />
+                                    <DateVisualizerPure onchange={item => calendarioHandler([item.datasSelecao])} range={currentDateRange} />
                                 </div>
                             </div>
                             <div className="mt-4">
@@ -81,7 +142,7 @@ export default function ConfirmacaoReserva() {
                                     </div>
                                     <p className="mt-2">Indique a hora de chegada</p>
                                     <div className="seletor-horario mt-1 p-1 d-flex  align-items-center" onClick={()=>{setDropdownToggle(!dropdownToggle)}}>
-                                        <p  className={`seletor-display px-1 ${horarioSelecionado != null ? "" : "white-hidden"}`}>{horarioSelecionado != null ? horarioSelecionado : "selecione um horário"}</p>
+                                        <p className={`seletor-display px-1 ${horarioSelecionado ? "" : "white-hidden"}`}>{horarioSelecionado ? horarioSelecionado : "selecione um horário"}</p>
                                         {downArrow}
                                      
                                     </div>
@@ -123,10 +184,10 @@ export default function ConfirmacaoReserva() {
                                         <p>Check out</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].endDate) : "___/___/___"}</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
-                                        <p>Hora de chegada</p> <p>{horarioSelecionado != null ? horarioSelecionado : "Escolha uma hora"}</p>
+                                        <p>Hora de chegada</p> <p>{horarioSelecionado ? horarioSelecionado : "Escolha uma hora"}</p>
                                     </div>
                                     <div className="mt-5 mb-2">
-                                        <Button className="btn-confirmacao">Confirmar reserva</Button>
+                                        <Button onClick={()=>{reservaHandler()}} className="btn-confirmacao">Confirmar reserva</Button>
                                     </div>
                                 </div>
                             </div>

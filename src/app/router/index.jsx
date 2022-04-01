@@ -15,7 +15,7 @@ export default function RouterList(){
             <Provider store={store}>
                 <AuthProvider>
                     <Routes>
-                        <Route path="/" element={<Home/>}/>
+                        <Route path="*" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/cadastro" element={<Cadastro/>}/>
                         <Route path="/reserva/:idReserva" element={<DetalhesReserva/>} />
