@@ -57,7 +57,7 @@ export default function ImputWithOptions (props) {
                 onClick={onClickedInput}
             />
             {optionsIsVisible && (
-                <ul className='list-unstyled options p-3 rounded'>
+                <ul className='list-unstyled shadow options p-3 rounded'>
                 {(props.options && filteredOptions().length > 0) ?
                     filteredOptions().map(({name, id}) => {
                         return (
