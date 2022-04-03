@@ -116,13 +116,17 @@ export default function SearchPage() {
                     <Container>
                     <Title variant="h2">Resultados</Title>
                         <Row className='d-flex row-cols-md-1 row-cols-lg-2'>
-                            {filteredProductsByCategory().map?.(product => {
-                                return (
-                                    <Col key={product.id}>
-                                        <ProductCard product={product} className="mb-3"/>
-                                    </Col>
-                                )
-                            })}
+                            {filteredProductsByCategory().length ? (
+                                filteredProductsByCategory().map?.(product => {
+                                    return (
+                                        <Col key={product.id}>
+                                            <ProductCard product={product} className="mb-3"/>
+                                        </Col>
+                                    )
+                                })
+                            ) : (
+                                <div>Nenhum resultado encontrado!</div>
+                            )}
                         </Row>
                     </Container>
                 </section>
