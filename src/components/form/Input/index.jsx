@@ -11,7 +11,8 @@ export default function Input(props){
             > 
                 {props.labelTxt}
             </label>
-            <input 
+            <input
+            autoComplete={props.autoComplete}
                 type={props.type} 
                 className={props.classInput} 
                 id={props.inputId} 

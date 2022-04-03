@@ -72,45 +72,47 @@ export default function SearchPage() {
                 <SearchBar/>
                 <div className="pt-4">{/*Espaçamento*/}</div>
                 <Container>
+                    {(cityId || dateRange?.startDate || currentCategory?.id) ? (
+                        <Title variant="h4">Filtros:</Title>
+                    ) : ""}
+                    <div className='pb-4 d-flex flex-wrap align-items-center gap-3'>
+                        {currentCategory?.id && (
+                            <Chip
+                                closeAction={() => dispatch(setCurrentCategory({}))}
+                                label="Categoria"
+                                text={`${currentCategory.qualification}`}
+                                on
+                            />
+                        )}
+                        {cityId ? (
+                            cityId && (
+                                <Chip
+                                    closeAction={() => dispatch(setCityId(0))}
+                                    label="Cidade"
+                                    text={`${cities?.find(city =>  city.id === cityId).name}`}
+                                />
+                            )
+                        ): ""}
+                        {dateRange?.startDate && (
+                            <>
+                                <Chip
+                                    closeAction={() => dispatch(setDateRange({}))}
+                                    label="Chech in"
+                                    text={dateRange.startDate.split("-").reverse().join("/")}
+                                />
+                                <Chip
+                                    closeAction={() => dispatch(setDateRange({}))}
+                                    label="Chech out"
+                                    text={dateRange.endDate.split("-").reverse().join("/")}
+                                />
+                            </>
+                        )}
+                    </div>
+                </Container>
+                <Container>
                     {categories.length && !currentCategory?.id ? (
                         <CategoriesColection className="pb-4"/>
                     ) : ""}
-                </Container>
-                <Container className='pb-4 d-flex flex-wrap align-items-center gap-3'>
-                    {(cityId || dateRange?.startDate || currentCategory?.id) ? (
-                        <Title variant="h2">Filtros:</Title>
-                    ) : ""}
-                    {currentCategory?.id && (
-                        <Chip
-                            closeAction={() => dispatch(setCurrentCategory({}))}
-                            label="Categoria"
-                            text={`${currentCategory.qualification}`}
-                            on
-                        />
-                    )}
-                    {cityId ? (
-                        cityId && (
-                            <Chip
-                                closeAction={() => dispatch(setCityId(0))}
-                                label="Cidade"
-                                text={`${cities?.find(city =>  city.id === cityId).name}`}
-                            />
-                        )
-                    ): ""}
-                    {dateRange?.startDate && (
-                        <>
-                            <Chip
-                                closeAction={() => dispatch(setDateRange({}))}
-                                label="Chech in"
-                                text={dateRange.startDate.split("-").reverse().join("/")}
-                            />
-                            <Chip
-                                closeAction={() => dispatch(setDateRange({}))}
-                                label="Chech out"
-                                text={dateRange.endDate.split("-").reverse().join("/")}
-                            />
-                        </>
-                    )}
                 </Container>
                 <section id="search-result" className='products-container py-4 light-gray-bg'>
                     <Container>

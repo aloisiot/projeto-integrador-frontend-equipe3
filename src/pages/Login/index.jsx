@@ -7,10 +7,10 @@ import { useEffect, useState, useRef } from "react";
 import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import useAuth from "../../app/auth/useAuth";
-import { Container, ToggleButton } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Title from "../../components/tipografy/Title";
 import { useNavigate } from "react-router-dom";
-import { CheckedIcon } from "../../components/icons";
+import CheckBox from "../../components/form/CheckBox";
 
 export default function Login(){
     const { signIn, authenticated } = useAuth()
@@ -119,6 +119,7 @@ export default function Login(){
                         <div className="form-box">
                             <form className="d-flex flex-column" >
                                 <Input 
+                                    autoComplete='on'
                                     forLabel={"email-input"} 
                                     classLabel={"form-label input-padrao"} 
                                     labelTxt={"Email"}
@@ -136,6 +137,7 @@ export default function Login(){
                                 </p>}
                                 </Input>
                                 <Input 
+                                    autoComplete='on'
                                     forLabel={"senha-input"} 
                                     classLabel={"form-label input-padrao"} 
                                     labelTxt={"Senha"}
@@ -151,15 +153,7 @@ export default function Login(){
                                 </p>}
                                 </Input>
                                 <div className="d-flex gap-2 align-self-center  align-items-strech">
-                                    <ToggleButton
-                                        id="toggle-check"
-                                        type="checkbox"
-                                        variant="outline-primary"
-                                        checked={keepConnected}
-                                        value="1"
-                                        label="label"
-                                        onChange={() => setKeepConnected(! keepConnected)}
-                                    >{CheckedIcon}</ToggleButton>
+                                    <CheckBox id="toggle-check" value={keepConnected} onChange={setKeepConnected} />
                                     <label htmlFor="toggle-check">Mantenha-me conectado!</label>
                                 </div>
                             </form>

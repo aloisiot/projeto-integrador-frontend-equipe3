@@ -2,6 +2,14 @@
     color: var(--primary-orange);
     background-color: var(--light-orange);
 
+    .label {
+        font-size: .8rem;
+    }
+
+    .text{
+        font-weight: 600;
+    }
+
     button {
         border: none;
         background: none;
