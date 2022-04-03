@@ -2,11 +2,6 @@
     display: inline-block;
     max-width: 399px;
     height: 240px;
-    border: 2px solid #FFF0;
-
-    &.active-category-card{
-        border: 2px solid var(--primary-orange);
-    }
 
     .img-container {
         overflow: hidden;
