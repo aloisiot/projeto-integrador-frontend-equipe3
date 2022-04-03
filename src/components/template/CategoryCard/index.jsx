@@ -1,41 +1,23 @@
 import "./styles.scss";
 import Title from "../../tipografy/Title";
-import { useDispatch, useSelector } from "react-redux";
-import { removeCurrentCategory, selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/currentCategorySlice";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentCategory } from "../../../app/store/currentCategorySlice";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryCard({ category, style }) {
-    const [ isSelected, setIsSelected ] = useState(false)
     const dispatch = useDispatch()
-    const currentCategory = useSelector(selectCurrentCategoriy)
-
-    useEffect(() => {
-        if(category.id === currentCategory.id) {
-            setIsSelected(true)
-        } else {
-            setIsSelected(false)
-        }
-    }, [category, currentCategory])
+    const navigate = useNavigate()
 
     function onClickHandler(event) {
-        const id = currentCategory.id
-        if(id === undefined || id !== category.id) {
-            dispatch(setCurrentCategory(category))
-        } else {
-            dispatch(removeCurrentCategory())
-        }
+        dispatch(setCurrentCategory(category))
+        navigate("/search")
     }
 
     return (
         <div
             onClick={onClickHandler}
             style={style}
-            className={`
-                component-category-card
-                rounded-3 shadow
-                overflow-hidden
-                ${isSelected ? "active-category-card" : ""}
-            `}
+            className="component-category-card rounded-3 shadow overflow-hidden"
         >
             <div className="img-container">
                 <img

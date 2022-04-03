@@ -1,0 +1,22 @@
+.component-chip {
+    color: var(--primary-orange);
+    background-color: var(--light-orange);
+
+    button {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+
+    button {
+        svg path {
+            fill: var(--primary-orange);
+        }
+
+        &:hover{
+            svg path{
+                fill: red;
+            }
+        }
+    }
+}

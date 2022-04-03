@@ -9,7 +9,7 @@ import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import DateVisualizerPure from "../../components/template/DateVisualizerPure";
 import { StarIcon, LocaleSmall, clockIcon, downArrow } from "../../components/icons";
-import formatarData, { formatDateForTransfer } from "../../utilitarios/formatarData";
+import { dateFormatPtBt, formatDateForTransfer } from "../../utilitarios/dateFormat";
 import './style.scss'
 import useAuth from "../../app/auth/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -192,10 +192,10 @@ export default function ConfirmacaoReserva() {
 
                                     </div>
                                     <div className="check-date mt-3 py-1">
-                                        <p>Check in</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].startDate) : "___/___/___"}</p>
+                                        <p>Check in</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].startDate) : "___/___/___"}</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
-                                        <p>Check out</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].endDate) : "___/___/___"}</p>
+                                        <p>Check out</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].endDate) : "___/___/___"}</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
                                         <p>Hora de chegada</p> <p>{horarioSelecionado ? horarioSelecionado : "Escolha uma hora"}</p>

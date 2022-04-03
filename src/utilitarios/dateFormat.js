@@ -3,5 +3,5 @@ export function dateFormatPtBt(data) {
 }
 
 export function formatDateForTransfer(data) {
-    return dateFormatPtBt(data).split("/").reverse().join("-")
+    return data.toISOString().split("T")[0]
 }

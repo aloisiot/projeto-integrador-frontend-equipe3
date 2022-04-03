@@ -56,6 +56,7 @@ export const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (_, action) => action.payload )
             .addCase(fetchProductsByCity.fulfilled, (_, action) => action.payload)
             .addCase(fetchProductsByCityAndDateRange.fulfilled, (_, action) => action.payload)
+            .addCase(fetchProductsByDateRange.fulfilled, (_, action) => action.payload)
     }
 })
 

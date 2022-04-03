@@ -7,6 +7,7 @@ import DetalhesReserva from '../../pages/DetalhesReserva';
 import { Provider } from 'react-redux';
 import { AuthProvider } from '../auth/AuthContext';
 import store from '../store';
+import SearchPage from '../../pages/Search';
 
 export default function RouterList(){
 
@@ -17,6 +18,7 @@ export default function RouterList(){
                     <Routes>
                         <Route path="*" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="/search" element={<SearchPage/>}/>
                         <Route path="/cadastro" element={<Cadastro/>}/>
                         <Route path="/reserva/:idReserva" element={<DetalhesReserva/>} />
                         <Route path="/confirmacao-reserva/:idReserva" element={<ConfirmacaoReserva/>} />
