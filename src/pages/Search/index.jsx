@@ -68,7 +68,7 @@ export default function SearchPage() {
 
     return (
         <Template>
-            <div onLoad={loadSources} className="search-page-content">
+            <div className="search-page-content">
                 <SearchBar/>
                 <div className="pt-4">{/*Espaçamento*/}</div>
                 <Container>
