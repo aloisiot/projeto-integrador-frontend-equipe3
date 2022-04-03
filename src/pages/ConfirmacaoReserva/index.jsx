@@ -65,7 +65,10 @@ export default function ConfirmacaoReserva() {
     useEffect(()=>{
       const cookie = jsCookie.get(userCookieName)
       if(!cookie){
-        Swal.fire('Faça login para continuar')
+        Swal.fire({
+            icon: 'info',
+            title: 'Faça login para continuar'
+        })
             .then(()=> navigate('/login'))
       }
     },[navigate,authenticated])
@@ -76,13 +79,24 @@ export default function ConfirmacaoReserva() {
                 Authorization: getTocken()
             }
         }
-        const resposta = await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        .then((resp => {
+            console.log("status: ", resp.status)
+            if (resp.status === 201){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva concluida!'
+                })
+            }
+        }))
         .catch(({response})=> {
             if(response.status === 422){
-                Swal.fire(response.data.error)
+                Swal.fire({
+                    icon: 'error',
+                    title: response.data.error
+                })
             }
         })
-        
     }
 
     function telefoneHandler(telefone){
@@ -142,7 +156,7 @@ export default function ConfirmacaoReserva() {
                                     </div>
                                     <p className="mt-2">Indique a hora de chegada</p>
                                     <div className="seletor-horario mt-1 p-1 d-flex  align-items-center" onClick={()=>{setDropdownToggle(!dropdownToggle)}}>
-                                        <p className={`seletor-display px-1 ${horarioSelecionado ? "" : "white-hidden"}`}>{horarioSelecionado ? horarioSelecionado : "selecione um horário"}</p>
+                                        <p className="seletor-display px-1">{horarioSelecionado || "selecione um horário"}</p>
                                         {downArrow}
                                      
                                     </div>
