@@ -23,7 +23,7 @@ export default function Cadastro(){
 
     return(
         <Template>
-            <div className="cadastrar-page-content">
+            <div className="cadastrar-page-content py-4">
                 <Container className="form-container d-flex flex-column align-items-center">
                     <div className="cadastro-box d-flex flex-column gap-1">
                     <Title className="pb-3" variant={"h1"} color="orange">

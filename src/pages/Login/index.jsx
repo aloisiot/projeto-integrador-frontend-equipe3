@@ -112,7 +112,7 @@ export default function Login(){
         <Template>
             <div className="login-page-content">
                 <Container className="form-container">
-                    <div className="login-box">
+                    <div className="login-box py-4">
                         <Title className="pb-3" variant={"h1"} color="orange">
                             Iniciar sessão
                         </Title>
