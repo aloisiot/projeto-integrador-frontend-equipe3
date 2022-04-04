@@ -1,3 +1,4 @@
+import './styles.scss'
 import { Col, Container, Row } from "react-bootstrap";
 import Template from "../../components/template/Layout";
 import SearchBar from "../../components/template/SerchBar";
@@ -109,9 +110,9 @@ export default function SearchPage() {
                         )}
                     </div>
                 </Container>
-                <Container>
-                    {categories.length && !currentCategory?.id ? (
-                        <CategoriesColection className="pb-4"/>
+                <Container className={`categories-container ${currentCategory?.id ? "not-visible" : "is-visible"}`}>
+                    {categories.length ? (
+                        <CategoriesColection className={"pb-4"}/>
                     ) : ""}
                 </Container>
                 <section id="search-result" className='products-container py-4 light-gray-bg'>

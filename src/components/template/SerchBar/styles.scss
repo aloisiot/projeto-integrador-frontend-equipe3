@@ -1,4 +1,7 @@
-.search-bar {
+.component-search-bar {
+    & * {
+        z-index: 1;
+    }
     background-color: var(--terciary-dark-gray);
     
     .title {

@@ -58,7 +58,7 @@ export default function SearchBar() {
     }
 
     return (
-        <div className="search-bar py-4">
+        <div className="component-search-bar py-4">
             <Container>
                 <Title color="white">Busque as melhores ofertas perto de você</Title>
                 <div className="d-flex flex-wrap gap-2 search-bar-content">
