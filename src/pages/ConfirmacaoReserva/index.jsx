@@ -17,6 +17,7 @@ import jsCookie from "js-cookie";
 import { userCookieName } from "../../app/auth/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import disableDate from "../../utilitarios/dateBetween";
 
 function hourPush(){
     let array = []
@@ -47,7 +48,7 @@ export default function ConfirmacaoReserva() {
         }
     }
     const [reserva, setReserva] = useState(initialReserva)
-
+  
 
     useEffect(() => {
         dispatch(findCurrentProduct(idReserva))
@@ -108,6 +109,10 @@ export default function ConfirmacaoReserva() {
 
     function calendarioHandler(datas){
         setCurrentDateRange(datas)
+        console.log(datas[0])
+        console.log(datas[0].startDate)
+        console.log(datas[0].endDate)
+
         setReserva({
             ...reserva,
             startDate : formatDateForTransfer(datas[0].startDate),
@@ -145,7 +150,7 @@ export default function ConfirmacaoReserva() {
                             <div>
                                 <div className="confirmacao-calendario mt-4">
                                     <h4>Selecione sua data de reserva</h4>
-                                    <DateVisualizerPure onchange={item => calendarioHandler([item.datasSelecao])} range={currentDateRange} />
+                                    <DateVisualizerPure onchange={item => calendarioHandler([item.datasSelecao])} range={currentDateRange} disabledDay={disableDate(product.disabledDates)}/>
                                 </div>
                             </div>
                             <div className="mt-4">

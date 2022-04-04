@@ -6,7 +6,7 @@ function getMonthQTD() {
     return window.innerWidth >= 992 ? 2 : 1
 }
 
-export default function DateVisualizerPure({onchange,range}) {
+export default function DateVisualizerPure({onchange,range,disabledDay}) {
 
     const [monthQTD, setMonthQTD] = useState(getMonthQTD())
     
@@ -21,6 +21,7 @@ export default function DateVisualizerPure({onchange,range}) {
     window.addEventListener("resize", () => {
         setMonthQTD(getMonthQTD())
     })
+
 
     return (
         <div className="calendarioCampo redondo p-3 margin-top-padrao">
@@ -37,6 +38,7 @@ export default function DateVisualizerPure({onchange,range}) {
                 moveRangeOnFirstSelection={true}
                 ranges={range !== null ? range : initialState}
                 weekdayDisplayFormat="EEEEEE"
+                disabledDay={disabledDay}
             />
         </div>
     )

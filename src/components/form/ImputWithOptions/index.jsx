@@ -49,6 +49,7 @@ console.log(props.value)
                 </span>
             )}
             <input
+                autoComplete='off'
                 className='flex-grow-1 imput-options'
                 placeholder={props.placeholder}
                 name={props.name}
