@@ -60,6 +60,7 @@ export default function DateRangePicker({className, setDateRange, dateRange}) {
             </div>
             {visible && (
                 <div className={`
+                    drop-down
                     date-range-picker
                     rounded-1 shadow
                     overflow-hidden

@@ -10,7 +10,7 @@ export default function ImputWithOptions (props) {
         setOptionsIsVisible(false)
         props.onSelectedOption(id) // seta o id selecionado
     }
-
+console.log(props.value)
     function onChangeHandler(event) {
         props.setValue(event.target.value)
         props.onSelectedOption(0) // remove o id selecionado pois o input esta sendo alterado
@@ -57,14 +57,14 @@ export default function ImputWithOptions (props) {
                 onClick={onClickedInput}
             />
             {optionsIsVisible && (
-                <ul className='list-unstyled shadow options p-3 rounded'>
+                <ul className='list-unstyled shadow options p-3 rounded drop-down'>
                 {(props.options && filteredOptions().length > 0) ?
                     filteredOptions().map(({name, id}) => {
                         return (
                             <li key={id}
                                 className='mb-2 pb-2 d-flex gap-3'
                                 value={id}
-                                onClick={(e) => onSelectedOption(e, name, id)}
+                                onClick={(event) => onSelectedOption(event, name, id)}
                             >
                                 <span className='icon'>{props.secIcon || ""}</span>
                                 <span>{name}</span>

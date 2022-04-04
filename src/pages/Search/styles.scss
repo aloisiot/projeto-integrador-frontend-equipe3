@@ -3,19 +3,18 @@
         overflow: hidden;
 
         &.not-visible > .component-categories-colection {
+            height: 542px;
+            @media (max-width: 399px) {
+                height: 1084px;
+            }
+            @media (min-width: 991px) {
+                height: 271px;
+            }
             animation: hidden 300ms ease-in-out both;
         }
     
         &.is-visible > .component-categories-colection {
             animation: show 200ms ease-in-out both;
-        }
-
-        @media (max-width: 991px) {
-            height: 542px;
-        }
-
-        @media (max-width: 399px) {
-            height: 1084px;
         }
     }
 
@@ -24,31 +23,12 @@
             transform: scaleY(0);
         }
         100% {
-            height: 271px;
-            @media (max-width: 991px) {
-                height: 542px;
-            }
-
-            @media (max-width: 399px) {
-                height: 1084px;
-            }
             transform: scaleY(1);
         }
     }
 
     @keyframes hidden {
-        0% {
-            height: 271px;
-            @media (max-width: 991px) {
-                height: 542px;
-            }
-
-            @media (max-width: 399px) {
-                height: 1084px;
-            }
-            transform: scaleY(1);
-        }
-        100% {
+        to {
             transform: scaleY(0);
             height: 0;
         }
