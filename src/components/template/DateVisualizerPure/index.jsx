@@ -10,7 +10,6 @@ export default function DateVisualizerPure({onchange,range}) {
 
     const [monthQTD, setMonthQTD] = useState(getMonthQTD())
     
-
     const initialState = [
         {
           startDate: new Date(),
@@ -22,7 +21,6 @@ export default function DateVisualizerPure({onchange,range}) {
     window.addEventListener("resize", () => {
         setMonthQTD(getMonthQTD())
     })
-
 
     return (
         <div className="calendarioCampo redondo p-3 margin-top-padrao">

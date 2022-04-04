@@ -2,8 +2,6 @@
     height: 68px;
     background-color: white;
 
-
-
     .sidebar-bkg{
         position: fixed;
         width: 100%;
@@ -12,7 +10,6 @@
         background-color: #00000054;
         visibility: hidden;
         transition: all ease 1s;
-
 
         &.sidebar-bkg-visible{
             opacity: 1;
@@ -39,7 +36,6 @@
             display: block;
         }
     }
-
 
     .logo-slogan {
         display: flex;
@@ -90,18 +86,15 @@
             @media (max-width: 420px){
                 width: 65%;
             }
-
             
             @media (max-width: 358px){
                 width: 75%;
             }
         }
-
     
         .orange-box{
             height: 27%;
             background-color: var(--primary-orange);
-
 
             & > div{
                 width: 100%;
@@ -122,7 +115,6 @@
                 flex-direction: column-reverse;
                 padding-bottom: unset;
 
-               
                 .sidebar-span-holder{
                     display: flex;
                     justify-content: flex-end;
@@ -137,13 +129,11 @@
                         margin-bottom: 8px;
                         
                         &.open-animation{
-                            animation-delay: 1s !important;
-                            animation-fill-mode: forwards !important;
-                            animation: open-animation 0.5s;
+                            animation: open-animation 0.6s .8s forwards;
                         }
                         
                         &.close-animation{
-                            animation: close-animation 250ms;
+                            animation: close-animation .3s;
                         }
                             
                     }    
@@ -168,9 +158,6 @@
                 gap: 0.5rem;
                 margin-top: 1.5rem;
                 opacity: 0;
-                transition: all ease-in-out 3s;
-     
-                
 
                 & > a{
                     color: black;
@@ -183,22 +170,18 @@
                     background-color: black;
     
                 }
-
-                 
+                        
                 &.open-animation{
-                    animation-delay: 1s !important;
-                    animation-fill-mode: forwards !important;
-                    animation: open-animation 0.5s;
+                    animation: open-animation 0.6s .8s forwards;
                 }
-
+                
                 &.close-animation{
-                    animation: close-animation 250ms;
+                    animation: close-animation .3s;
                 }
             }
         }
     
     }
-
 
     @keyframes open-animation {
         from {opacity: 0}
@@ -210,5 +193,3 @@
         to {opacity: 0;}
     }
 }
-
-

@@ -19,7 +19,9 @@ export default function Cadastro(){
         if (name.length > 0 && lastname.length > 0){
             signUp(name, lastname, email, password)
         }
-    }   
+    }
+
+    window.scrollTo(0,0)
 
     return(
         <Template>

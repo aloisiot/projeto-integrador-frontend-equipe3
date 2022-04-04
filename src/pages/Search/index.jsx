@@ -73,7 +73,7 @@ export default function SearchPage() {
                 <SearchBar/>
                 <div className="pt-4">{/*Espaçamento*/}</div>
                 <Container>
-                    {(cityId || dateRange.startDate || currentCategory?.id) ? (
+                    {(cityId || dateRange?.startDate || currentCategory?.id) ? (
                         <Title variant="h4">Filtros:</Title>
                     ) : ""}
                     <div className='pb-4 d-flex flex-wrap align-items-center gap-3'>
