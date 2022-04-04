@@ -10,11 +10,15 @@
             @media (min-width: 991px) {
                 height: 271px;
             }
-            animation: hidden 300ms ease-in-out both;
+            animation: hidden 300ms 50ms ease-in both;
         }
     
         &.is-visible > .component-categories-colection {
-            animation: show 200ms ease-in-out both;
+            animation: show 200ms ease-out both;
+        }
+
+        &.not-visible > h2 {
+            display: none;
         }
     }
 

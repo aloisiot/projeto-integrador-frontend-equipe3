@@ -1,12 +1,13 @@
 import "./styles.scss";
 import Title from "../../tipografy/Title";
-import { useDispatch } from "react-redux";
-import { setCurrentCategory } from "../../../app/store/currentCategorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/currentCategorySlice";
 import { useNavigate } from "react-router-dom";
 
 export default function CategoryCard({ category, style }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const currentCategory = useSelector(selectCurrentCategoriy)
 
     function onClickHandler(event) {
         dispatch(setCurrentCategory(category))
@@ -17,7 +18,11 @@ export default function CategoryCard({ category, style }) {
         <div
             onClick={onClickHandler}
             style={style}
-            className="component-category-card rounded-3 shadow overflow-hidden"
+            className={`
+                ${currentCategory.id === category.id ? "active" : ""}
+                component-category-card
+                rounded-3 shadow overflow-hidden
+            `}
         >
             <div className="img-container">
                 <img
