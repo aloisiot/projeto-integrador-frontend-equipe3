@@ -13,7 +13,7 @@ export function fulfilledMidleware(_, action) {
     return action.payload
 }
 
-export default function withProcessMidlewares(builder, actions) {
+const withProcessMidlewares = (actions) => (builder) => {
     actions.forEach((action) => {
         builder
             .addCase(action.pending, pendingMidleware)
@@ -21,3 +21,5 @@ export default function withProcessMidlewares(builder, actions) {
             .addCase(action.fulfilled, fulfilledMidleware)
     })
 }
+
+export default withProcessMidlewares

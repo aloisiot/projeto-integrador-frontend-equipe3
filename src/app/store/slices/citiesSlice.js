@@ -19,9 +19,7 @@ export const categoriesSlice = createSlice({
     name: 'cities',
     initialState: [],
     reducers: {},
-    extraReducers(builder){
-        withProcessMidlewares(builder, [fetchCities])
-    }
+    extraReducers:  withProcessMidlewares([fetchCities])
 })
 
 export default categoriesSlice.reducer

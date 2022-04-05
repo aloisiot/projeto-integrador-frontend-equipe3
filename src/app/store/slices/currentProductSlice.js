@@ -27,18 +27,16 @@ export function selectCurrentProduct(state){
 
 async function fetchBookingsByProduct(id){
     const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/bookings/by-product/${id}`)
-        if(resp.status === 200){
-            return await resp.data
-        }
+    if(resp.status === 200){
+        return await resp.data
+    }
 }
 
 export const currentProductSlice = createSlice({
     name: 'currentProduct',
     initialState: {},
     reducers: {},
-    extraReducers(builder){
-        withProcessMidlewares(builder, [findCurrentProduct])
-    }
+    extraReducers: withProcessMidlewares([findCurrentProduct])
 })
 
 export default currentProductSlice.reducer

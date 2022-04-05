@@ -52,14 +52,12 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: [],
     reducers: {},
-    extraReducers(builder){
-        withProcessMidlewares(builder, [
+    extraReducers: withProcessMidlewares([
             fetchProducts,
             fetchProductsByCity,
             fetchProductsByCityAndDateRange,
             fetchProductsByDateRange
         ])
-    }
 })
 
 export default productsSlice.reducer

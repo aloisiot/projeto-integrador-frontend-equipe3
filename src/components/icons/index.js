@@ -217,3 +217,11 @@ export const XIcon = (
         <path d="M10.5858 12L5.29289 6.70711L6.70711 5.29289L12 10.5858L17.2929 5.29289L18.7071 6.70711L13.4142 12L18.7071 17.2929L17.2929 18.7071L12 13.4142L6.70711 18.7071L5.29289 17.2929L10.5858 12Z" fill="black"/>
     </svg>
 )
+
+export const LoadIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg"  width="64px" height="64px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" fill="none" stroke="#F0572D" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+        </circle>
+    </svg>
+)
