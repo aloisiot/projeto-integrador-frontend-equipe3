@@ -9,35 +9,32 @@ import './style.scss'
 import { useSelector } from "react-redux";
 import { selectCurrentProduct } from "../../../app/store/slices/currentProductSlice";
 
-
 export default function ModalGallery({modalStatus, modalFunction }) {
 
-
     const product = useSelector(selectCurrentProduct)
-
 
     return (
         <div className={`modal-bkg ${modalStatus ? "modal-visible" : ""}`}>
             <Container className="modal-main">
             <div className="close-btn">
-                        <button onClick={modalFunction}>{XiconOrange}</button>
+                <button onClick={modalFunction}>{XiconOrange}</button>
             </div>
-                    <Swiper
-                        modules={[Navigation, Pagination]}
-                        navigation
-                        spaceBetween={1}
-                        pagination={{ type: 'fraction' }}
-                    >
-                    {product?.images?.map((img) => {
-                        return (
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation
+                    spaceBetween={1}
+                    pagination={{ type: 'fraction' }}
+                >
+                {product?.images?.map((img) => {
+                    return (
                         <SwiperSlide key={`slide-${img.id}`}>
                             <div className="img-modal-holder">
                                 <img className="rounded" src={img.url} alt={img.title}></img>
                             </div>
                         </SwiperSlide>
-                            )
-                        })}
-                    </Swiper>
+                    )
+                })}
+                </Swiper>
             </Container>
         </div>
     )
