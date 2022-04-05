@@ -8,8 +8,8 @@ import Title from '../../components/tipografy/Title';
 import ProductCard from '../../components/template/ProductCard';
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories, selectAllCategories } from '../../app/store/categoriesSlice';
-import { fetchProducts, selectAllProducts } from '../../app/store/productsSlice';
+import { fetchCategories, selectAllCategories } from '../../app/store/slices/categoriesSlice';
+import { fetchProducts, selectAllProducts } from '../../app/store/slices/productsSlice';
 import CategoriesColection from '../../components/template/CategoryCardColection';
 
 export default function Home(){

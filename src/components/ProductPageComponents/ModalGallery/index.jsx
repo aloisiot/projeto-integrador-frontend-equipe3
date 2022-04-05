@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './style.scss'
 import { useSelector } from "react-redux";
-import { selectCurrentProduct } from "../../../app/store/currentProductSlice";
+import { selectCurrentProduct } from "../../../app/store/slices/currentProductSlice";
 
 
 export default function ModalGallery({modalStatus, modalFunction }) {

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import withProcessMidlewares from "../processMidlewers";
 
 export const fetchCities = createAsyncThunk(
     "cities/fethCities", async () => {
@@ -19,9 +20,7 @@ export const categoriesSlice = createSlice({
     initialState: [],
     reducers: {},
     extraReducers(builder){
-        builder.addCase(fetchCities.fulfilled, (_, action) => {
-            return action.payload
-        })
+        withProcessMidlewares(builder, [fetchCities])
     }
 })
 

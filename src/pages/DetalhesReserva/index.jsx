@@ -7,7 +7,7 @@ import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCa
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
 import { useEffect, useState } from "react";
-import { findCurrentProduct, selectCurrentProduct } from '../../app/store/currentProductSlice'
+import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
      Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
     kitchenIcon, noSmoke, noParty, shareIconMobile, heartIconMobile, acIcon, petsIcon, creditCard

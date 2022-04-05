@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import withProcessMidlewares from "../processMidlewers";
 
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts", async () => {
@@ -52,11 +53,12 @@ export const productsSlice = createSlice({
     initialState: [],
     reducers: {},
     extraReducers(builder){
-        builder
-            .addCase(fetchProducts.fulfilled, (_, action) => action.payload )
-            .addCase(fetchProductsByCity.fulfilled, (_, action) => action.payload)
-            .addCase(fetchProductsByCityAndDateRange.fulfilled, (_, action) => action.payload)
-            .addCase(fetchProductsByDateRange.fulfilled, (_, action) => action.payload)
+        withProcessMidlewares(builder, [
+            fetchProducts,
+            fetchProductsByCity,
+            fetchProductsByCityAndDateRange,
+            fetchProductsByDateRange
+        ])
     }
 })
 

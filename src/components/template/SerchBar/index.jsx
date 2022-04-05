@@ -7,10 +7,10 @@ import { LocaleStrockIcon, Locale } from "../../icons"
 import Title from "../../tipografy/Title"
 import Button from "../Button"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchCities, selectAllCities } from "../../../app/store/citiesSlice"
+import { fetchCities, selectAllCities } from "../../../app/store/slices/citiesSlice"
 import { formatDateForTransfer } from "../../../utilitarios/dateFormat";
 import Swal from "sweetalert2"
-import { setCityId, setDateRange } from "../../../app/store/searchParamsSlice"
+import { setCityId, setDateRange } from "../../../app/store/slices/searchParamsSlice"
 import { useNavigate } from "react-router-dom"
 
 export default function SearchBar() {

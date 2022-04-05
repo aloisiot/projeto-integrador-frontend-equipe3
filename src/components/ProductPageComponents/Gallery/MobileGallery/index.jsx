@@ -4,7 +4,7 @@ import './style.scss'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { selectCurrentProduct } from '../../../../app/store/currentProductSlice';
+import { selectCurrentProduct } from '../../../../app/store/slices/currentProductSlice';
 import { useSelector } from 'react-redux';
 
 

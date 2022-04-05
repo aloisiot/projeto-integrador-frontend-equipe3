@@ -2,18 +2,18 @@ import './styles.scss'
 import { Col, Container, Row } from "react-bootstrap";
 import Template from "../../components/template/Layout";
 import SearchBar from "../../components/template/SerchBar";
-import { selectSearchParams, setCityId, setDateRange } from "../../app/store/searchParamsSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentCategoriy, setCurrentCategory } from '../../app/store/currentCategorySlice';
 import Chip from "../../components/template/Chip";
 import Title from '../../components/tipografy/Title';
-import { selectAllCities } from "../../app/store/citiesSlice"
-import { fetchCategories, selectAllCategories } from '../../app/store/categoriesSlice';
+import { selectAllCities } from "../../app/store/slices/citiesSlice"
 import { useEffect } from 'react';
 import CategoriesColection from '../../components/template/CategoryCardColection';
-import { fetchProducts, fetchProductsByCity, fetchProductsByCityAndDateRange, fetchProductsByDateRange, selectAllProducts } from '../../app/store/productsSlice';
 import ProductCard from '../../components/template/ProductCard';
 import { useCallback } from "react";
+import { fetchProducts, fetchProductsByCity, fetchProductsByCityAndDateRange, fetchProductsByDateRange, selectAllProducts } from '../../app/store/slices/productsSlice';
+import { selectSearchParams, setCityId, setDateRange } from '../../app/store/slices/searchParamsSlice';
+import { selectCurrentCategoriy, setCurrentCategory } from '../../app/store/slices/currentCategorySlice';
+import { fetchCategories, selectAllCategories } from '../../app/store/slices/categoriesSlice';
 
 export default function SearchPage() {
     const dispatch = useDispatch()
@@ -41,19 +41,15 @@ export default function SearchPage() {
     const loadSources = useCallback(() =>{
         const startDate = dateRange?.startDate
         const endDate = dateRange?.endDate
-        console.log(cityId)
         if(cityId && startDate && endDate) {
-            console.log("cityId && startDate && endDate")
             dispatch(fetchProductsByCityAndDateRange({
                 cityId: cityId,
                 startDate,
                 endDate
             }))
         } else if(cityId){
-            console.log("cityId")
             dispatch(fetchProductsByCity(cityId))
         } else if(startDate && endDate) {
-            console.log("startDate && endDate")
             dispatch(fetchProductsByDateRange({
                 startDate,
                 endDate

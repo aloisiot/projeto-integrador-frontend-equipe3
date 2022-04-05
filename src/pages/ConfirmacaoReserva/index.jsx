@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findCurrentProduct, selectCurrentProduct } from "../../app/store/currentProductSlice";
+import { findCurrentProduct, selectCurrentProduct } from "../../app/store/slices/currentProductSlice";
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import Button from "../../components/template/Button";

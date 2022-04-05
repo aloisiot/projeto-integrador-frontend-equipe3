@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { selectCurrentProduct } from "../../../../app/store/currentProductSlice"
+import { selectCurrentProduct } from "../../../../app/store/slices/currentProductSlice"
 import Button from "../../../template/Button"
 import "./style.scss"
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import withProcessMidlewares from "../processMidlewers";
 
 export const findCurrentProduct = createAsyncThunk(
     'currentProduct/findCurrentProduct', async (id) => {
@@ -36,9 +37,7 @@ export const currentProductSlice = createSlice({
     initialState: {},
     reducers: {},
     extraReducers(builder){
-        builder.addCase(findCurrentProduct.fulfilled, (_,action) => {
-            return action.payload
-        })
+        withProcessMidlewares(builder, [findCurrentProduct])
     }
 })
 

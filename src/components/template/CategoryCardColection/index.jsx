@@ -1,7 +1,7 @@
 import './styles.scss'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories, selectAllCategories } from "../../../app/store/categoriesSlice";
+import { fetchCategories, selectAllCategories } from "../../../app/store/slices/categoriesSlice";
 import CategoryCard from "../CategoryCard";
 
 export default function CategoriesColection({className}) {

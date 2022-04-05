@@ -10,7 +10,7 @@ export default function ImputWithOptions (props) {
         setOptionsIsVisible(false)
         props.onSelectedOption(id) // seta o id selecionado
     }
-console.log(props.value)
+
     function onChangeHandler(event) {
         props.setValue(event.target.value)
         props.onSelectedOption(0) // remove o id selecionado pois o input esta sendo alterado

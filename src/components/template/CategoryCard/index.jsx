@@ -1,7 +1,7 @@
 import "./styles.scss";
 import Title from "../../tipografy/Title";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/currentCategorySlice";
+import { selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/slices/currentCategorySlice";
 import { useNavigate } from "react-router-dom";
 
 export default function CategoryCard({ category, style }) {
