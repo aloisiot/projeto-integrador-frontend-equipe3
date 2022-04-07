@@ -5,6 +5,7 @@ import citiesReducer from './slices/citiesSlice'
 import currentCategoryReducer from './slices/currentCategorySlice'
 import currentProductReducer from './slices/currentProductSlice'
 import searchParamsReducer from './slices/searchParamsSlice'
+import prossesReducer from './slices/prossesSlice'
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     categories: categoriesReducer,
     products: productsReducer,
     cities: citiesReducer,
-    currentProduct: currentProductReducer
+    currentProduct: currentProductReducer,
+    prosses: prossesReducer
   }
 })

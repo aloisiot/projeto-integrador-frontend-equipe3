@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { processWatcher } from "../../../app/processWatcher";
+import { useSelector } from "react-redux";
+import { selectProcessState } from "../../../app/store/slices/prossesSlice";
 import { LoadIcon } from "../../icons";
 
 export default function LoadingSpinner() {
-    const [loading, setLoading] = useState(false)
-    processWatcher.subscribe(setLoading)
+    const isLoading = useSelector(selectProcessState)
     
     return (
         <>
-        {loading && (
+        {isLoading && (
             <div
                 className={`
                     component-loading-spinner
@@ -16,9 +15,9 @@ export default function LoadingSpinner() {
                     justify-content-center
                 `}
                 style={{
+                    position: "fixed",
                     zIndex: 999,
                     backgroundColor: "#FFFB",
-                    position: "absolute",
                     top: 0,
                     left: 0,
                     height: "100vh",

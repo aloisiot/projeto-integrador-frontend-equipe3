@@ -33,7 +33,8 @@ export default function Home(){
                     sortId: Math.random(),
                     product
                 }
-            }).sort((o1, o2) => o1.sortId - o2.sortId)
+            })
+            .sort((o1, o2) => o1.sortId - o2.sortId)
             .map(object => object.product)
         }
         return null

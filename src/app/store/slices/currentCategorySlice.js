@@ -11,7 +11,7 @@ export const currentCategorySlice = createSlice({
         setCurrentCategory(_, action) {
             return action.payload
         }, 
-        removeCurrentCategory(_, action) {
+        removeCurrentCategory() {
             return {}
         }
     }

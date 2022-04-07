@@ -24,7 +24,7 @@ export default function Header() {
     }
 
     return (
-        <header className="default-header">
+        <header className="default-header shadow">
             <div className={`sidebar-bkg ${sidebarActive ? "sidebar-bkg-visible" : ""}`}></div>
             <div className={`sidebar-holder ${sidebarActive ? "sidebar-visible" : ""}`}>
                 <div className="orange-box">

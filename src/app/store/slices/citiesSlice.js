@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import withProcessMidlewares from "../processMidlewers";
+import { asyncThunkWithProssesMiddleware } from "./prossesSlice";
 
-export const fetchCities = createAsyncThunk(
+export const fetchCities = asyncThunkWithProssesMiddleware(
     "cities/fethCities", async () => {
         const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/cities`)
         if(resp.status === 200) {
@@ -19,7 +19,9 @@ export const categoriesSlice = createSlice({
     name: 'cities',
     initialState: [],
     reducers: {},
-    extraReducers:  withProcessMidlewares([fetchCities])
+    extraReducers:  (builder) => {
+        builder.addCase(fetchCities.fulfilled, (_, action) => action.payload)
+    }
 })
 
 export default categoriesSlice.reducer
