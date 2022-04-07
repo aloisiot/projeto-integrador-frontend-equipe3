@@ -4,15 +4,19 @@ import ProductCard from "../ProductCard"
 const ProductCardCollection = ({products, category, shufle}) => {
     let result = products
 
-    if(category) { // filtro por categoria
+    console.log(category)
+
+    if(category?.id) { // filtro por categoria
         result = products.filter(product => product.category?.id === category.id)
     }
 
     if(shufle) { // embaralhamento
         result = result
-            .map(product => [product, Math.ceil(Math.random() * 10)])
-            .sort((o1, o2) => o1[1] - o2[1])
-            .map(sortObj =>  sortObj[0])
+            .map(product => {
+                return { product, randN: Math.ceil(Math.random() * 10) }
+            })
+            .sort((o1, o2) => o1.randN - o2.randN)
+            .map(sortObj =>  sortObj.product)
     }
 
     return result.map(product => {

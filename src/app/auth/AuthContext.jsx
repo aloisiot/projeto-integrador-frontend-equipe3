@@ -21,18 +21,35 @@ export function AuthProvider(props) {
 
     async function signIn(email, password, keepConnected, onRejected) {
         jsCookie.remove(userCookieName)
-        const resp = await axios.post(
-            `${process.env.REACT_APP_LINK_API}/auth/sign-in`,
-            {email, password}
-        )
+        const payload = {email, password}
+        await axios
+            .post(`${process.env.REACT_APP_LINK_API}/auth/sign-in`, payload)
+            .then(resp => {
+                const options = keepConnected ? { expires: 30 } : undefined
+                jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
+                setAuthenticated(true)
+            })
+            .catch(({response}) =>{
+                const is403 = response.status === 403
+                Swal.fire({
+                    icon: "warning",
+                    title: is403 ? "Credenciais inválidas" : "Algo não ocorreu bem",
+                    text: "Tente novamente"
+                })
+            })
         
-        if(resp.status === 200) {
+        /* if(resp.status === 200) {
             const options = keepConnected ? { expires: 30 } : undefined
             jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
             setAuthenticated(true)
         } else {
-            onRejected()
-        }
+            console.log(resp)
+            Swal.fire({
+                title: 'Credenciais inválidas',
+                text: 'Usuário ou senha incorreto',
+                icon: 'error'
+            })
+        } */
     }
 
     async function signUp (name, lastname, email, password) {

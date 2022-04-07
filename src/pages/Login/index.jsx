@@ -47,23 +47,21 @@ export default function Login(){
         let valorInput = event.target.value
         let inputAlterado = event.target.id
 
-        if(valorInput !== ""){
-            if(inputAlterado === "email-input"){
-                if(validaEmail(email)){
-                    if(emailError.length > 0 || emailError === "Email incorreto. Digite novamente"){
-                        setEmailError("")
-                    }
-                }else{
-                    setEmailError("Formato de email inválido")
+        if(valorInput !== "" && inputAlterado === "email-input"){
+            if(validaEmail(email)){
+                if(emailError.length > 0 || emailError === "Email incorreto. Digite novamente"){
+                    setEmailError("")
                 }
             }else{
-                if(validaSenhaLogin(valorInput)){
-                    if(passwordError.length > 0 || passwordError === "Senha incorreta. Digite novamente"){
-                        setPasswordError("")
-                    }
-                }else{
-                    setPasswordError("A senha tem no mínimo 6 caracteres")
+                setEmailError("Formato de email inválido")
+            }
+        }else{
+            if(validaSenhaLogin(valorInput)){
+                if(passwordError.length > 0 || passwordError === "Senha incorreta. Digite novamente"){
+                    setPasswordError("")
                 }
+            }else{
+                setPasswordError("A senha tem no mínimo 6 caracteres")
             }
         }
     }

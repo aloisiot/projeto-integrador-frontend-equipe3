@@ -82,7 +82,6 @@ export default function ConfirmacaoReserva() {
         }
         await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
         .then((resp => {
-            console.log("status: ", resp.status)
             if (resp.status === 201){
                 Swal.fire({
                     icon: 'success',
