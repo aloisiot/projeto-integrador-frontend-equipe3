@@ -8,6 +8,7 @@ export default function CategoryCard({ category, style }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentCategory = useSelector(selectCurrentCategoriy)
+    const { urlImage, qualification, productsQuantity } = category
 
     function onClickHandler(event) {
         dispatch(setCurrentCategory(category))
@@ -26,13 +27,13 @@ export default function CategoryCard({ category, style }) {
         >
             <div className="img-container">
                 <img
-                    src={category.urlImage}
-                    alt={category.qualification}
+                    src={urlImage}
+                    alt={qualification}
                 />
             </div>
             <div className="component-card-content p-2">
-                <Title variant="h5" color="deep-blue">{category.qualification}</Title>
-                <p className="description">{"954.767 resultados"}</p>
+                <Title variant="h5" color="deep-blue">{qualification}</Title>
+                <p className="description">{`${productsQuantity} ${productsQuantity > 1 ? "resultados" : "resultado"}`}</p>
             </div>
         </div>
     )
