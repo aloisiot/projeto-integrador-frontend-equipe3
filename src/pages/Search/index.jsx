@@ -65,7 +65,7 @@ export default function SearchPage() {
 
     return (
         <Template>
-            <div className="search-page-content">
+            <div className="search-page-content flex-col-items-stretch">
                 <SearchBar/>
                 <div className="pt-4">{/*Espaçamento*/}</div>
                 <Container>
@@ -112,7 +112,7 @@ export default function SearchPage() {
                         <CategoriesColection className={"pb-4"}/>
                     ) : ""}
                 </Container>
-                <section id="search-result" className='products-container py-4 light-gray-bg'>
+                <section id="search-result" className='products-container py-4 light-gray-bg flex-grow-1'>
                     <Container>
                     <Title variant="h2">Resultados</Title>
                         <Row className='d-flex row-cols-md-1 row-cols-lg-2'>

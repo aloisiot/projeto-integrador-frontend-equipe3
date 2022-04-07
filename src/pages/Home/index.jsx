@@ -42,7 +42,7 @@ export default function Home(){
 
     return(
         <Template>
-            <div className="home-page-content">
+            <div className="home-page-content flex-col-items-stretch">
                 <SearchBar/>
                 <Container className="py-4">
                     <Title variant="h2">Buscar por categoria</Title>
@@ -50,7 +50,7 @@ export default function Home(){
                         <CategoriesColection className="pt-4"/>
                     ) : ""}
                 </Container>
-                <section className='products-container py-4 light-gray-bg'>
+                <section className='products-container py-4 light-gray-bg flex-grow-1'>
                     <Container>
                     <Title variant="h2">Recomendações</Title>
                         <Row className='d-flex row-cols-md-1 row-cols-lg-2'>
