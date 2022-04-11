@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findCurrentProduct, selectCurrentProduct } from "../../app/store/currentProductSlice";
+import { findCurrentProduct, selectCurrentProduct } from "../../app/store/slices/currentProductSlice";
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import DateVisualizerPure from "../../components/template/DateVisualizerPure";
 import { StarIcon, LocaleSmall, clockIcon, downArrow } from "../../components/icons";
-import formatarData, { formatDateForTransfer } from "../../utilitarios/formatarData";
+import { dateFormatPtBt, formatDateForTransfer } from "../../utilitarios/dateFormat";
 import './style.scss'
 import useAuth from "../../app/auth/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ import jsCookie from "js-cookie";
 import { userCookieName } from "../../app/auth/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import disableDate from "../../utilitarios/dateBetween";
 
 function hourPush(){
     let array = []
@@ -47,7 +48,7 @@ export default function ConfirmacaoReserva() {
         }
     }
     const [reserva, setReserva] = useState(initialReserva)
-
+  
 
     useEffect(() => {
         dispatch(findCurrentProduct(idReserva))
@@ -65,7 +66,10 @@ export default function ConfirmacaoReserva() {
     useEffect(()=>{
       const cookie = jsCookie.get(userCookieName)
       if(!cookie){
-        Swal.fire('Faça login para continuar')
+        Swal.fire({
+            icon: 'info',
+            title: 'Faça login para continuar'
+        })
             .then(()=> navigate('/login'))
       }
     },[navigate,authenticated])
@@ -76,13 +80,23 @@ export default function ConfirmacaoReserva() {
                 Authorization: getTocken()
             }
         }
-        const resposta = await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
+        .then((resp => {
+            if (resp.status === 201){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva concluida!'
+                })
+            }
+        }))
         .catch(({response})=> {
             if(response.status === 422){
-                Swal.fire(response.data.error)
+                Swal.fire({
+                    icon: 'error',
+                    title: response.data.error
+                })
             }
         })
-        
     }
 
     function telefoneHandler(telefone){
@@ -131,7 +145,7 @@ export default function ConfirmacaoReserva() {
                             <div>
                                 <div className="confirmacao-calendario mt-4">
                                     <h4>Selecione sua data de reserva</h4>
-                                    <DateVisualizerPure onchange={item => calendarioHandler([item.datasSelecao])} range={currentDateRange} />
+                                    <DateVisualizerPure onchange={item => calendarioHandler([item.datasSelecao])} range={currentDateRange} disabledDay={disableDate(product.disabledDates)}/>
                                 </div>
                             </div>
                             <div className="mt-4">
@@ -142,7 +156,7 @@ export default function ConfirmacaoReserva() {
                                     </div>
                                     <p className="mt-2">Indique a hora de chegada</p>
                                     <div className="seletor-horario mt-1 p-1 d-flex  align-items-center" onClick={()=>{setDropdownToggle(!dropdownToggle)}}>
-                                        <p className={`seletor-display px-1 ${horarioSelecionado ? "" : "white-hidden"}`}>{horarioSelecionado ? horarioSelecionado : "selecione um horário"}</p>
+                                        <p className="seletor-display px-1">{horarioSelecionado || "selecione um horário"}</p>
                                         {downArrow}
                                      
                                     </div>
@@ -178,10 +192,10 @@ export default function ConfirmacaoReserva() {
 
                                     </div>
                                     <div className="check-date mt-3 py-1">
-                                        <p>Check in</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].startDate) : "___/___/___"}</p>
+                                        <p>Check in</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].startDate) : "___/___/___"}</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
-                                        <p>Check out</p> <p>{currentDateRange != null ? formatarData(currentDateRange[0].endDate) : "___/___/___"}</p>
+                                        <p>Check out</p> <p>{currentDateRange != null ? dateFormatPtBt(currentDateRange[0].endDate) : "___/___/___"}</p>
                                     </div>
                                     <div className="check-date mt-1 py-1">
                                         <p>Hora de chegada</p> <p>{horarioSelecionado ? horarioSelecionado : "Escolha uma hora"}</p>
