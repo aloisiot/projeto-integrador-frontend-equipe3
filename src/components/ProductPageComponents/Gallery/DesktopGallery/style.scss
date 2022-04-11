@@ -6,7 +6,11 @@
     .grid-img-secondarias{
         height: 100%;
         div{
-            height: 50%;
+            height: 15rem;
+
+            @media (max-width:  1199px){
+                height: 227px;
+            }
         }
         img{
             object-fit: cover;

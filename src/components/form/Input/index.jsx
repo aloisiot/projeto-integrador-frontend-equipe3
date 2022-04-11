@@ -6,7 +6,7 @@ export default function Input(props){
     return(
         <div>
             <label 
-                htmlFor={props.forLabel} 
+                htmlFor={props.inputId} 
                 className={props.classLabel}
             > 
                 {props.labelTxt}

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { AuthProvider } from '../auth/AuthContext';
 import store from '../store';
 import SearchPage from '../../pages/Search';
+import CriacaoReserva from '../../pages/CriacaoReserva';
 
 export default function RouterList(){
 
@@ -22,6 +23,7 @@ export default function RouterList(){
                         <Route path="/cadastro" element={<Cadastro/>}/>
                         <Route path="/reserva/:idReserva" element={<DetalhesReserva/>} />
                         <Route path="/confirmacao-reserva/:idReserva" element={<ConfirmacaoReserva/>} />
+                        <Route path="/criar-reserva" element={<CriacaoReserva/>} />
                     </Routes>
                 </AuthProvider>
             </Provider>

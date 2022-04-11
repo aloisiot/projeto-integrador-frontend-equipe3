@@ -56,6 +56,7 @@ export default function ImputWithOptions (props) {
                 value={props.value}
                 onChange={onChangeHandler}
                 onClick={onClickedInput}
+                autoComplete="off"
             />
             {optionsIsVisible && (
                 <ul className='list-unstyled shadow options p-3 rounded drop-down'>

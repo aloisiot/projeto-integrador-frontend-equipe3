@@ -35,7 +35,6 @@ export default function Cadastro(){
                         <div className="double-input-box">
                         <Input
                             onChange={(e) => setName(e.target.value)}
-                            forLabel={"nome-input"}
                             classLabel={"form-label"}
                             labelTxt={"Nome"}
                             type={"text"}
@@ -43,7 +42,6 @@ export default function Cadastro(){
                             inputId={"nome-input"}/>
                          <Input
                             onChange={(e) => setLastname(e.target.value)}
-                            forLabel={"sobrenome-input"}
                             classLabel={"form-label"}
                             labelTxt={"Sobrenome"}
                             type={"text"}
@@ -52,7 +50,6 @@ export default function Cadastro(){
                         />      
                         </div>
                         <Input
-                            forLabel={"email-cadastro-input"}
                             classLabel={"form-label"}
                             labelTxt={"Email"}
                             type={"email"}
@@ -60,7 +57,6 @@ export default function Cadastro(){
                             inputId={"email-cadastro-input"}
                         />
                         <Input
-                            forLabel={"email-confirma-input"}
                             classLabel={"form-label"}
                             labelTxt={"Confirmar Email"}
                             type={"email"}
@@ -69,7 +65,6 @@ export default function Cadastro(){
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <Input
-                            forLabel={"senha-cadastro-input"}
                             classLabel={"form-label"}
                             labelTxt={"Senha"}
                             type={"password"} classInput={"form-control"}
