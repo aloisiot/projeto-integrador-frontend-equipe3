@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Template from "../../components/template/Layout";
 import DesktopGallery from "../../components/ProductPageComponents/Gallery/DesktopGallery";
 import MobileGallery from "../../components/ProductPageComponents/Gallery/MobileGallery";
@@ -9,12 +10,14 @@ import DateVisualizer from "../../components/ProductPageComponents/DateVisualize
 import { useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
-     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
-    kitchenIcon, noSmoke, noParty, shareIconMobile, heartIconMobile, acIcon, petsIcon, creditCard
+    Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
+    kitchenIcon, noSmoke, noParty, shareIconMobile, acIcon, petsIcon, creditCard, fullFillHeartIcon
 } from "../../components/icons";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import useAuth from '../../app/auth/useAuth';
+import Swal from 'sweetalert2';
 
 const iconCaracteristicas = {
     "icon-wifi": wiFiIcon,
@@ -32,13 +35,59 @@ function getGaleriaAtual() {
 }
 
 export default function DetalhesReserva() {
-
+    const { getUserId, getToken } = useAuth()
     const dispatch = useDispatch();
     const arrayTest = [StarIcon, StarIcon, StarIcon, emptyStar, emptyStar]
     const [modalAtivo, setModalAtivo] = useState(false)
     const [galeriaAtual, setGaleriaAtual] = useState(getGaleriaAtual())
     const { idReserva } = useParams()
     const product = useSelector(selectCurrentProduct)
+    const [productIsFavorite, setProductIsFavorite] = useState(false)
+
+    const currentProductIsFavorite = async (productId, requestConfig) =>  {
+        const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/clients/product-is-favorite/${productId}`, requestConfig)
+        if(resp.status === 200){
+            setProductIsFavorite(resp.data || false)
+        }
+    }
+
+    useEffect(() => {
+        if(product) {
+            const config = {
+                headers: {
+                    Authorization: getToken()
+                }
+            }
+            currentProductIsFavorite(product?.id, config)
+        }
+    }, [product, getToken])
+
+    const updateFavorite = async () => {
+        const userId = getUserId()
+        const token = getToken()
+        if(userId && token) {
+            const config = {
+                headers: {
+                    Authorization: token
+                }
+            }
+            const body = {
+                clientId: userId,
+                productId: product?.id
+            }
+            await axios
+                    .post(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
+                    .then(() => findCurrentProduct(idReserva))
+
+            const isFavorite = await currentProductIsFavorite(product?.id, config)
+            currentProductIsFavorite(isFavorite)
+        } else {
+            Swal.fire({
+                icon: 'info',
+                title: 'Você não está autenticado'
+            })
+        }
+    }
 
     useEffect(() => {
         dispatch(findCurrentProduct(idReserva))
@@ -67,11 +116,9 @@ export default function DetalhesReserva() {
                                 <div className="d-flex flex-column align-items-center">
                                     <p>Bom</p>
                                     <div className="div-estrelas">
-                                        {
-
-                                            arrayTest.map((star, i) =>
-                                                <span key={i} className='stars'>{star}</span>
-                                            )}
+                                        {arrayTest.map((star, i) =>
+                                            <span key={i} className='stars'>{star}</span>
+                                        )}
                                     </div>
                                 </div>
                                 <span className='num-avaliacao '>8</span>
@@ -82,7 +129,9 @@ export default function DetalhesReserva() {
                 <div>
                     <div className="container iconesContainer">
                         <button>{window.innerWidth < 520 ? shareIconMobile : shareIcon}</button>
-                        <button>{window.innerWidth < 520 ? heartIconMobile : heartIcon}</button>
+                        <button onClick={() => updateFavorite()}>
+                            {productIsFavorite ? fullFillHeartIcon : heartIcon}
+                        </button>
                     </div>
                 </div>
                 {galeriaAtual === "desktop" ? <DesktopGallery modalFunction={() => { setModalAtivo(true) }} /> : <MobileGallery />}

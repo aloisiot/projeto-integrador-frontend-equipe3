@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import Input from "../../components/form/Input";
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import Template from "../../components/template/Layout";
 import './style.scss'

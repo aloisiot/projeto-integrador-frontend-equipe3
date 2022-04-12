@@ -12,7 +12,7 @@ export function AuthProvider(props) {
     const [ authenticated, setAuthenticated ] = useState()
 
     const checkIsAuthenticated = useCallback(() => {
-        return Boolean(getUserDetails()?.email !== undefined)
+        return Boolean(getUserDetails()?.name !== undefined)
     }, [])
 
     useEffect(() => {
@@ -37,19 +37,6 @@ export function AuthProvider(props) {
                     text: "Tente novamente"
                 })
             })
-        
-        /* if(resp.status === 200) {
-            const options = keepConnected ? { expires: 30 } : undefined
-            jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
-            setAuthenticated(true)
-        } else {
-            console.log(resp)
-            Swal.fire({
-                title: 'Credenciais inválidas',
-                text: 'Usuário ou senha incorreto',
-                icon: 'error'
-            })
-        } */
     }
 
     async function signUp (name, lastname, email, password) {
@@ -64,7 +51,11 @@ export function AuthProvider(props) {
                 'Voce será redirecionado para a págona de login',
             ).then(() => {navigate("/login")})
         }
-    } 
+    }
+
+    const getUserId = () => {
+        return getUserDetails()?.id
+    }
 
     function signOut() {
         jsCookie.remove(userCookieName)
@@ -79,7 +70,7 @@ export function AuthProvider(props) {
         }
     }
 
-    function getTocken() {
+    function getToken() {
         const cookie = JSON.parse(jsCookie.get(userCookieName))
         const tocken =  `${cookie.type} ${cookie.token}`
         return tocken
@@ -92,7 +83,8 @@ export function AuthProvider(props) {
             signUp,
             authenticated,
             getUserDetails,
-            getTocken
+            getToken,
+            getUserId
         }}>
             {props.children}
         </AppContext.Provider>
