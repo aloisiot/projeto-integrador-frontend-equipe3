@@ -79,8 +79,7 @@ export default function DetalhesReserva() {
                     .post(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
                     .then(() => findCurrentProduct(idReserva))
 
-            const isFavorite = await currentProductIsFavorite(product?.id, config)
-            currentProductIsFavorite(isFavorite)
+            currentProductIsFavorite(product?.id, config)
         } else {
             Swal.fire({
                 icon: 'info',

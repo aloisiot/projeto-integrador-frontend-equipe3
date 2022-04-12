@@ -4,8 +4,6 @@ import ProductCard from "../ProductCard"
 const ProductCardCollection = ({products, category, shufle}) => {
     let result = products
 
-    console.log(category)
-
     if(category?.id) { // filtro por categoria
         result = products.filter(product => product.category?.id === category.id)
     }
