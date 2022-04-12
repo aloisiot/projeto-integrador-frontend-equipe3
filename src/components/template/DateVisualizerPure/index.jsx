@@ -6,11 +6,10 @@ function getMonthQTD() {
     return window.innerWidth >= 992 ? 2 : 1
 }
 
-export default function DateVisualizerPure({onchange,range}) {
+export default function DateVisualizerPure({onchange,range,disabledDay}) {
 
     const [monthQTD, setMonthQTD] = useState(getMonthQTD())
     
-
     const initialState = [
         {
           startDate: new Date(),
@@ -39,6 +38,7 @@ export default function DateVisualizerPure({onchange,range}) {
                 moveRangeOnFirstSelection={true}
                 ranges={range !== null ? range : initialState}
                 weekdayDisplayFormat="EEEEEE"
+                disabledDay={disabledDay}
             />
         </div>
     )

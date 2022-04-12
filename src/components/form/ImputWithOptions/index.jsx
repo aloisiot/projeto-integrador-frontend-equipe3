@@ -49,6 +49,7 @@ export default function ImputWithOptions (props) {
                 </span>
             )}
             <input
+                autoComplete='off'
                 className='flex-grow-1 imput-options'
                 placeholder={props.placeholder}
                 name={props.name}
@@ -57,14 +58,14 @@ export default function ImputWithOptions (props) {
                 onClick={onClickedInput}
             />
             {optionsIsVisible && (
-                <ul className='list-unstyled shadow options p-3 rounded'>
+                <ul className='list-unstyled shadow options p-3 rounded drop-down'>
                 {(props.options && filteredOptions().length > 0) ?
                     filteredOptions().map(({name, id}) => {
                         return (
                             <li key={id}
                                 className='mb-2 pb-2 d-flex gap-3'
                                 value={id}
-                                onClick={(e) => onSelectedOption(e, name, id)}
+                                onClick={(event) => onSelectedOption(event, name, id)}
                             >
                                 <span className='icon'>{props.secIcon || ""}</span>
                                 <span>{name}</span>

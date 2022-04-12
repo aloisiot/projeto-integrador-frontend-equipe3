@@ -1,0 +1,48 @@
+.component-chip {
+    color: var(--primary-orange);
+    background-color: var(--light-orange);
+    animation: onMount 400ms ease-out both;
+
+    .label {
+        font-size: .8rem;
+    }
+
+    .text{
+        font-weight: 600;
+    }
+
+    button {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+
+    button {
+        svg path {
+            fill: var(--primary-orange);
+        }
+
+        &:hover{
+            svg path{
+                fill: red;
+            }
+        }
+    }
+
+    @keyframes onMount {
+        0% {
+            opacity: .5;
+            transform: scale(.8);
+        }
+        50%{
+            opacity: .7;
+            transform: scale(1.05);
+        }
+        100%{
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        
+    }
+}

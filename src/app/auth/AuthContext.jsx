@@ -12,7 +12,7 @@ export function AuthProvider(props) {
     const [ authenticated, setAuthenticated ] = useState()
 
     const checkIsAuthenticated = useCallback(() => {
-        return Boolean(getUserDetails()?.email !== undefined)
+        return Boolean(getUserDetails()?.name !== undefined)
     }, [])
 
     useEffect(() => {
@@ -21,18 +21,22 @@ export function AuthProvider(props) {
 
     async function signIn(email, password, keepConnected, onRejected) {
         jsCookie.remove(userCookieName)
-        const resp = await axios.post(
-            `${process.env.REACT_APP_LINK_API}/auth/sign-in`,
-            {email, password}
-        )
-        
-        if(resp.status === 200) {
-            const options = keepConnected ? { expires: 30 } : undefined
-            jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
-            setAuthenticated(true)
-        } else {
-            onRejected()
-        }
+        const payload = {email, password}
+        await axios
+            .post(`${process.env.REACT_APP_LINK_API}/auth/sign-in`, payload)
+            .then(resp => {
+                const options = keepConnected ? { expires: 30 } : undefined
+                jsCookie.set(userCookieName, JSON.stringify(resp.data), options)
+                setAuthenticated(true)
+            })
+            .catch(({response}) =>{
+                const is403 = response.status === 403
+                Swal.fire({
+                    icon: "warning",
+                    title: is403 ? "Credenciais inválidas" : "Algo não ocorreu bem",
+                    text: "Tente novamente"
+                })
+            })
     }
 
     async function signUp (name, lastname, email, password) {
@@ -47,7 +51,11 @@ export function AuthProvider(props) {
                 'Voce será redirecionado para a págona de login',
             ).then(() => {navigate("/login")})
         }
-    } 
+    }
+
+    const getUserId = () => {
+        return getUserDetails()?.id
+    }
 
     function signOut() {
         jsCookie.remove(userCookieName)
@@ -62,10 +70,14 @@ export function AuthProvider(props) {
         }
     }
 
-    function getTocken() {
-        const cookie = JSON.parse(jsCookie.get(userCookieName))
-        const tocken =  `${cookie.type} ${cookie.token}`
-        return tocken
+    function getToken() {
+        try {
+            const cookie = JSON.parse(jsCookie.get(userCookieName))
+            const tocken =  `${cookie.type} ${cookie.token}`
+            return tocken
+        } catch {
+            return null
+        }
     }
 
     return (
@@ -75,7 +87,8 @@ export function AuthProvider(props) {
             signUp,
             authenticated,
             getUserDetails,
-            getTocken
+            getToken,
+            getUserId
         }}>
             {props.children}
         </AppContext.Provider>

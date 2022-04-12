@@ -11,12 +11,4 @@
             grid-template-columns: 1fr;
         }
     }
-
-    .products-container {
-        background-color: var(--light-gray);
-
-        .component-category-card {
-            min-width: 100%;
-        }
-    }
 }

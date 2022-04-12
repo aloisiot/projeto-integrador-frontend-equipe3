@@ -36,7 +36,7 @@ export default function ConfirmacaoReserva() {
     const [dropdownToggle, setDropdownToggle] = useState(false);
     const [horarioSelecionado, setHorarioSelecionado] = useState(null)
     const hourArray = hourPush();
-    const {getUserDetails,authenticated, getTocken} = useAuth()
+    const {getUserDetails,authenticated, getToken} = useAuth()
     const userDetails = getUserDetails();
     const navigate = useNavigate();
     const initialReserva = {
@@ -77,7 +77,7 @@ export default function ConfirmacaoReserva() {
     async function reservaHandler(){
         const config = {
             headers: {
-                Authorization: getTocken()
+                Authorization: getToken()
             }
         }
         await axios.post(`${process.env.REACT_APP_LINK_API}/bookings`,reserva,config)
@@ -108,6 +108,7 @@ export default function ConfirmacaoReserva() {
 
     function calendarioHandler(datas){
         setCurrentDateRange(datas)
+
         setReserva({
             ...reserva,
             startDate : formatDateForTransfer(datas[0].startDate),

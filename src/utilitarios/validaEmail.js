@@ -5,6 +5,6 @@ export function validaEmail(email){
 
 
 export function validaSenhaLogin(senha){
-    return senha.length >= 6
+    return senha.length >= 8
 }
 

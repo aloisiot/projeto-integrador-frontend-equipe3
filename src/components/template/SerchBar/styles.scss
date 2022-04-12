@@ -1,11 +1,11 @@
-.search-bar {
+.component-search-bar {
     background-color: var(--terciary-dark-gray);
     
     .title {
         color: white;
     }
     .search-bar-content{
-        @media (max-width: 490px) {
+        @media (max-width: 767px) {
             flex-direction: column;
         }
     }

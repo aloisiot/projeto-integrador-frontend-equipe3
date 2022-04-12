@@ -56,19 +56,24 @@
                         opacity: 0;
                     }
                 }
-                .btn-check:checked+.btn-outline-primary,
-                .btn-check:hover+.btn-outline-primary  {
-                    background-color: var(--primary-orange);
-                
-                    svg{
-                        opacity: 1;
-                    }
-                }
 
                 .btn-check:hover+.btn-outline-primary  {
-                    background-color: var(--primary-orange)
+                    background-color: var(--primary-orange);
+                    opacity: .6;
+                }
+
+                .btn-check:checked+.btn-outline-primary {
+                    background-color: var(--primary-orange);
+                    opacity: 1;
                 }
                 
+                :is(
+                    .btn-check:checked+.btn-outline-primary,
+                    .btn-check:hover+.btn-outline-primary
+                ) svg {
+                    opacity: 1;
+                }
+
                 label{
                     font-weight: 600;
                     font-size: 17px;

@@ -7,21 +7,19 @@ import { LocaleStrockIcon, Locale } from "../../icons"
 import Title from "../../tipografy/Title"
 import Button from "../Button"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchCities, selectAllCities } from "../../../app/store/citiesSlice"
+import { fetchCities, selectAllCities } from "../../../app/store/slices/citiesSlice"
 import { formatDateForTransfer } from "../../../utilitarios/dateFormat";
-import {
-    fetchProductsByCity,
-    fetchProductsByCityAndDateRange,
-    fetchProductsByDateRange
-} from "../../../app/store/productsSlice"
 import Swal from "sweetalert2"
+import { setCityId, setDateRange } from "../../../app/store/slices/searchParamsSlice"
+import { useNavigate } from "react-router-dom"
 
 export default function SearchBar() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [selectedCityName, setSelectedCityName] = useState("");
-    const [ selectedCityId, setSelectedCityId] = useState(0);
-    const [dateRange, setDateRange] = useState(null)
+    const [selectedCityId, setSelectedCityId] = useState(0);
     const cities = useSelector(selectAllCities);
+    const [dateRangeFromPiker, setDateRangeFromPiker] = useState(null)
 
     useEffect(() => {
         if(! cities.length) {
@@ -29,30 +27,38 @@ export default function SearchBar() {
         }
     }, [dispatch, cities])
 
-    function onSubmit(event){
-        const startDate = dateRange?.[0]?.startDate
-        const endDate = dateRange?.[0]?.endDate
+    function getFormatedDateRange() {
+        if(dateRangeFromPiker?.length) {
+            const formatedDateRange = {
+                startDate: formatDateForTransfer(dateRangeFromPiker[0].startDate),
+                endDate: formatDateForTransfer(dateRangeFromPiker[0].endDate)
+            }
+            return formatedDateRange
+        }
+        return {}
+    }
 
-        if(selectedCityId && startDate && endDate) {
-            dispatch(fetchProductsByCityAndDateRange({
-                cityId: selectedCityId,
-                startDate: formatDateForTransfer(startDate),
-                endDate: formatDateForTransfer(endDate)
-            }))
-        } else if(selectedCityId){
-            dispatch(fetchProductsByCity(selectedCityId))
-        } else if(startDate && endDate) {
-            dispatch(fetchProductsByDateRange({
-                startDate: formatDateForTransfer(startDate),
-                endDate: formatDateForTransfer(endDate)
-            }))
+    function onSubmit(event){
+        const formatedDateRange = getFormatedDateRange()
+        dispatch(setDateRange(getFormatedDateRange()))
+        dispatch(setCityId(selectedCityId))
+        const startDate = formatedDateRange?.startDate
+        const endDate = formatedDateRange?.endDate
+
+        if(selectedCityId || startDate || endDate) {
+            navigate("/search")
         } else {
-            Swal.fire("Opss!", "Voce deve indicar uma cidade ou intervalo de datas para a pesquisa!")
+            Swal.fire({
+                icon: 'info',
+                title: "Opss!",
+                text: "Voce deve indicar uma cidade ou intervalo de datas para a pesquisa!"
+            })
+            return;
         }
     }
 
     return (
-        <div className="search-bar py-4">
+        <div className="component-search-bar py-4">
             <Container>
                 <Title color="white">Busque as melhores ofertas perto de você</Title>
                 <div className="d-flex flex-wrap gap-2 search-bar-content">
@@ -70,8 +76,8 @@ export default function SearchBar() {
                     />
                     <DateRangePicker
                         className="flex-grow-1"
-                        dateRange={dateRange}
-                        setDateRange={setDateRange}
+                        dateRange={dateRangeFromPiker}
+                        setDateRange={setDateRangeFromPiker}
                     />
                     <Button
                         onClick={onSubmit}

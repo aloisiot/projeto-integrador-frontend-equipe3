@@ -1,0 +1,31 @@
+.criacao-reserva-content{
+    background-color: var(--light-gray);
+
+    & > .container{
+        padding-top: 2rem;
+    }
+
+    .criacao-form{
+        background-color: var(--primary-white);
+
+        & > form{
+            display: flex;
+            & > .criacao-form-input{
+                flex: 1;
+                margin-right: 15px;
+               label{
+                display: block;
+                font-weight: 500;
+                color: var(--secondary-deep-blue);
+               }
+
+               input{
+                   width: 100%;
+                   margin-top: 4px;
+                   padding: 10px;
+                   background-color: var(--secondary-grey);
+               }
+            }
+        }
+    }
+}

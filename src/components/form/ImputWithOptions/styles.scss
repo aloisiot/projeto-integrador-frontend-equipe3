@@ -30,6 +30,14 @@
                 padding: 0 !important;
                 margin: 0 !important;
             }
+
+            &:hover {
+                color: var(--primary-orange);
+
+                svg path {
+                    fill: var(--primary-orange);
+                }
+            }
         }
     }
 }

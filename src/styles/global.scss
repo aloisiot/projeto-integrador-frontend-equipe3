@@ -19,3 +19,20 @@ input {
         background-color: #FFE1E1;
     } 
 }
+
+.light-gray-bg {
+    background-color: var(--light-gray);
+}
+
+.drop-down {
+    z-index: 1;
+}
+
+.flex-col-items-stretch {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.redondo{
+    border-radius: 0.5rem;
+}

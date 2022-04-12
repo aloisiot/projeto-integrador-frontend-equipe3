@@ -2,7 +2,7 @@
     background-color: var(--light-gray);
 
 
-    .redondo, .form-dados{
+    .form-dados{
         border-radius: 0.5rem;
     }
 
@@ -120,10 +120,6 @@
                    
                     .seletor-display{
                         width: 100%;
-                        
-                        &.white-hidden{
-                            color: white;
-                        }
                     }
                 }
 

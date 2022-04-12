@@ -1,5 +1,5 @@
 import useAuth from "../../../../app/auth/useAuth";
-import { Xicon } from "../../../icons";
+import { XIcon } from "../../../icons";
 import './style.scss';
 
 export default function ProfileUI({user}) {
@@ -13,7 +13,7 @@ export default function ProfileUI({user}) {
             <div className="d-flex flex-column ">
                 <div className="d-flex justify-content-between align-items-center ">
                     <p >Olá,</p>
-                    <span className="x-icon" onClick={() => signOut()}>{Xicon}</span>
+                    <span className="x-icon" onClick={() => signOut()}>{XIcon}</span>
                 </div>
                 <p className="texto-inferior">
                     {`${user?.name} ${user?.lastname}`}

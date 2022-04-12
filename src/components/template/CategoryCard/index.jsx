@@ -1,29 +1,18 @@
 import "./styles.scss";
 import Title from "../../tipografy/Title";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCurrentCategory, selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/currentCategorySlice";
-import { useEffect, useState } from "react";
+import { selectCurrentCategoriy, setCurrentCategory } from "../../../app/store/slices/currentCategorySlice";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryCard({ category, style }) {
-    const [ isSelected, setIsSelected ] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const currentCategory = useSelector(selectCurrentCategoriy)
-
-    useEffect(() => {
-        if(category.id === currentCategory.id) {
-            setIsSelected(true)
-        } else {
-            setIsSelected(false)
-        }
-    }, [category, currentCategory])
+    const { urlImage, qualification, productsQuantity } = category
 
     function onClickHandler(event) {
-        const id = currentCategory.id
-        if(id === undefined || id !== category.id) {
-            dispatch(setCurrentCategory(category))
-        } else {
-            dispatch(removeCurrentCategory())
-        }
+        dispatch(setCurrentCategory(category))
+        navigate("/search")
     }
 
     return (
@@ -31,21 +20,20 @@ export default function CategoryCard({ category, style }) {
             onClick={onClickHandler}
             style={style}
             className={`
+                ${currentCategory.id === category.id ? "active" : ""}
                 component-category-card
-                rounded-3 shadow
-                overflow-hidden
-                ${isSelected ? "active-category-card" : ""}
+                rounded-3 shadow overflow-hidden
             `}
         >
             <div className="img-container">
                 <img
-                    src={category.urlImage}
-                    alt={category.qualification}
+                    src={urlImage}
+                    alt={qualification}
                 />
             </div>
             <div className="component-card-content p-2">
-                <Title variant="h5" color="deep-blue">{category.qualification}</Title>
-                <p className="description">{"954.767 resultados"}</p>
+                <Title variant="h5" color="deep-blue">{qualification}</Title>
+                <p className="description">{`${productsQuantity} ${productsQuantity > 1 ? "resultados" : "resultado"}`}</p>
             </div>
         </div>
     )

@@ -1,0 +1,43 @@
+.search-page-content {
+    .categories-container {
+        overflow: hidden;
+
+        &.not-visible > .component-categories-colection {
+            height: 542px;
+            @media (max-width: 399px) {
+                height: 1084px;
+            }
+            @media (min-width: 991px) {
+                height: 271px;
+            }
+            animation: hidden 300ms 50ms ease-in both;
+        }
+    
+        &.is-visible > .component-categories-colection {
+            animation: show 200ms ease-out both;
+        }
+
+        &.not-visible > h2 {
+            display: none;
+        }
+    } 
+
+    @keyframes show {
+        0% {
+            opacity: 0;
+            transform: scaleY(0);
+        }
+        100% {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+
+    @keyframes hidden {
+        to {
+            opacity: 0;
+            transform: scaleY(0);
+            height: 0;
+        }
+    }
+}

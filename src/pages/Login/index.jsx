@@ -7,10 +7,10 @@ import { useEffect, useState, useRef } from "react";
 import Button from "../../components/template/Button";
 import Template from "../../components/template/Layout";
 import useAuth from "../../app/auth/useAuth";
-import { Container, ToggleButton } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Title from "../../components/tipografy/Title";
 import { useNavigate } from "react-router-dom";
-import { CheckedIcon } from "../../components/icons";
+import CheckBox from "../../components/form/CheckBox";
 
 export default function Login(){
     const { signIn, authenticated } = useAuth()
@@ -47,23 +47,21 @@ export default function Login(){
         let valorInput = event.target.value
         let inputAlterado = event.target.id
 
-        if(valorInput !== ""){
-            if(inputAlterado === "email-input"){
-                if(validaEmail(email)){
-                    if(emailError.length > 0 || emailError === "Email incorreto. Digite novamente"){
-                        setEmailError("")
-                    }
-                }else{
-                    setEmailError("Formato de email inválido")
+        if(valorInput !== "" && inputAlterado === "email-input"){
+            if(validaEmail(email)){
+                if(emailError.length > 0 || emailError === "Email incorreto. Digite novamente"){
+                    setEmailError("")
                 }
             }else{
-                if(validaSenhaLogin(valorInput)){
-                    if(passwordError.length > 0 || passwordError === "Senha incorreta. Digite novamente"){
-                        setPasswordError("")
-                    }
-                }else{
-                    setPasswordError("A senha tem no mínimo 6 caracteres")
+                setEmailError("Formato de email inválido")
+            }
+        }else{
+            if(validaSenhaLogin(valorInput)){
+                if(passwordError.length > 0 || passwordError === "Senha incorreta. Digite novamente"){
+                    setPasswordError("")
                 }
+            }else{
+                setPasswordError("A senha tem no mínimo 6 caracteres")
             }
         }
     }
@@ -112,13 +110,14 @@ export default function Login(){
         <Template>
             <div className="login-page-content">
                 <Container className="form-container">
-                    <div className="login-box">
+                    <div className="login-box py-4">
                         <Title className="pb-3" variant={"h1"} color="orange">
                             Iniciar sessão
                         </Title>
                         <div className="form-box">
                             <form className="d-flex flex-column" >
                                 <Input 
+                                    autoComplete='on'
                                     forLabel={"email-input"} 
                                     classLabel={"form-label input-padrao"} 
                                     labelTxt={"Email"}
@@ -136,6 +135,7 @@ export default function Login(){
                                 </p>}
                                 </Input>
                                 <Input 
+                                    autoComplete='on'
                                     forLabel={"senha-input"} 
                                     classLabel={"form-label input-padrao"} 
                                     labelTxt={"Senha"}
@@ -151,15 +151,7 @@ export default function Login(){
                                 </p>}
                                 </Input>
                                 <div className="d-flex gap-2 align-self-center  align-items-strech">
-                                    <ToggleButton
-                                        id="toggle-check"
-                                        type="checkbox"
-                                        variant="outline-primary"
-                                        checked={keepConnected}
-                                        value="1"
-                                        label="label"
-                                        onChange={() => setKeepConnected(! keepConnected)}
-                                    >{CheckedIcon}</ToggleButton>
+                                    <CheckBox id="toggle-check" value={keepConnected} onChange={setKeepConnected} />
                                     <label htmlFor="toggle-check">Mantenha-me conectado!</label>
                                 </div>
                             </form>

@@ -6,7 +6,7 @@ import { CalendarioIcon } from '../../icons';
 import Button from '../../template/Button';
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
 
-export default function DateRangePicker({className, dateRange, setDateRange}) {
+export default function DateRangePicker({className, setDateRange, dateRange}) {
     const [visible, setVisible ]= useState(false) 
 
     const initialState = [
@@ -27,9 +27,9 @@ export default function DateRangePicker({className, dateRange, setDateRange}) {
 
     function renderDates() {
         return (
-            dateFormatPtBt(dateRange[0]?.startDate)
+            dateFormatPtBt(dateRange?.[0].startDate)
             + " - " +
-            dateFormatPtBt(dateRange[0]?.endDate)
+            dateFormatPtBt(dateRange?.[0].endDate)
         )
     }
 
@@ -55,11 +55,12 @@ export default function DateRangePicker({className, dateRange, setDateRange}) {
                     {CalendarioIcon}
                 </span>
                 <span>
-                    {dateRange !== null ? renderDates() : "Check in - Check out"}
+                    {dateRange ? renderDates() : "Check in - Check out"}
                 </span>
             </div>
             {visible && (
                 <div className={`
+                    drop-down
                     date-range-picker
                     rounded-1 shadow
                     overflow-hidden
@@ -71,7 +72,7 @@ export default function DateRangePicker({className, dateRange, setDateRange}) {
                         editableDateInputs={true}
                         onChange={item => handlerDateRangeChange(item.selection)}
                         moveRangeOnFirstSelection={false}
-                        ranges={dateRange !== null ? dateRange : initialState}
+                        ranges={dateRange ? dateRange : initialState}
                         showDateDisplay={false}
                         locale={ptBR}
                         weekdayDisplayFormat="EEEEEE"
