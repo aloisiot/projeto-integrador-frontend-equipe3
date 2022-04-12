@@ -76,7 +76,7 @@ export default function DetalhesReserva() {
                 productId: product?.id
             }
             await axios
-                    .post(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
+                    .put(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
                     .then(() => findCurrentProduct(idReserva))
 
             currentProductIsFavorite(product?.id, config)
