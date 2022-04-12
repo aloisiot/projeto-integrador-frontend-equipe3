@@ -52,7 +52,7 @@ export default function DetalhesReserva() {
     }
 
     useEffect(() => {
-        if(product) {
+        if(product && getUserId()) {
             const config = {
                 headers: {
                     Authorization: getToken()
@@ -60,7 +60,7 @@ export default function DetalhesReserva() {
             }
             currentProductIsFavorite(product?.id, config)
         }
-    }, [product, getToken])
+    }, [product, getToken, getUserId])
 
     const updateFavorite = async () => {
         const userId = getUserId()

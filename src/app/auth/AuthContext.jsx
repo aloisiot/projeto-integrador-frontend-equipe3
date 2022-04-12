@@ -71,9 +71,13 @@ export function AuthProvider(props) {
     }
 
     function getToken() {
-        const cookie = JSON.parse(jsCookie.get(userCookieName))
-        const tocken =  `${cookie.type} ${cookie.token}`
-        return tocken
+        try {
+            const cookie = JSON.parse(jsCookie.get(userCookieName))
+            const tocken =  `${cookie.type} ${cookie.token}`
+            return tocken
+        } catch {
+            return null
+        }
     }
 
     return (
