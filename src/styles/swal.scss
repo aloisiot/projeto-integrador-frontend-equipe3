@@ -1,4 +1,10 @@
-.swal2-confirm.swal2-styled{
-    background-color: rgb(80, 120, 173) !important;
+.swal2-styled:is(
+    .swal2-cancel,
+    .swal2-confirm
+){
     box-shadow: none !important;
+}
+
+.swal2-styled.swal2-confirm{
+    background-color: rgb(80, 120, 173) !important;
 }

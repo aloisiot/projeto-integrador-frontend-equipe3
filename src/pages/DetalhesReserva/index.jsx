@@ -89,9 +89,9 @@ export default function DetalhesReserva() {
                 icon: 'info',
                 title: 'Você não está autenticado',
                 text: "Entre com sua conta para favoritar este produto.",
-                showCancelButton: true,
                 confirmButtonText: 'Entrar',
-                denyButtonText: 'Agora não',
+                cancelButtonText: "Agora não",
+                showCancelButton: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate("/login")
