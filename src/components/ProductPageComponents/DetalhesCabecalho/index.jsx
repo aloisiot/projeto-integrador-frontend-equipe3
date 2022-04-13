@@ -19,7 +19,7 @@ export default function DetalhesCabecalho({product, singleTitle, className}) {
                         </>
                     ) : (
                         <>
-                            <Title variant={"h1"} className="no-margin white">
+                            <Title variant={"h4"} className="no-margin white">
                                 {singleTitle}
                                 </Title>
                         </>

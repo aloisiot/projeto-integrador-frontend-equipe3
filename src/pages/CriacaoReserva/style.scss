@@ -119,6 +119,7 @@
                 height: 103px;
                 flex-direction: column;
                 justify-content: center;
+                
             }
 
             &.option-animation-in{
@@ -135,6 +136,11 @@
             padding-right: 10px;
             font-weight: 500;
             margin: unset;
+
+            @media(max-width: 500px){
+                text-align: center;
+                padding: unset;
+            }
         }
     }
 
