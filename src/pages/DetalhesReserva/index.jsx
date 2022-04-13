@@ -7,11 +7,11 @@ import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer"
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
-    kitchenIcon, noSmoke, noParty, shareIconMobile, acIcon, petsIcon, creditCard, fullFillHeartIcon
+    kitchenIcon, noSmoke, noParty, acIcon, petsIcon, creditCard, fullFillHeartIcon
 } from "../../components/icons";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,7 @@ export const currentProductIsFavorite = async (productId, requestConfig) =>  {
 }
 
 export default function DetalhesReserva() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const { getUserId, getToken } = useAuth()
     const arrayTest = [StarIcon, StarIcon, StarIcon, emptyStar, emptyStar]
@@ -66,6 +66,27 @@ export default function DetalhesReserva() {
             handlerSetIsFavorite(product.id, config)
         }
     }, [product, getToken, getUserId, handlerSetIsFavorite])
+
+    const share = () => {
+        if(window.navigator.share){
+            window.navigator.share({
+                url: window.location.href,
+                title: product.name
+            })
+        } else {
+            const shareUrlInput = document.getElementById("share-url-input")
+            shareUrlInput.select();
+            shareUrlInput.setSelectionRange(0, 99999)
+            window.navigator.clipboard.writeText(shareUrlInput.value)
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Link copiado',
+                showConfirmButton: false,
+                timer: 2000
+              })
+        }
+    }
 
     const updateFavorite = async () => {
         const userId = getUserId()
@@ -138,9 +159,23 @@ export default function DetalhesReserva() {
                     </div>
                 </div>
                 <div>
-                    <div className="container iconesContainer">
-                        <button>{window.innerWidth < 520 ? shareIconMobile : shareIcon}</button>
-                        <button onClick={() => updateFavorite()}>
+                    <div className="container iconesContainer d-flex gap-2">
+                        {(window.navigator.share || window.navigator.clipboard) && (
+                            // Renderiza a opcao de compartilhamento somente algum dos
+                            // recursos necessarios estiverem disponiveis no navegador
+                            <button onClick={share}>
+                                {shareIcon}
+                                <input
+                                    id="share-url-input"
+                                    style={{visibility:
+                                    "hidden", position:
+                                    "absolute",
+                                    width: 0}}
+                                    value={window.location.href}
+                                />
+                            </button>
+                        )}
+                        <button onClick={updateFavorite}>
                             {productIsFavorite
                                 ? <div className='full-fill-heart-icon'>{fullFillHeartIcon}</div>
                                 : <div>{heartIcon}</div>
