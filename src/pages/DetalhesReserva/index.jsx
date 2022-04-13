@@ -7,7 +7,7 @@ import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer"
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
@@ -51,16 +51,20 @@ export default function DetalhesReserva() {
     const product = useSelector(selectCurrentProduct)
     const [productIsFavorite, setProductIsFavorite] = useState(false)
 
+    const handlerSetIsFavorite = useCallback(async (productId, requestConfig) => {
+        setProductIsFavorite(await currentProductIsFavorite(productId, requestConfig))
+    }, [])
+
     useEffect(() => {
-        if(product && getUserId()) {
+        if(product.id && getUserId()) {
             const config = {
                 headers: {
                     Authorization: getToken()
                 }
             }
-            currentProductIsFavorite(product?.id, config)
+            handlerSetIsFavorite(product.id, config)
         }
-    }, [product, getToken, getUserId])
+    }, [product, getToken, getUserId, handlerSetIsFavorite])
 
     const updateFavorite = async () => {
         const userId = getUserId()
@@ -78,7 +82,7 @@ export default function DetalhesReserva() {
             await axios
                     .put(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
 
-            setProductIsFavorite(await currentProductIsFavorite(product?.id, config))
+            handlerSetIsFavorite(product?.id, config)
         } else {
             Swal.fire({
                 icon: 'info',
