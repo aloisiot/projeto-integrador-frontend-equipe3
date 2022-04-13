@@ -7,15 +7,15 @@ import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer"
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
-    kitchenIcon, noSmoke, noParty, shareIconMobile, acIcon, petsIcon, creditCard, fullFillHeartIcon
+    kitchenIcon, noSmoke, noParty, acIcon, petsIcon, creditCard, fullFillHeartIcon
 } from "../../components/icons";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from '../../app/auth/useAuth';
 import Swal from 'sweetalert2';
 
@@ -34,9 +34,17 @@ function getGaleriaAtual() {
     return window.innerWidth >= 1024 ? "desktop" : "mobile"
 }
 
+export const currentProductIsFavorite = async (productId, requestConfig) =>  {
+    const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/clients/product-is-favorite/${productId}`, requestConfig)
+    if(resp.status === 200){
+        return Boolean(resp.data || false)
+    }
+}
+
 export default function DetalhesReserva() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { getUserId, getToken } = useAuth()
-    const dispatch = useDispatch();
     const arrayTest = [StarIcon, StarIcon, StarIcon, emptyStar, emptyStar]
     const [modalAtivo, setModalAtivo] = useState(false)
     const [galeriaAtual, setGaleriaAtual] = useState(getGaleriaAtual())
@@ -44,23 +52,41 @@ export default function DetalhesReserva() {
     const product = useSelector(selectCurrentProduct)
     const [productIsFavorite, setProductIsFavorite] = useState(false)
 
-    const currentProductIsFavorite = async (productId, requestConfig) =>  {
-        const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/clients/product-is-favorite/${productId}`, requestConfig)
-        if(resp.status === 200){
-            setProductIsFavorite(resp.data || false)
-        }
-    }
+    const handlerSetIsFavorite = useCallback(async (productId, requestConfig) => {
+        setProductIsFavorite(await currentProductIsFavorite(productId, requestConfig))
+    }, [])
 
     useEffect(() => {
-        if(product && getUserId()) {
+        if(product.id && getUserId()) {
             const config = {
                 headers: {
                     Authorization: getToken()
                 }
             }
-            currentProductIsFavorite(product?.id, config)
+            handlerSetIsFavorite(product.id, config)
         }
-    }, [product, getToken, getUserId])
+    }, [product, getToken, getUserId, handlerSetIsFavorite])
+
+    const share = () => {
+        if(window.navigator.share){
+            window.navigator.share({
+                url: window.location.href,
+                title: product.name
+            })
+        } else {
+            const shareUrlInput = document.getElementById("share-url-input")
+            shareUrlInput.select();
+            shareUrlInput.setSelectionRange(0, 99999)
+            window.navigator.clipboard.writeText(shareUrlInput.value)
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Link copiado',
+                showConfirmButton: false,
+                timer: 2000
+              })
+        }
+    }
 
     const updateFavorite = async () => {
         const userId = getUserId()
@@ -77,13 +103,20 @@ export default function DetalhesReserva() {
             }
             await axios
                     .put(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
-                    .then(() => findCurrentProduct(idReserva))
 
-            currentProductIsFavorite(product?.id, config)
+            handlerSetIsFavorite(product?.id, config)
         } else {
             Swal.fire({
                 icon: 'info',
-                title: 'Você não está autenticado'
+                title: 'Você não está autenticado',
+                text: "Entre com sua conta para favoritar este produto.",
+                confirmButtonText: 'Entrar',
+                cancelButtonText: "Agora não",
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
             })
         }
     }
@@ -126,10 +159,27 @@ export default function DetalhesReserva() {
                     </div>
                 </div>
                 <div>
-                    <div className="container iconesContainer">
-                        <button>{window.innerWidth < 520 ? shareIconMobile : shareIcon}</button>
-                        <button onClick={() => updateFavorite()}>
-                            {productIsFavorite ? fullFillHeartIcon : heartIcon}
+                    <div className="container iconesContainer d-flex gap-2">
+                        {(window.navigator.share || window.navigator.clipboard) && (
+                            // Renderiza a opcao de compartilhamento somente algum dos
+                            // recursos necessarios estiverem disponiveis no navegador
+                            <button onClick={share}>
+                                {shareIcon}
+                                <input
+                                    id="share-url-input"
+                                    style={{visibility:
+                                    "hidden", position:
+                                    "absolute",
+                                    width: 0}}
+                                    value={window.location.href}
+                                />
+                            </button>
+                        )}
+                        <button onClick={updateFavorite}>
+                            {productIsFavorite
+                                ? <div className='full-fill-heart-icon'>{fullFillHeartIcon}</div>
+                                : <div>{heartIcon}</div>
+                            }
                         </button>
                     </div>
                 </div>

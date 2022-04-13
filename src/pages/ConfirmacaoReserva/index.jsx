@@ -70,7 +70,7 @@ export default function ConfirmacaoReserva() {
             icon: 'info',
             title: 'Faça login para continuar'
         })
-            .then(()=> navigate('/login'))
+        .then(()=> navigate('/login'))
       }
     },[navigate,authenticated])
     
@@ -130,7 +130,6 @@ export default function ConfirmacaoReserva() {
                 <Container>
                     <h4>Complete seus dados</h4>
                     <div className="confirmacao-conteudo">
-
                         <div className="left">
                             <div className="form-dados p-1">
                                 <div className="column-1 d-flex">

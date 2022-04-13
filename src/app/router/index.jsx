@@ -9,6 +9,7 @@ import { AuthProvider } from '../auth/AuthContext';
 import store from '../store';
 import SearchPage from '../../pages/Search';
 import CriacaoReserva from '../../pages/CriacaoReserva';
+import Favoritos from '../../pages/Favoritos';
 
 export default function RouterList(){
 
@@ -19,6 +20,7 @@ export default function RouterList(){
                     <Routes>
                         <Route path="*" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="/Favoritos" element={<Favoritos/>}/>
                         <Route path="/search" element={<SearchPage/>}/>
                         <Route path="/cadastro" element={<Cadastro/>}/>
                         <Route path="/reserva/:idReserva" element={<DetalhesReserva/>} />

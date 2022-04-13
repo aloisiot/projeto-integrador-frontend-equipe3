@@ -83,6 +83,7 @@ export default function CriacaoReserva() {
     useEffect(() => {
         console.log(selectedOptions)
     }, [selectedOptions])
+    
     return (
         <Template>
             <DetalhesCabecalho singleTitle={"Administração"} />

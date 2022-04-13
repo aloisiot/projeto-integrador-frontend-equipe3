@@ -7,6 +7,7 @@ import currentProductReducer from './slices/currentProductSlice'
 import searchParamsReducer from './slices/searchParamsSlice'
 import prossesReducer from './slices/prossesSlice'
 import characteristicsReducer from './slices/characteristicsSlice'
+import favoritesReducer from './slices/favoritesSlice'
 
 export default configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
     cities: citiesReducer,
     currentProduct: currentProductReducer,
     prosses: prossesReducer,
-    characteristics : characteristicsReducer
+    characteristics : characteristicsReducer,
+    favorites: favoritesReducer
   }
 })

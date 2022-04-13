@@ -1,4 +1,4 @@
-import { Logo, headerMenu, XiconWhite } from "../../icons";
+import { Logo, headerMenu, XiconWhite, heartIcon } from "../../icons";
 import { Nav, Container } from "react-bootstrap";
 import ButtonsUI from "../HeaderItens/ButtonsUI"
 import ProfileUI from "../HeaderItens/ProfileUI"
@@ -63,10 +63,19 @@ export default function Header() {
                         <Link name="to-home-link" role="link" to="/">{Logo}</Link>
                         <span className="slogan">A reserva ideal você encontra aqui</span>
                     </div>
-                    <div className="menu-header">
-                        <button onClick={() => { setSidebarActive(true) }}>{headerMenu}</button>
+                    <div className="d-flex align-items-center gap-3">
+                        {checkIsAuthenticated() ? (
+                            <>
+                                <Link title="favoritos" to="/favoritos" className="justify-self-end">
+                                    {heartIcon}
+                                </Link>
+                                <ProfileUI user={getUserDetails()} />
+                            </>
+                        ) :  <ButtonsUI />}
+                        <div className="menu-header">
+                            <button onClick={() => { setSidebarActive(true) }}>{headerMenu}</button>
+                        </div>
                     </div>
-                    {checkIsAuthenticated() ? <ProfileUI user={getUserDetails()} /> : <ButtonsUI />}
                 </Nav>
             </Container>
         </header>
