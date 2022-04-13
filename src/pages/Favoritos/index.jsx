@@ -54,7 +54,7 @@ export default function Favoritos() {
 
     return (
         <Template>
-            <div className="favoritos-page-content">
+            <div style={{height: "100%"}} className="favoritos-page-content">
                 <DetalhesCabecalho
                     singleTitle={"Favoritos"}
                 />
@@ -69,7 +69,7 @@ export default function Favoritos() {
                                     />
                                 </Row>
                             ) : (
-                                <div className="d-flex flex-column align-items-center">
+                                <div className="d-flex flex-column align-items-center py-4">
                                     <p style={{fontSize: "2rem", textAlign: "center"}}>
                                         Ainda não há produtos favoritados
                                     </p>

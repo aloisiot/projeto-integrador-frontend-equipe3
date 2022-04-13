@@ -6,12 +6,12 @@ import LoadingSpinner from '../LoadingSpinner';
 export default function Template({children, bgColor}){
     return(
         <div
-            className={`
-                default-template
-                d-flex flex-column
-                align-items-cener
-                default-bg-${bgColor ? bgColor : "white"}
-            `}
+            className={
+                "default-template " +
+                "d-flex flex-column " +
+                "align-items-cener " +
+                `default-bg-${bgColor ? bgColor : "white"} `
+            }
         >
             <LoadingSpinner/>
             <Header/>
