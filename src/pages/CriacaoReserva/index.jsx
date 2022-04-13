@@ -48,7 +48,7 @@ export default function CriacaoReserva(){
 
     return(
         <Template>
-            <DetalhesCabecalho singleTitle={"Administração"}/>
+            {/* <DetalhesCabecalho singleTitle={"Administração"}/> */}
                 <div className="criacao-reserva-content">
                     <Container>
                         <h4>Criar propriedade</h4>
