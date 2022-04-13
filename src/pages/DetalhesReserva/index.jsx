@@ -7,7 +7,7 @@ import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer"
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
@@ -34,6 +34,13 @@ function getGaleriaAtual() {
     return window.innerWidth >= 1024 ? "desktop" : "mobile"
 }
 
+export const currentProductIsFavorite = async (productId, requestConfig) =>  {
+    const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/clients/product-is-favorite/${productId}`, requestConfig)
+    if(resp.status === 200){
+        return Boolean(resp.data || false)
+    }
+}
+
 export default function DetalhesReserva() {
     const { getUserId, getToken } = useAuth()
     const dispatch = useDispatch();
@@ -44,23 +51,20 @@ export default function DetalhesReserva() {
     const product = useSelector(selectCurrentProduct)
     const [productIsFavorite, setProductIsFavorite] = useState(false)
 
-    const currentProductIsFavorite = async (productId, requestConfig) =>  {
-        const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/clients/product-is-favorite/${productId}`, requestConfig)
-        if(resp.status === 200){
-            setProductIsFavorite(resp.data || false)
-        }
-    }
+    const handlerSetIsFavorite = useCallback(async (productId, requestConfig) => {
+        setProductIsFavorite(await currentProductIsFavorite(productId, requestConfig))
+    }, [])
 
     useEffect(() => {
-        if(product && getUserId()) {
+        if(product.id && getUserId()) {
             const config = {
                 headers: {
                     Authorization: getToken()
                 }
             }
-            currentProductIsFavorite(product?.id, config)
+            handlerSetIsFavorite(product.id, config)
         }
-    }, [product, getToken, getUserId])
+    }, [product, getToken, getUserId, handlerSetIsFavorite])
 
     const updateFavorite = async () => {
         const userId = getUserId()
@@ -77,9 +81,8 @@ export default function DetalhesReserva() {
             }
             await axios
                     .put(`${process.env.REACT_APP_LINK_API}/clients/favorite-products`, body, config)
-                    .then(() => findCurrentProduct(idReserva))
 
-            currentProductIsFavorite(product?.id, config)
+            handlerSetIsFavorite(product?.id, config)
         } else {
             Swal.fire({
                 icon: 'info',
@@ -129,7 +132,10 @@ export default function DetalhesReserva() {
                     <div className="container iconesContainer">
                         <button>{window.innerWidth < 520 ? shareIconMobile : shareIcon}</button>
                         <button onClick={() => updateFavorite()}>
-                            {productIsFavorite ? fullFillHeartIcon : heartIcon}
+                            {productIsFavorite
+                                ? <div className='full-fill-heart-icon'>{fullFillHeartIcon}</div>
+                                : <div>{heartIcon}</div>
+                            }
                         </button>
                     </div>
                 </div>

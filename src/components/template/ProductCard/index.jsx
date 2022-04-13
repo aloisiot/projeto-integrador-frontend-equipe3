@@ -5,9 +5,13 @@ import { Locale, StarIcon } from '../../icons';
 import Link from '../../tipografy/Link';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProductCard ({product, className}) {
-
+export default function ProductCard ({product, className, secondaryAction, secondaryActionText}) {
     const navigate = useNavigate();
+    
+    const navigateToProductPage = () => {
+        navigate(`/reserva/${product.id}`)
+        window.scrollTo(0, 0)
+    }
 
     return (
         <div className={`d-flex shadow rounded-3 component-product-card ${className}`}>
@@ -38,7 +42,22 @@ export default function ProductCard ({product, className}) {
                 </div>
                 <div>
                     <p className='description'>{product?.description}</p>
-                    <Button full onClick={() => {navigate(`/reserva/${product.id}`);window.scrollTo(0, 0)}}>Veja mais</Button>
+                    <div className="buttons d-flex gap-2">
+                        <Button
+                            className="flex-grow-1"
+                            full={secondaryAction === undefined}
+                            onClick={navigateToProductPage}
+                            >Veja mais
+                        </Button>
+                        {(secondaryAction && secondaryActionText) && (
+                            <Button
+                                variant="secondary"
+                                className="flex-grow-1"
+                                onClick={() => secondaryAction(product.id)}
+                            >{secondaryActionText}
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </div>    
         </div>

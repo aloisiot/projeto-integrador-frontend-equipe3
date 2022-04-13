@@ -70,7 +70,7 @@ export default function ConfirmacaoReserva() {
             icon: 'info',
             title: 'Faça login para continuar'
         })
-            .then(()=> navigate('/login'))
+        .then(()=> navigate('/login'))
       }
     },[navigate,authenticated])
     
@@ -116,7 +116,6 @@ export default function ConfirmacaoReserva() {
         })
     }
     
-
 
     const hourLi = hourArray.map((horario,index)=>{
         return (

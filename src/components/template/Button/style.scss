@@ -41,6 +41,10 @@
         }
     }
 
+    &.secondary {
+        background-color: var(--light-gray);
+    }
+
     &.bordered {
         background: none;
         color: var(--primary-orange);

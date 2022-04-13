@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { asyncThunkWithProssesMiddleware } from "./prossesSlice";
 
+
 export const fetchProducts = asyncThunkWithProssesMiddleware(
     "products/fetchProducts", async () => {
         const resp = await axios.get(`${process.env.REACT_APP_LINK_API}/products`)

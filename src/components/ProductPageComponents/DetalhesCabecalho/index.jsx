@@ -1,32 +1,33 @@
+/* eslint-disable no-restricted-globals */
 import { goBackArrow } from "../../icons";
-import Link from "../../tipografy/Link";
+import Title from "../../tipografy/Title";
 import "./style.scss"
 
-
-
-export default function DetalhesCabecalho({product,singleTitle}) {
-
-    
+export default function DetalhesCabecalho({product, singleTitle, className}) {
+    const goBack = () => history.go(-1)
 
     return (
-        <div className="detalhesCabecalho d-flex align-items-center">
+        <div className={`detalhesCabecalho d-flex align-items-center`}>
             <div className="container d-flex justify-content-between">
                 <div className="cabecalhoTexto">
-                    { !(typeof singleTitle === "string") && (
+                    { !(typeof singleTitle === "string") ? (
                         <>
                             <p>{product?.category?.qualification}</p>
-                            <h4>{product?.name}</h4>
+                            <Title variant={"h1"} className="not-sigle white">
+                                {product?.name}
+                            </Title>
                         </>
-                    )}
-                    { typeof singleTitle === "string" && (
+                    ) : (
                         <>
-                            <h4 className="no-margin">{singleTitle}</h4>
+                            <Title variant={"h1"} className="no-margin white">
+                                {singleTitle}
+                                </Title>
                         </>
                     )}
                 </div>
-                <Link to="/" className="d-flex align-items-center">
+                <button onClick={goBack} className="d-flex align-items-center goback-btn">
                     {goBackArrow}
-                </Link>
+                </button>
             </div>
         </div>
     )
