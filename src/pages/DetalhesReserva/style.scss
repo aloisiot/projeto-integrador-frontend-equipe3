@@ -1,13 +1,8 @@
 .component-paginaDetalhes{
 
-    div{
-
-        div{
-            button{
-                background-color: transparent;
-                border: unset;
-            }
-        }
+    div div button{
+        background-color: transparent;
+        border: unset;
     }
 
     .detalhesSegundoCabecalho{
@@ -66,8 +61,8 @@
     }
 
     .iconesContainer{
-
         margin-top: 2rem;
+        
         svg{
             size: 10rem;
         }
@@ -83,17 +78,13 @@
             color: var(--secondary-deep-blue);
         }
 
-
         & > div{
             margin-bottom: 1.5rem;
         }
 
-        .separador-box{
-
-            .separador{
-                padding: 0.1rem;
-                background-color: var(--primary-orange);
-            }
+        .separador-box .separador{
+            padding: 0.1rem;
+            background-color: var(--primary-orange);
         }
 
         .descricaoCampo{
@@ -107,21 +98,17 @@
         .tituloSecundario{
             padding-bottom: 0.5rem;               
             margin-bottom: unset;
-            
         }
 
-        .mapaCampo{
-            .localizao-texto{
-                p{
-                    margin: unset;
-                    font-weight: 500;
-                }
-
-                p:nth-child(2){
-                    margin-top: 1rem;
-                }
+        .mapaCampo .localizao-texto{
+            p{
+                margin: unset;
+                font-weight: 500;
             }
 
+            p:nth-child(2){
+                margin-top: 1rem;
+            }
         }
 
         .detalhes-main-holder{
@@ -132,16 +119,29 @@
                     margin: unset;
                     font-weight: 500;
                 }
-
-            
             }
-
         }
-
     }
 
-    
-    
+    .full-fill-heart-icon {
+        animation: showFavoriteBtn .3s ease-out both;
+    }
+
+    @keyframes showFavoriteBtn {
+        0% {
+            opacity: .5;
+            transform: scale(.5);
+        }
+        50% {
+
+            opacity: .8;
+            transform: scale(1.2);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 }
 
 
