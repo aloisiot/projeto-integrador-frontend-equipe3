@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "../../app/auth/useAuth";
 import { fetchFavoritesByClient, selectAllFavorites } from "../../app/store/slices/favoritesSlice";
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
@@ -13,25 +14,25 @@ import { currentProductIsFavorite } from "../DetalhesReserva";
 
 export default function Favoritos() {
     const navigate = useNavigate()
-    const { getUserId, getToken, authenticated } = useAuth()
+    const { getUserId, getToken, checkIsAuthenticated } = useAuth()
     const dispatch = useDispatch()
     const favorites = useSelector(selectAllFavorites)
 
-    // useEffect(() => {
-    //     if(! authenticated) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
-    //         Swal.fire({
-    //             icon: 'info',
-    //             title: 'Faça login para continuar'
-    //         })
-    //         .then(()=> navigate('/login'))
-    //     }
-    // })
+    useEffect(() => {
+        if(! checkIsAuthenticated()) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
+            Swal.fire({
+                icon: 'info',
+                title: 'Faça login para continuar'
+            })
+            .then(()=> navigate('/login'))
+        }
+    }, [navigate, checkIsAuthenticated])
 
     useEffect(() => {
-        // if(authenticated) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
+        if(checkIsAuthenticated()) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
             dispatch(fetchFavoritesByClient({token: getToken()}))
-        // }
-    }, [dispatch, getToken, authenticated])
+        }
+    }, [dispatch, getToken, checkIsAuthenticated])
 
     const removeFavorite = async (productId) => {
         const token = getToken()

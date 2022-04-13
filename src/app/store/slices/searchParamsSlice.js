@@ -20,8 +20,11 @@ export const searchParamsSlice = createSlice({
                 cityId: action.payload
             }
         },
+        cleanParams() {
+            return {}
+        }
     }
 })
 
-export const {setCityId, setDateRange} = searchParamsSlice.actions
+export const {setCityId, setDateRange, cleanParams} = searchParamsSlice.actions
 export default searchParamsSlice.reducer

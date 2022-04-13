@@ -60,6 +60,7 @@ export function AuthProvider(props) {
     function signOut() {
         jsCookie.remove(userCookieName)
         setAuthenticated(false)
+        window.location.reload()
     }
 
     function getUserDetails() {
