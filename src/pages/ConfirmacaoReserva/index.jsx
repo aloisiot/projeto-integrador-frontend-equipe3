@@ -117,7 +117,6 @@ export default function ConfirmacaoReserva() {
     }
     
 
-
     const hourLi = hourArray.map((horario,index)=>{
         return (
             <li key={index} onClick={()=>{horarioHandler(horario)}}>{horario}</li>
