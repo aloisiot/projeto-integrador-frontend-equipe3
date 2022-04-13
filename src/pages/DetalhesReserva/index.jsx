@@ -15,7 +15,7 @@ import {
 } from "../../components/icons";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from '../../app/auth/useAuth';
 import Swal from 'sweetalert2';
 
@@ -42,8 +42,9 @@ export const currentProductIsFavorite = async (productId, requestConfig) =>  {
 }
 
 export default function DetalhesReserva() {
-    const { getUserId, getToken } = useAuth()
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const { getUserId, getToken } = useAuth()
     const arrayTest = [StarIcon, StarIcon, StarIcon, emptyStar, emptyStar]
     const [modalAtivo, setModalAtivo] = useState(false)
     const [galeriaAtual, setGaleriaAtual] = useState(getGaleriaAtual())
@@ -86,7 +87,15 @@ export default function DetalhesReserva() {
         } else {
             Swal.fire({
                 icon: 'info',
-                title: 'Você não está autenticado'
+                title: 'Você não está autenticado',
+                text: "Entre com sua conta para favoritar este produto.",
+                showCancelButton: true,
+                confirmButtonText: 'Entrar',
+                denyButtonText: 'Agora não',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
             })
         }
     }
