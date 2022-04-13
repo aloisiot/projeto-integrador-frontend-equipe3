@@ -11,11 +11,18 @@ import { fetchCategories, selectAllCategories } from '../../app/store/slices/cat
 import { fetchProducts, selectAllProducts } from '../../app/store/slices/productsSlice';
 import CategoriesColection from '../../components/template/CategoryCardColection';
 import ProductCardCollection from '../../components/template/ProductCardCollection';
+import { cleanParams, selectSearchParams } from '../../app/store/slices/searchParamsSlice';
 
 export default function Home(){
     const dispatch = useDispatch();
     const categories = useSelector(selectAllCategories);
     const products = useSelector(selectAllProducts);
+    const searchParams = useSelector(selectSearchParams)
+    
+    if(Object.keys(searchParams).length) {
+        dispatch(cleanParams())
+        dispatch(fetchProducts())
+    }
     
     useEffect(() => {
         if(! categories.length) {

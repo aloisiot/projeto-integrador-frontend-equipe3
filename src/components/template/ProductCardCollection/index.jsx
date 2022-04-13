@@ -1,7 +1,7 @@
 import { Col } from "react-bootstrap"
 import ProductCard from "../ProductCard"
 
-const ProductCardCollection = ({products, category, shufle}) => {
+const ProductCardCollection = ({products, category, shufle, secondaryAction, secondaryActionText}) => {
     let result = products
 
     if(category?.id) { // filtro por categoria
@@ -20,7 +20,12 @@ const ProductCardCollection = ({products, category, shufle}) => {
     return result.map(product => {
         return (
             <Col key={product.id}>
-                <ProductCard product={product} className="mb-3"/>
+                <ProductCard
+                    product={product}
+                    secondaryAction={secondaryAction}
+                    secondaryActionText={secondaryActionText}
+                    className="mb-3"
+                />
             </Col>
         )
     })

@@ -12,13 +12,21 @@
 
         }
 
-        
-        h4{
-            font-size: 1.4rem;
+        .component-title{
+            font-weight: 600;
+            
+            &.not-sigle {
+                font-size: 1.4rem;
+            }
 
             &.no-margin{
                 margin: unset;
             }
         }
+    }
+
+    .goback-btn {
+        border: none;
+        background: none;
     }
 }

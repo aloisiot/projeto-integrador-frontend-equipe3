@@ -8,23 +8,89 @@
     .criacao-form{
         background-color: var(--primary-white);
 
-        & > form{
-            display: flex;
-            & > .criacao-form-input{
-                flex: 1;
-                margin-right: 15px;
-               label{
-                display: block;
-                font-weight: 500;
-                color: var(--secondary-deep-blue);
-               }
+        & > div {
+            form{
+                
+                .dois-input{
+                    display: flex;
+                .criacao-categoria-holder{
+                    position: relative;
+                }
+    
+                & > .criacao-form-input, .criacao-categoria-holder{
+                    flex: 1;
+                    margin-right: 10%;
+                   label{
+                    display: block;
+                    font-weight: 500;
+                    color: var(--secondary-deep-blue);
+                   }
 
-               input{
-                   width: 100%;
-                   margin-top: 4px;
-                   padding: 10px;
-                   background-color: var(--secondary-grey);
-               }
+                   .criacao-cidade-input{
+                       background-color: var(--secondary-grey);
+                   }
+    
+                   .btn-categoria{
+                       position: absolute;
+                       background-color: transparent;
+                       border: none;
+                       padding: unset;
+                       height: 2.5rem;
+                       width: 100%;
+                       bottom: 0;
+                   }
+    
+                   ul{
+                       background-color: var(--secondary-grey);
+                       position: absolute;
+                       width: 100%;
+                       max-height: 200px;
+                       overflow-y: scroll;
+                        li{
+                            padding: 10px;
+                            font-weight: 500;
+                            border-bottom: 1px solid black;
+                            cursor: pointer;                       
+                        }
+                        
+                   }
+    
+                   input, .criacao-categoria-input{
+                       width: 100%;
+                       margin-top: 4px;
+                       padding: 10px;
+                       background-color: var(--secondary-grey);
+                       height: 2.5rem;
+                       font-weight: 500;
+    
+                   }
+    
+                   .criacao-categoria-input{
+                       display: flex;
+                       align-items: center;
+                       justify-content: space-between;
+                       position: relative;
+                    & > p {
+                        margin: unset;
+                    }
+                   }
+    
+                }
+            }
+
+            .criacao-descricao{
+                margin-right: 10%;
+
+                label{
+                    font-weight: 500;
+                }
+
+                textarea{
+                    width: 100%;
+                    background-color: var(--secondary-grey);
+                    border: none;
+                }
+            }
             }
         }
     }
