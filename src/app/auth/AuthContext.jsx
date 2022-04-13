@@ -12,7 +12,7 @@ export function AuthProvider(props) {
     const [ authenticated, setAuthenticated ] = useState()
 
     const checkIsAuthenticated = useCallback(() => {
-        return Boolean(getUserDetails()?.name !== undefined)
+        return Boolean(getToken() !== null)
     }, [])
 
     useEffect(() => {
@@ -88,7 +88,8 @@ export function AuthProvider(props) {
             authenticated,
             getUserDetails,
             getToken,
-            getUserId
+            getUserId,
+            checkIsAuthenticated
         }}>
             {props.children}
         </AppContext.Provider>

@@ -9,7 +9,7 @@ import useAuth from "../../../app/auth/useAuth";
 import Link from "../../tipografy/Link";
 
 export default function Header() {
-    const { authenticated, getUserDetails } = useAuth()
+    const { getUserDetails, checkIsAuthenticated } = useAuth()
     const [sidebarActive, setSidebarActive] = useState(false)
 
     let location = useLocation();
@@ -66,7 +66,7 @@ export default function Header() {
                     <div className="menu-header">
                         <button onClick={() => { setSidebarActive(true) }}>{headerMenu}</button>
                     </div>
-                    {authenticated ? <ProfileUI user={getUserDetails()} /> : <ButtonsUI />}
+                    {checkIsAuthenticated() ? <ProfileUI user={getUserDetails()} /> : <ButtonsUI />}
                 </Nav>
             </Container>
         </header>
