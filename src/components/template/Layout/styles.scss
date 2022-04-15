@@ -10,13 +10,12 @@
 
     & .main-content {
         margin-top: 68px;
-        // display : grid  (Esta propriedade está comentada pois ela estava quebrando o mapa da página de detalhes)
         & > :only-child {
             grid-column: 1 / -1;
             grid-row: 1 / -1;
         }
     }
-       
+
     .default-header {
         position: fixed;
         z-index: 99;

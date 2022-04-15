@@ -10,7 +10,7 @@ export default function Template({children, bgColor}){
                 "default-template " +
                 "d-flex flex-column " +
                 "align-items-cener " +
-                `default-bg-${bgColor ? bgColor : "white"} `
+                `default-bg-${bgColor ? bgColor : "white"}`
             }
         >
             <LoadingSpinner/>

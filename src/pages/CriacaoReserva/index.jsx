@@ -52,11 +52,10 @@ export default function CriacaoReserva() {
     const [inputCancelamento, setInputCancelamento] = useState(null)
     const [inputLatitude, setInputLatitude] = useState(null)
     const [inputLongitude, setInputLongitude] = useState(null)
-    
 
     useEffect(()=>{
         const user = getUserDetails();
-        const authority = user?.authorities[0]?.authority
+        const authority = user?.authorities?.[0]?.authority
         if(authority !== 'ADMIN'){
             navigate("/")
         }
