@@ -12,6 +12,7 @@ export default function MapVisualizer({latitude,longitude}) {
             iconSize: 64
         })
     }
+    console.log(latitude,longitude)
 
     return (
         <div className="map-holder">

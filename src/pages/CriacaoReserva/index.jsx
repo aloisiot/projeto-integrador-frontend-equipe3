@@ -11,6 +11,11 @@ import { fetchCategories, selectAllCategories } from "../../app/store/slices/cat
 import { fetchCharacteristics, selectAllCharacteristics } from "../../app/store/slices/characteristicsSlice";
 import { tvIcon, wiFiIcon, kitchenIcon, noSmoke, noParty, acIcon, petsIcon, creditCard } from "../../components/icons";
 import Button from "../../components/template/Button";
+import ImgInputBox from "../../components/template/ImgInputBox";
+import axios from "axios";
+import useAuth from "../../app/auth/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const iconCaracteristicas = {
     "icon-wifi": wiFiIcon,
@@ -25,18 +30,38 @@ const iconCaracteristicas = {
 
 
 export default function CriacaoReserva() {
-
+    const {getToken, getUserDetails} = useAuth()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [selectedCityName, setSelectedCityName] = useState("");
     const [selectedCityId, setSelectedCityId] = useState(0);
     const cities = useSelector(selectAllCities);
     const [selectedCategoryName, setSelectedCategoryName] = useState("");
     const [selectedCategoryId, setSelectedCategoryId] = useState(0);
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedCharacteristics, setSelectedCharacteristics] = useState([])
     const categories = useSelector(selectAllCategories);
     const characteristics = useSelector(selectAllCharacteristics);
     const [imgLinks, setImgLinks] = useState([])
     const [newLink, setNewLink] = useState("")
+    const [currentEdit, setCurrentEdit] = useState(false)
+    const [inputNome, setInputNome] = useState(null)
+    const [inputEndereco, setInputEndereco] = useState("")
+    const [inputDesc, setInputDesc] = useState(null)
+    const [inputRegras, setInputRegras] = useState(null)
+    const [inputSaude, setInputSaude] = useState(null)
+    const [inputCancelamento, setInputCancelamento] = useState(null)
+    const [inputLatitude, setInputLatitude] = useState(null)
+    const [inputLongitude, setInputLongitude] = useState(null)
+    
+
+    useEffect(()=>{
+        const user = getUserDetails();
+        const authority = user?.authorities[0]?.authority
+        if(authority !== 'ADMIN'){
+            navigate("/")
+        }
+        
+    })
 
     useEffect(() => {
         if (!cities.length) {
@@ -58,6 +83,12 @@ export default function CriacaoReserva() {
     }, [dispatch, categories])
 
 
+    function includesCharacteristic(characteristic) {
+        return selectedCharacteristics.filter((c) => {
+            return c.id === characteristic.id
+        }).length > 0
+    }
+
 
     function modifyCategories() {
         return categories.map((category) => {
@@ -68,35 +99,107 @@ export default function CriacaoReserva() {
         })
     }
 
-    function selectedOptionsHandler(iconName) {
-        if (!selectedOptions.includes(iconName)) {
-            setSelectedOptions([
-                ...selectedOptions,
-                iconName
+    function selectedCharacteristicsHandler(characteristic) {
+        if (!includesCharacteristic(characteristic)) {
+            setSelectedCharacteristics([
+                ...selectedCharacteristics,
+                characteristic
             ])
 
         } else {
-            setSelectedOptions(selectedOptions.filter((iconStored) => {
-                return iconStored !== iconName
+            setSelectedCharacteristics(selectedCharacteristics.filter((c) => {
+                return c.id !== characteristic.id
             }))
         }
 
     }
 
     function imgLinkPusher() {
-        if(!imgLinks.includes(newLink)){
+        if (!imgLinks.includes(newLink) && newLink.length > 0) {
             setImgLinks(imgLinks.concat(newLink))
+            setNewLink("")
         }
     }
 
-     function imgLinkRemover(linkName){
-        const newImgLinks = imgLinks.filter((name)=>{
+    function imgLinkRemover(linkName) {
+        const newImgLinks = imgLinks.filter((name) => {
             return name !== linkName
         })
-        setImgLinks([...newImgLinks])
+        setImgLinks(newImgLinks)
     }
 
-    console.log(imgLinks)
+    function imgLinkUpdater(oldName, newName) {
+        let newImgLinks = [];
+      
+
+
+        if (oldName !== newName && newName.length > 0) {
+            newImgLinks = imgLinks.map((name) => {
+                if (name === oldName) {
+                    return newName
+                } else {
+                    return name
+                }
+            })
+
+            setImgLinks(newImgLinks)
+        }
+
+        setCurrentEdit("")
+    }
+
+    async function criacaoPostHandler() {
+        const reservaCriada = {
+            description: inputDesc,
+            name: inputNome,
+            category: {
+                id: selectedCategoryId
+            },
+            city: {
+                id: selectedCityId
+            },
+            address: inputEndereco,
+            images: imgLinks.map((link) => {
+                return {
+                    url: link,
+                    title: inputNome
+                }
+            }),
+            characteristics: selectedCharacteristics,
+            policies: {
+                generalRules: inputRegras,
+                cheersAndSecurity: inputSaude,
+                cancellation: inputCancelamento
+            },
+            latitude: inputLatitude,
+            longitude: inputLongitude
+        }
+
+        const config = {
+            headers: {
+                Authorization: getToken()
+            }
+        }
+        await axios.post(`${process.env.REACT_APP_LINK_API}/products`, reservaCriada, config)
+            .then((resp => {
+                if (resp.status === 201) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sua reserva foi criada!'
+                    })
+                }
+            }))
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ops! Algo aconteceu.'
+                })
+            })
+
+
+    }
+
+
 
     return (
         <Template>
@@ -109,7 +212,7 @@ export default function CriacaoReserva() {
                             <div className="dois-input gap-4">
                                 <div className="criacao-form-input">
                                     <label htmlFor="criacao-nome">Nome</label>
-                                    <input className="redondo" type="text" id="criacao-nome" autoComplete="off"></input>
+                                    <input className="redondo" type="text" id="criacao-nome" autoComplete="off" onBlur={(e) => { setInputNome(e.target.value) }}></input>
                                 </div>
                                 <div className="criacao-form-input">
                                     <label htmlFor="criacao-nome">Categoria</label>
@@ -129,7 +232,7 @@ export default function CriacaoReserva() {
                             <div className="dois-input mt-3 gap-4">
                                 <div className="criacao-form-input">
                                     <label htmlFor="criacao-endereço">Endereço</label>
-                                    <input className="redondo" type="text" id="criacao-endereço" autoComplete="off"></input>
+                                    <input className="redondo" type="text" id="criacao-endereço" autoComplete="off" value={inputEndereco} onChange={(e) => { setInputEndereco(e.target.value) }}></input>
                                 </div>
                                 <div className="criacao-form-input">
                                     <label htmlFor="criacao-Cidade">Cidade</label>
@@ -147,9 +250,19 @@ export default function CriacaoReserva() {
                                     />
                                 </div>
                             </div>
+                            <div className="dois-input gap-4 mt-3">
+                                <div className="criacao-form-input">
+                                    <label htmlFor="criacao-latitude">Latitude</label>
+                                    <input className="redondo" type='number' step="0.00000000000001" id="criacao-latitude" onBlur={(e) => { setInputLatitude(e.target.value) }}></input>
+                                </div>
+                                <div className="criacao-form-input">
+                                    <label htmlFor="criacao-longitude">Longitude</label>
+                                    <input className="redondo" type='number' step="0.00000000000001" id="criacao-longitude" onBlur={(e) => { setInputLongitude(e.target.value) }}></input>
+                                </div>
+                            </div>
                             <div className="criacao-descricao mt-2">
                                 <label>Descrição</label>
-                                <textarea className="redondo"></textarea>
+                                <textarea className="redondo" onBlur={(e) => { setInputDesc(e.target.value) }}></textarea>
                             </div>
                         </form>
                         <div className="criacao-atributos-holder mx-4 mt-4">
@@ -157,18 +270,17 @@ export default function CriacaoReserva() {
                             <h6>Clique para adicionar</h6>
                             <div className="row row-cols-2 row-cols-lg-4">
                                 {
-                                    characteristics.slice(0, 8).map(({ id, name, icon }) => {
+                                    characteristics.slice(0, 8).map((characteristic) => {
                                         return (
-                                            <div key={id} className='col'>
+                                            <div key={characteristic.id} className='col'>
                                                 <div
-                                                    className={`d-flex gap-3 criacao-atributos mt-3 p-2 redondo align-items-center ${selectedOptions.includes(icon) ? "option-animation-in" : ""}`}
-                                                    onClick={() => { selectedOptionsHandler(icon) }}
-                                                    key={id}
+                                                    className={`d-flex gap-3 criacao-atributos mt-3 p-2 redondo align-items-center ${includesCharacteristic(characteristic) ? "option-animation-in" : ""}`}
+                                                    onClick={() => { selectedCharacteristicsHandler(characteristic) }}
                                                 >
-                                                    {iconCaracteristicas[icon]}
-                                                    <p>{name}</p>
+                                                    {iconCaracteristicas[characteristic.icon]}
+                                                    <p>{characteristic.name}</p>
                                                 </div>
-                                                <p className={`atributo-indicador ${selectedOptions.includes(icon) ? "" : 'escondido'}`}>Atributo adicionado!</p>
+                                                <p className={`atributo-indicador ${includesCharacteristic(characteristic) ? "" : 'escondido'}`}>Atributo adicionado!</p>
                                             </div>
                                         )
                                     })
@@ -181,19 +293,19 @@ export default function CriacaoReserva() {
                                 <div className="col-12 mt-2 col-xl-4">
                                     <div className="d-flex flex-column politicas-box">
                                         <h6>Regras da casa</h6>
-                                        <textarea  className="redondo" placeholder="Escreva sobre as regras da casa" ></textarea>
+                                        <textarea className="redondo" placeholder="Escreva sobre as regras da casa" onBlur={(e) => { setInputRegras(e.target.value) }} ></textarea>
                                     </div>
                                 </div>
                                 <div className="col-12 mt-2 col-xl-4">
                                     <div className="d-flex flex-column politicas-box">
                                         <h6>Saúde e segurança</h6>
-                                        <textarea className="redondo" placeholder="Escreva sobre os protocolos de saúde e segurança"></textarea>
+                                        <textarea className="redondo" placeholder="Escreva sobre os protocolos de saúde e segurança" onBlur={(e) => { setInputSaude(e.target.value) }}></textarea>
                                     </div>
                                 </div>
                                 <div className="col-12 mt-2 col-xl-4">
                                     <div className="d-flex flex-column politicas-box">
                                         <h6>Cancelamento</h6>
-                                        <textarea className="redondo" placeholder="Escreva sobre os detalhes do processo de cancelamento"></textarea>
+                                        <textarea className="redondo" placeholder="Escreva sobre os detalhes do processo de cancelamento" onBlur={(e) => { setInputCancelamento(e.target.value) }}></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +315,7 @@ export default function CriacaoReserva() {
                                 <h4>Carregar imagens</h4>
                                 <h6>Adicione pelo menos 5 imagens</h6>
                                 <div className="img-input-box p-3 d-flex redondo">
-                                    <input type='url' className="redondo" placeholder="Insira o link da imagem" onBlur={(e) => { setNewLink(e.target.value) }}></input>
+                                    <input type='url' className="redondo" placeholder="Insira o link da imagem" onChange={(e) => { setNewLink(e.target.value) }} value={newLink}></input>
                                     <div className="img-input-btn-box">
                                         <Button onClick={() => { imgLinkPusher() }}>Adicionar imagem</Button>
                                     </div>
@@ -211,17 +323,21 @@ export default function CriacaoReserva() {
                                 {
                                     imgLinks?.map((savedLink) => {
                                         return (
-                                            <div key={savedLink} className="img-input-box p-3 d-flex redondo mt-2">
-                                                <input type='url' className="redondo" placeholder="Insira o link da imagem" defaultValue={savedLink}></input>
-                                                <div className="img-input-btn-box gap-1">
-                                                    <Button>Editar imagem</Button> <Button variant="btn-danger" onClick={()=>{imgLinkRemover(savedLink)}}>Remover</Button>
-                                                </div>
-                                            </div>
+                                            <ImgInputBox
+                                                key={savedLink}
+                                                linkName={savedLink}
+                                                remover={(l) => { imgLinkRemover(l) }}
+                                                updater={(oldName, newName) => { imgLinkUpdater(oldName, newName) }}
+                                                currentEdit={currentEdit}
+                                                setCurrentEdit={(boolean) => { setCurrentEdit(boolean) }}
+                                            />
                                         )
                                     })
-                                
                                 }
                             </div>
+                        </div>
+                        <div className="d-flex mx-4 mt-5 justify-content-center">
+                            <Button className="mt-4 py-2 criacao-confirm-btn" onClick={() => { criacaoPostHandler() }}>Criar Reserva</Button>
                         </div>
                     </section>
                 </Container>

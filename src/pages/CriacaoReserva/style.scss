@@ -1,5 +1,6 @@
 .criacao-reserva-content{
     background-color: var(--light-gray);
+    padding-bottom: 5rem;
 
     & > .container{
         padding-top: 2rem;
@@ -98,6 +99,7 @@
                     background-color: var(--secondary-grey);
                     border: none;
                     font-weight: 500;
+                    resize: none;
                 }
             }
 
@@ -177,5 +179,10 @@
         flex: 1;
         margin-right: 10px;
         font-weight: 500;
+    }
+
+    .criacao-confirm-btn{
+        width: 20rem;
+    
     }
 }

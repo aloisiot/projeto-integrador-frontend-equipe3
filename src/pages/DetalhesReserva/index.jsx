@@ -171,7 +171,7 @@ export default function DetalhesReserva() {
                                     "hidden", position:
                                     "absolute",
                                     width: 0}}
-                                    value={window.location.href}
+                                    defaultValue={window.location.href}
                                 />
                             </button>
                         )}
