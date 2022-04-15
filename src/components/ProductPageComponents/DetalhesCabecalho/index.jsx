@@ -3,25 +3,25 @@ import { goBackArrow } from "../../icons";
 import Title from "../../tipografy/Title";
 import "./style.scss"
 
-export default function DetalhesCabecalho({product, singleTitle, className}) {
+export default function DetalhesCabecalho({product, singleTitle}) {
     const goBack = () => history.go(-1)
 
     return (
         <div className={`detalhesCabecalho d-flex align-items-center`}>
             <div className="container d-flex justify-content-between">
                 <div className="cabecalhoTexto">
-                    { !(typeof singleTitle === "string") ? (
+                    {typeof singleTitle === "string" ? (
                         <>
-                            <p>{product?.category?.qualification}</p>
-                            <Title variant={"h1"} className="not-sigle white">
-                                {product?.name}
+                            <Title variant={"h1"} className="no-margin white">
+                                {singleTitle}
                             </Title>
                         </>
                     ) : (
                         <>
-                            <Title variant={"h4"} className="no-margin white">
-                                {singleTitle}
-                                </Title>
+                            <p>{product?.category?.qualification}</p>
+                            <Title variant={"h1"} className="white">
+                                {product?.name}
+                            </Title>
                         </>
                     )}
                 </div>
