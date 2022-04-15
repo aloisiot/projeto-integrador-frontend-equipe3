@@ -32,11 +32,16 @@ button{
     z-index: 1;
 }
 
+.light-orange-bg-set{
+    background: unset !important;
+    background-color: var(--light-orange)  !important;
+}
+
 .flex-col-items-stretch {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 .redondo{
-    border-radius: 0.5rem;
+    border-radius: 0.5rem !important;
 }
