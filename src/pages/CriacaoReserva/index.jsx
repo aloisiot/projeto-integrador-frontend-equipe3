@@ -10,6 +10,7 @@ import ImputWithOptions from "../../components/form/ImputWithOptions";
 import { fetchCategories, selectAllCategories } from "../../app/store/slices/categoriesSlice";
 import { fetchCharacteristics, selectAllCharacteristics } from "../../app/store/slices/characteristicsSlice";
 import { tvIcon, wiFiIcon, kitchenIcon, noSmoke, noParty, acIcon, petsIcon, creditCard } from "../../components/icons";
+import Button from "../../components/template/Button";
 
 const iconCaracteristicas = {
     "icon-wifi": wiFiIcon,
@@ -34,6 +35,8 @@ export default function CriacaoReserva() {
     const [selectedOptions, setSelectedOptions] = useState([])
     const categories = useSelector(selectAllCategories);
     const characteristics = useSelector(selectAllCharacteristics);
+    const [imgLinks, setImgLinks] = useState([])
+    const [newLink, setNewLink] = useState("")
 
     useEffect(() => {
         if (!cities.length) {
@@ -80,10 +83,21 @@ export default function CriacaoReserva() {
 
     }
 
-    useEffect(() => {
-        console.log(selectedOptions)
-    }, [selectedOptions])
-    
+    function imgLinkPusher() {
+        if(!imgLinks.includes(newLink)){
+            setImgLinks(imgLinks.concat(newLink))
+        }
+    }
+
+     function imgLinkRemover(linkName){
+        const newImgLinks = imgLinks.filter((name)=>{
+            return name !== linkName
+        })
+        setImgLinks([...newImgLinks])
+    }
+
+    console.log(imgLinks)
+
     return (
         <Template>
             <DetalhesCabecalho singleTitle={"Administração"} />
@@ -167,21 +181,46 @@ export default function CriacaoReserva() {
                                 <div className="col-12 mt-2 col-xl-4">
                                     <div className="d-flex flex-column politicas-box">
                                         <h6>Regras da casa</h6>
-                                        <textarea className="redondo" placeholder="Escreva sobre as regras da casa" onBlur={()=>{console.log("hello")}}></textarea>
+                                        <textarea  className="redondo" placeholder="Escreva sobre as regras da casa" ></textarea>
                                     </div>
                                 </div>
                                 <div className="col-12 mt-2 col-xl-4">
-                                        <div className="d-flex flex-column politicas-box">
-                                            <h6>Saúde e segurança</h6>
-                                            <textarea className="redondo" placeholder="Escreva sobre os protocolos de saúde e segurança"></textarea>
-                                        </div>
+                                    <div className="d-flex flex-column politicas-box">
+                                        <h6>Saúde e segurança</h6>
+                                        <textarea className="redondo" placeholder="Escreva sobre os protocolos de saúde e segurança"></textarea>
+                                    </div>
                                 </div>
                                 <div className="col-12 mt-2 col-xl-4">
-                                        <div className="d-flex flex-column politicas-box">
-                                            <h6>Cancelamento</h6>
-                                            <textarea className="redondo" placeholder="Escreva sobre os detalhes do processo de cancelamento"></textarea>
-                                        </div>
+                                    <div className="d-flex flex-column politicas-box">
+                                        <h6>Cancelamento</h6>
+                                        <textarea className="redondo" placeholder="Escreva sobre os detalhes do processo de cancelamento"></textarea>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="criacao-img-holder mx-4 mt-4">
+                            <div className="d-flex flex-column">
+                                <h4>Carregar imagens</h4>
+                                <h6>Adicione pelo menos 5 imagens</h6>
+                                <div className="img-input-box p-3 d-flex redondo">
+                                    <input type='url' className="redondo" placeholder="Insira o link da imagem" onBlur={(e) => { setNewLink(e.target.value) }}></input>
+                                    <div className="img-input-btn-box">
+                                        <Button onClick={() => { imgLinkPusher() }}>Adicionar imagem</Button>
+                                    </div>
+                                </div>
+                                {
+                                    imgLinks?.map((savedLink) => {
+                                        return (
+                                            <div key={savedLink} className="img-input-box p-3 d-flex redondo mt-2">
+                                                <input type='url' className="redondo" placeholder="Insira o link da imagem" defaultValue={savedLink}></input>
+                                                <div className="img-input-btn-box gap-1">
+                                                    <Button>Editar imagem</Button> <Button variant="btn-danger" onClick={()=>{imgLinkRemover(savedLink)}}>Remover</Button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                
+                                }
                             </div>
                         </div>
                     </section>

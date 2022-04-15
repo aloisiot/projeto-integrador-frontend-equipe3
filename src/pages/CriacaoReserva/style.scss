@@ -127,6 +127,10 @@
             }
             p{
                 margin: unset;
+                @media(max-width: 500px){
+                    text-align: center;
+                    padding: unset;
+                }
             }
         }
 
@@ -144,17 +148,34 @@
         }
     }
 
-    .criacao-politicas-holder{
-        .politicas-box{
-            
-            textarea{
-                width: 100%;
-                height: 10rem;
-                background-color: var(--secondary-grey);
-                border: none;
-                padding: 10px;
-                font-weight: 500;
+    .criacao-politicas-holder .politicas-box textarea{
+        width: 100%;
+        height: 10rem;
+        background-color: var(--secondary-grey);
+        border: none;
+        padding: 10px;
+        font-weight: 500;
+        resize: none;
+    }
+        
+    .criacao-img-holder .img-input-box{
+        background-color: var(--secondary-grey);
+
+        .img-input-btn-box{
+            width: 30%;
+            display: flex;
+
+            & > button {
+                flex: auto;
             }
         }
+    }
+
+    input{
+        padding: 10px;
+        width: 70%;
+        flex: 1;
+        margin-right: 10px;
+        font-weight: 500;
     }
 }
