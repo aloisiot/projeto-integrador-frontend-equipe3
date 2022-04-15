@@ -7,7 +7,7 @@ import MapVisualizer from "../../components/ProductPageComponents/MapVisualizer"
 import DetalhesCabecalho from "../../components/ProductPageComponents/DetalhesCabecalho";
 import InformacoesCampo from "../../components/ProductPageComponents/InformacoesCampo";
 import DateVisualizer from "../../components/ProductPageComponents/DateVisualizer";
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { findCurrentProduct, selectCurrentProduct } from '../../app/store/slices/currentProductSlice'
 import {
     Locale, StarIcon, emptyStar, heartIcon, shareIcon, tvIcon, wiFiIcon,
@@ -83,7 +83,7 @@ export default function DetalhesReserva() {
                 icon: 'success',
                 title: 'Link copiado',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1500
               })
         }
     }

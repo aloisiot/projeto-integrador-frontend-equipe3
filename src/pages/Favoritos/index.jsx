@@ -19,7 +19,7 @@ export default function Favoritos() {
     const favorites = useSelector(selectAllFavorites)
 
     useEffect(() => {
-        if(! checkIsAuthenticated()) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
+        if(! checkIsAuthenticated()) {
             Swal.fire({
                 icon: 'info',
                 title: 'Faça login para continuar'
@@ -29,7 +29,7 @@ export default function Favoritos() {
     }, [navigate, checkIsAuthenticated])
 
     useEffect(() => {
-        if(checkIsAuthenticated()) { // TODO alterar o uso do estado 'authenticated' para o uso da funçao
+        if(checkIsAuthenticated()) {
             dispatch(fetchFavoritesByClient({token: getToken()}))
         }
     }, [dispatch, getToken, checkIsAuthenticated])
