@@ -83,7 +83,7 @@ export default function DetalhesReserva() {
                 icon: 'success',
                 title: 'Link copiado',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1500
               })
         }
     }
