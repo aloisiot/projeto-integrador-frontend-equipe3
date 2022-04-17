@@ -53,7 +53,7 @@ export function AuthProvider(props) {
             Swal.fire({
                 icon: "success",
                 title: 'Cadastro concluido',
-                text: 'Enviamos um link de verificação para o seu email. Verifique sua conta antes de fazer entrar!',
+                text: 'Enviamos um link de verificação para o seu email. Verifique sua conta antes de entrar!',
             })
             return true
         })
