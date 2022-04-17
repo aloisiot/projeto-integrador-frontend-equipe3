@@ -12,7 +12,7 @@ import Title from "../../components/tipografy/Title"
 export default function ValidaEmail() {
     const params = useParams()
     const dispatch = useDispatch()
-    const [emailStatus, setEmailIsValid] = useState("processing")
+    const [validationStatus, setValidationStatus] = useState("processing")
 
     const checkEmail = useCallback(async (userId, emailHash) => {
         const url = `${process.env.REACT_APP_LINK_API}/auth/validate-email/${userId}/${emailHash}`
@@ -20,8 +20,8 @@ export default function ValidaEmail() {
         
         dispatch(processReducerActions.add("check-email-" + now))
         await axios.get(url)
-            .then(resp => setEmailIsValid(resp.data === true ? 'valid' : "invalid"))
-            .catch(() => setEmailIsValid("invalid"))
+            .then(resp => setValidationStatus(resp.data === true ? 'valid' : "invalid"))
+            .catch(() => setValidationStatus("invalid"))
         
         dispatch(processReducerActions.remove("check-email-" + now))
     }, [dispatch])
@@ -48,13 +48,13 @@ export default function ValidaEmail() {
                     "align-items-center " +
                     "justify-content-center "
                 }>
-                    {emailStatus === "processing" && (
+                    {validationStatus === "processing" && (
                         <>
                             <Title className="text-center">Aguarde...</Title>
                             <p>Estamos processando a solicitação</p>
                         </>
                     )}
-                    {emailStatus === "valid" && (
+                    {validationStatus === "valid" && (
                         <>
                             <Title className="text-center">Email verificado!</Title>
                             <p>Entre com sua conta</p>
@@ -63,7 +63,7 @@ export default function ValidaEmail() {
                             </Link>
                         </>
                     )}
-                {emailStatus === "invalid" && (
+                    {validationStatus === "invalid" && (
                         <>
                             <Title className="text-center">Link de verificação inválido</Title>
                             <p>cadastre-se novamente</p>
