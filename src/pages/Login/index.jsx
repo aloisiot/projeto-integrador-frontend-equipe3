@@ -11,10 +11,13 @@ import { Container } from "react-bootstrap";
 import Title from "../../components/tipografy/Title";
 import { useNavigate } from "react-router-dom";
 import CheckBox from "../../components/form/CheckBox";
+import { actions as processReducerActions } from "../../app/store/slices/prossesSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login(){
     const { signIn, authenticated } = useAuth()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("");
     const [emailMudou, setEmailMudou] = useState(false)
@@ -34,13 +37,11 @@ export default function Login(){
         }
     }, [authenticated, navigate])
 
-    // TODO
-    function onSignInError(err) {
-        // console.log(err)
-    }
-
-    function fazerLogin(){
-        signIn(email, password, keepConnected, onSignInError)
+    async function fazerLogin(){
+        const now = Date.now()
+        dispatch(processReducerActions.add("sign-in-process-" + now))
+        await signIn(email, password, keepConnected)
+        dispatch(processReducerActions.remove("sign-in-process-" + now))
     }
 
     function controlaInputOnBlur(event){

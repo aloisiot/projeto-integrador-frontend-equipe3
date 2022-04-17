@@ -1,14 +1,12 @@
 import axios from "axios";
 import jsCookie from "js-cookie";
 import { createContext, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AppContext = createContext();
 export const userCookieName = "c7d5e61a-e190-43b0-b422-b56571c0005d"
 
 export function AuthProvider(props) {
-    const navigate = useNavigate()
     const [ authenticated, setAuthenticated ] = useState()
 
     const checkIsAuthenticated = useCallback(() => {
@@ -19,7 +17,7 @@ export function AuthProvider(props) {
         setAuthenticated(checkIsAuthenticated())
     }, [authenticated, checkIsAuthenticated])
 
-    async function signIn(email, password, keepConnected, onRejected) {
+    async function signIn(email, password, keepConnected) {
         jsCookie.remove(userCookieName)
         const payload = {email, password}
         await axios
@@ -30,27 +28,45 @@ export function AuthProvider(props) {
                 setAuthenticated(true)
             })
             .catch(({response}) =>{
-                const is403 = response.status === 403
-                Swal.fire({
-                    icon: "warning",
-                    title: is403 ? "Credenciais inválidas" : "Algo não ocorreu bem",
-                    text: "Tente novamente"
-                })
+                if(response?.data?.error === "account not ferified") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Conta não verificada",
+                        text: "Enviamos um link de verificação para o seu email. Tente novamente após a verificação!"
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "warning",
+                        title: response.status === 403 ? "Credenciais inválidas" : "Algo não ocorreu bem",
+                        text: "Tente novamente"
+                    })
+                }
             })
     }
 
     async function signUp (name, lastname, email, password) {
-        const resp = await axios.post(
+        return await axios.post(
             `${process.env.REACT_APP_LINK_API}/auth/sign-up`,
             {name, lastname, email, password}
         )
-
-        if(resp.status === 201) {
-            Swal.fire(
-                'Cadastro concluido',
-                'Voce será redirecionado para a págona de login',
-            ).then(() => {navigate("/login")})
-        }
+        .then(() => {
+            Swal.fire({
+                icon: "success",
+                title: 'Cadastro concluido',
+                text: 'Voce será redirecionado para a págona de login',
+            })
+            return true
+        })
+        .catch(({response}) => {
+            const invalidEmailError = "Ja existe um usuário com o email especificado"
+            const internalError = "Erro interno. Tente novamente!"
+            Swal.fire({
+                icon: "info",
+                title: "Ops!!!",
+                text: response?.data?.error === invalidEmailError ? invalidEmailError : internalError
+            })
+            return false
+        })
     }
 
     const getUserId = () => {

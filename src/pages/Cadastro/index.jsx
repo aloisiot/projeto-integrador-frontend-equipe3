@@ -7,17 +7,30 @@ import useAuth from "../../app/auth/useAuth";
 import { useState } from "react";
 import Title from "../../components/tipografy/Title";
 import { Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { actions as processReducerActions } from "../../app/store/slices/prossesSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastro(){
     const { signUp } = useAuth()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [name, setName] = useState("")
     const [lastname, setLastname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [btnIsDisable, setBtnIsDisable] = useState(false);
 
-    function cadastrar() {
+    async function cadastrar() {
         if (name.length > 0 && lastname.length > 0){
-            signUp(name, lastname, email, password)
+            setBtnIsDisable(true)
+            const now = Date.now()
+            dispatch(processReducerActions.add("sign-up-process-" + now))
+            const isUp = await signUp(name, lastname, email, password)
+            dispatch(processReducerActions.remove("sign-up-process-" + now))
+            if(isUp) {
+                navigate("/login")
+            }
         }
     }
 
@@ -72,7 +85,7 @@ export default function Cadastro(){
                             onChange={(e) => setPassword(e.target.value)}
                         />    
                     </form>
-                    <Button className="align-self-center large" onClick={() => cadastrar()} variant={"primary login"}>
+                    <Button disabled={btnIsDisable} className="align-self-center large" onClick={() => cadastrar()} variant={"primary login"}>
                         Cadastrar
                     </Button>
                     <FraseLink frase="Já possui uma conta?" url="/login" link="Faça login"/>

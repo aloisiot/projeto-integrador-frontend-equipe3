@@ -27,6 +27,7 @@ export const prossesSlice = createSlice({
 })
 
 const { add, remove } = prossesSlice.actions
+export const actions = prossesSlice.actions;
 
 export const asyncThunkWithProssesMiddleware = (typePrefix, payloadCreator) => {
     return createAsyncThunk(typePrefix, async (arg, thunkAPI) => {
