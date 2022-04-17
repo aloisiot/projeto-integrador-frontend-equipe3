@@ -9,7 +9,7 @@ import Template from "../../components/template/Layout"
 import Link from "../../components/tipografy/Link"
 import Title from "../../components/tipografy/Title"
 
-export default function ValidaEmal() {
+export default function ValidaEmail() {
     const params = useParams()
     const dispatch = useDispatch()
     const [emailStatus, setEmailIsValid] = useState("processing")
