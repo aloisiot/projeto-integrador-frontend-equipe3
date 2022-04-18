@@ -9,7 +9,7 @@ import useAuth from "../../../app/auth/useAuth";
 import Link from "../../tipografy/Link";
 
 export default function Header() {
-    const { getUserDetails, checkIsAuthenticated } = useAuth()
+    const { getUserDetails, checkIsAuthenticated, signOut } = useAuth()
     const [sidebarActive, setSidebarActive] = useState(false)
 
     let location = useLocation();
@@ -21,6 +21,11 @@ export default function Header() {
         } else {
             return "close-animation"
         }
+    }
+
+    function sidebarSignout(){
+        setSidebarActive(false)
+        signOut()
     }
 
     return (
@@ -42,17 +47,25 @@ export default function Header() {
                 </div>
                 <div className="header-second-section">
                     <div className={opacityTrigger()}>
-                        {urlAtual !== "/cadastro" && (
+                        {urlAtual !== "/cadastro" && !checkIsAuthenticated() && (
                             <Link to="/cadastro">
                                 Criar conta
                             </Link>
                         )}
-                        {urlAtual !== "/login" && urlAtual !== "/cadastro" ? <div className="sidebar-section-separator"></div> : <></>}
+                         {checkIsAuthenticated() && (
+                             <Link to="/favoritos">
+                                 Favoritos
+                            </Link>
+                        )}
+                        {(urlAtual !== "/login" && urlAtual !== "/cadastro") ? <div className="sidebar-section-separator"></div> : <></>}
 
-                        {urlAtual !== "/login" && (
+                        {urlAtual !== "/login" && !checkIsAuthenticated()  && (
                             <Link to="/login">
                                 Fazer Login
                             </Link>
+                        )}
+                         {checkIsAuthenticated() && (
+                            <button onClick={()=>{sidebarSignout()}}>Fazer logout</button>
                         )}
                     </div>
                 </div>
@@ -71,7 +84,7 @@ export default function Header() {
                                 </Link>
                                 <ProfileUI user={getUserDetails()} />
                             </>
-                        ) :  <ButtonsUI />}
+                        ) : <ButtonsUI />}
                         <div className="menu-header">
                             <button onClick={() => { setSidebarActive(true) }}>{headerMenu}</button>
                         </div>
