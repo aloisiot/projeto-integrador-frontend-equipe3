@@ -1,4 +1,4 @@
-import { Logo, headerMenu, XiconWhite, heartIcon } from "../../icons";
+import { Logo, headerMenu, XiconWhite, heartIcon, logoutIcon } from "../../icons";
 import { Nav, Container } from "react-bootstrap";
 import ButtonsUI from "../HeaderItens/ButtonsUI"
 import ProfileUI from "../HeaderItens/ProfileUI"
@@ -53,9 +53,14 @@ export default function Header() {
                             </Link>
                         )}
                          {checkIsAuthenticated() && (
-                             <Link to="/favoritos">
-                                 Favoritos
-                            </Link>
+                             <>
+                                <Link to="/favoritos">
+                                    Favoritos
+                                </Link>
+                                <Link to="/minhas-reservas">
+                                    Minhas reservas
+                                </Link>
+                            </>
                         )}
                         {(urlAtual !== "/login" && urlAtual !== "/cadastro") ? <div className="sidebar-section-separator"></div> : <></>}
 
@@ -65,7 +70,9 @@ export default function Header() {
                             </Link>
                         )}
                          {checkIsAuthenticated() && (
-                            <button onClick={()=>{sidebarSignout()}}>Fazer logout</button>
+                            <button className="logout-btn d-flex gap-3 align-items-center" onClick={()=>{sidebarSignout()}}>
+                                {logoutIcon} <span>Fazer logout</span>
+                            </button>
                         )}
                     </div>
                 </div>

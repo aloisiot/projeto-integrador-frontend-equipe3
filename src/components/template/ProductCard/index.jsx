@@ -39,33 +39,33 @@ export default function ProductCard ({product, className, secondaryAction, secon
                 </div>
                 <div className='locale pb-2 d-flex flex-column gap-1'>
                     <div>{Locale} {product.city?.name} - <Link to="/">Veja no mapa</Link></div>
-                    {(checkIn && startDate && endDate) && (
-                        <div className="datas">
-                            <p>{`${startDate} até ${endDate}`}</p>
-                            <p>{`Check-in: ${checkIn}`}</p>
-                        </div>
-                    )
-                    }
                 </div>
-                <div>
-                    <p className='description'>{product?.description}</p>
-                    <div className="buttons d-flex gap-2">
-                        <Button
-                            className="flex-grow-1"
-                            full={secondaryAction === undefined}
-                            onClick={navigateToProductPage}
-                            >Veja mais
-                        </Button>
-                        {(secondaryAction && secondaryActionText) && (
-                            <Button
-                                variant="secondary"
-                                className="flex-grow-1"
-                                onClick={() => secondaryAction(product.id)}
-                            >{secondaryActionText}
-                            </Button>
-                        )}
+                {(checkIn && startDate && endDate) ? (
+                    <div className="dates">
+                        <p>De <strong>{startDate}</strong> à <strong>{endDate}</strong></p>
+                        <p>Check-in: <strong>{checkIn}</strong></p>
                     </div>
-                </div>
+                ) : (
+                    <p className='description'>{product?.description}</p>
+                )}
+                    <div>
+                        <div className="buttons d-flex gap-2">
+                            <Button
+                                className="flex-grow-1"
+                                full={secondaryAction === undefined}
+                                onClick={navigateToProductPage}
+                                >Veja mais
+                            </Button>
+                            {(secondaryAction && secondaryActionText) && (
+                                <Button
+                                    variant="secondary"
+                                    className="flex-grow-1"
+                                    onClick={() => secondaryAction(product.id)}
+                                >{secondaryActionText}
+                                </Button>
+                            )}
+                        </div>
+                    </div>
             </div>    
         </div>
     )
