@@ -5,7 +5,7 @@ import { Locale, StarIcon } from '../../icons';
 import Link from '../../tipografy/Link';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProductCard ({product, className, secondaryAction, secondaryActionText}) {
+export default function ProductCard ({product, className, secondaryAction, secondaryActionText, checkIn, startDate, endDate}) {
     const navigate = useNavigate();
     
     const navigateToProductPage = () => {
@@ -15,7 +15,7 @@ export default function ProductCard ({product, className, secondaryAction, secon
 
     return (
         <div className={`d-flex shadow rounded-3 component-product-card ${className}`}>
-            <div className="img-container rounded-3 overflow-hidden">
+            <div className=" img-container rounded-3 overflow-hidden">
                 <img
                     src={product.images[0].url}
                     alt="hotel"
@@ -37,8 +37,15 @@ export default function ProductCard ({product, className, secondaryAction, secon
                         <span className='text pt-1 fw-bold'>Muito bom</span>
                     </div>
                 </div>
-                <div className='locale pb-2 d-flex gap-1'>
+                <div className='locale pb-2 d-flex flex-column gap-1'>
                     <div>{Locale} {product.city?.name} - <Link to="/">Veja no mapa</Link></div>
+                    {(checkIn && startDate && endDate) && (
+                        <div className="datas">
+                            <p>{`${startDate} até ${endDate}`}</p>
+                            <p>{`Check-in: ${checkIn}`}</p>
+                        </div>
+                    )
+                    }
                 </div>
                 <div>
                     <p className='description'>{product?.description}</p>

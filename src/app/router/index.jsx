@@ -11,6 +11,7 @@ import SearchPage from '../../pages/Search';
 import CriacaoReserva from '../../pages/CriacaoReserva';
 import Favoritos from '../../pages/Favoritos';
 import ValidaEmail from '../../pages/ValidaEmail';
+import MinhasReservas from '../../pages/MinhasReservas'
 
 export default function RouterList(){
 
@@ -28,6 +29,7 @@ export default function RouterList(){
                         <Route path="/confirmacao-reserva/:idReserva" element={<ConfirmacaoReserva/>} />
                         <Route path="/criar-reserva" element={<CriacaoReserva/>} />
                         <Route path="/validate-email/:userId/:emailHash" element={<ValidaEmail/>} />
+                        <Route path="/minhas-reservas" element={<MinhasReservas/>} />
                     </Routes>
                 </AuthProvider>
             </Provider>

@@ -1,7 +1,7 @@
 import { Col } from "react-bootstrap"
 import ProductCard from "../ProductCard"
 
-const ProductCardCollection = ({products, category, shufle, secondaryAction, secondaryActionText}) => {
+const ProductCardCollection = ({products, category, shufle, secondaryAction, secondaryActionText, checkIn, startDate, endDate}) => {
     let result = products
 
     if(category?.id) { // filtro por categoria
@@ -22,6 +22,9 @@ const ProductCardCollection = ({products, category, shufle, secondaryAction, sec
             <Col key={product.id}>
                 <ProductCard
                     product={product}
+                    checkIn = {checkIn}
+                    startDate = {startDate}
+                    endDate = {endDate}
                     secondaryAction={secondaryAction}
                     secondaryActionText={secondaryActionText}
                     className="mb-3"

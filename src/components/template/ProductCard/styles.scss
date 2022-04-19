@@ -1,5 +1,5 @@
 .component-product-card{
-    height: 260px;
+    height: 280px;
     background-color: white;
 
     .img-container {
@@ -23,8 +23,19 @@
             -webkit-box-orient: vertical;
         }
 
+
+
         .locale svg {
             height: 18px;
+
+            
+        }
+
+        .datas{
+            p{
+                margin: unset;
+                font-weight: bold;
+            }
         }
     }
 
