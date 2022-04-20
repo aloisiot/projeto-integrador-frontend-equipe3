@@ -17,9 +17,9 @@ const ProductCardCollection = ({products, category, shufle, secondaryAction, sec
             .map(sortObj =>  sortObj.product)
     }
 
-    return result.map(product => {
+    return result.map((product, index) => {
         return (
-            <Col key={product.id}>
+            <Col key={`${product.id}-${index}`}>
                 <ProductCard
                     product={product}
                     checkIn = {checkIn}

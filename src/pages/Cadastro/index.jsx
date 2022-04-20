@@ -19,11 +19,9 @@ export default function Cadastro(){
     const [lastname, setLastname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [btnIsDisable, setBtnIsDisable] = useState(false);
 
     async function cadastrar() {
         if (name.length > 0 && lastname.length > 0){
-            setBtnIsDisable(true)
             const now = Date.now()
             dispatch(processReducerActions.add("sign-up-process-" + now))
             const isUp = await signUp(name, lastname, email, password)
@@ -85,7 +83,7 @@ export default function Cadastro(){
                             onChange={(e) => setPassword(e.target.value)}
                         />    
                     </form>
-                    <Button disabled={btnIsDisable} className="align-self-center large" onClick={() => cadastrar()} variant={"primary login"}>
+                    <Button className="align-self-center large" onClick={() => cadastrar()} variant={"primary login"}>
                         Cadastrar
                     </Button>
                     <FraseLink frase="Já possui uma conta?" url="/login" link="Faça login"/>
